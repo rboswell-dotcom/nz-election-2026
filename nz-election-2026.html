@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NZ Election 2026 — Policy Guide</title>
+<meta name="description" content="A plain-English guide to the 2026 New Zealand general election — policies, parties, and how Parliament works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --surface2: #F0EFE9;
+  --border: #E2E0D8;
+  --border-strong: #C8C5BA;
+  --text: #1A1916;
+  --text-secondary: #5A584F;
+  --text-muted: #8C8A80;
+  --accent: #1B4332;
+  --accent-light: #D4EAE0;
+  --national: #1E4A8C;
+  --labour: #C0392B;
+  --act: #2D6A1F;
+  --greens: #1D9E75;
+  --nzfirst: #B8640E;
+  --tpm: #6B5FCC;
+  --top: #0A5E47;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  background: var(--accent);
+  color: #fff;
+  padding: 56px 24px 48px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7EC8A4;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: #7EC8A4;
+}
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.72);
+  max-width: 520px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  font-size: 12px;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* LAYOUT */
+.container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+/* NAV TABS */
+.nav-wrap {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* CONTENT */
+.tab-content { display: none; padding: 36px 0 60px; }
+.tab-content.active { display: block; }
+
+/* SECTION HEADINGS */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 26px;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.lead {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* CARDS */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  margin-bottom: 10px;
+}
+
+/* FACT GRID */
+.fact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.fact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+}
+.fact-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.fact-value {
+  font-family: 'Fraunces', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.fact-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* PARLIAMENT BAR */
+.parl-bar {
+  display: flex;
+  height: 24px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.parl-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.parl-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* SEAT TABLE */
+.seat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+.seat-table th {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1.5px solid var(--border-strong);
+}
+.seat-table td {
+  font-size: 13px;
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.seat-table tr:last-child td { border-bottom: none; }
+.seat-table tr.total-row td {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--surface2);
+}
+.bar-wrap {
+  width: 80px;
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 3px; }
+.pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.pill-gov { background: #D4EAE0; color: #1B4332; }
+.pill-opp { background: #EEEDF0; color: #4A4860; }
+
+/* INFO BLOCKS */
+.info-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+}
+.info-block h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.info-block p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* PARTY ROWS */
+.party-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.party-swatch {
+  width: 12px;
+  height: 36px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.party-info { flex: 1; }
+.party-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.party-meta-text {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.party-link {
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.party-link:hover { text-decoration: underline; }
+
+/* SPECTRUM */
+.spectrum-block { margin-bottom: 28px; }
+.spectrum-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.spectrum-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.axis-wrap {
+  position: relative;
+  height: 58px;
+  margin-bottom: 8px;
+}
+.axis-track {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 3px;
+}
+.axis-ends {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.spin {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+}
+.spin-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  border: 2px solid var(--bg);
+  letter-spacing: -0.02em;
+}
+.spin-lbl {
+  font-size: 8px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-top: 3px;
+  font-weight: 500;
+}
+.spectrum-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* COMPARE */
+.compare-selects {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pselect {
+  flex: 1;
+  min-width: 140px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C8A80' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+.vs-text { font-size: 13px; color: var(--text-muted); font-weight: 500; flex-shrink: 0; }
+.compare-table {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.compare-hdr {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr;
+  border-bottom: 1.5px solid var(--border-strong);
+  background: var(--surface2);
+}
+.compare-hdr-cell {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 14px;
+  color: var(--text);
+}
+.compare-hdr-cell:first-child { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.compare-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-topic {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 12px 10px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 14px;
+  line-height: 1.4;
+}
+.compare-cell {
+  font-size: 12px;
+  color: var(--text);
+  padding: 12px 14px;
+  line-height: 1.55;
+  border-right: 1px solid var(--border);
+}
+.compare-cell:last-child { border-right: none; }
+.compare-cell.none { color: var(--text-muted); font-style: italic; }
+
+/* COALITION */
+.coal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+}
+.coal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.coal-title { font-size: 14px; font-weight: 600; color: var(--text); }
+.status-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.s-likely { background: #D4EAE0; color: #1B4332; }
+.s-possible { background: #FEF3CD; color: #8A5700; }
+.s-unlikely { background: #FDEAEA; color: #8B1A1A; }
+.coal-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.cbadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.coal-bar {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+.coal-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.coal-note { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.poll-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 20px;
+  padding: 16px 18px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  line-height: 1.6;
+  border: 1px solid var(--border);
+}
+
+/* POLICIES */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.tbtn {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.tbtn:hover { background: var(--surface2); }
+.tbtn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pchip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.pchip[data-p="National"].active { background: #1E4A8C; color: #C8DCF5; border-color: #1E4A8C; }
+.pchip[data-p="Labour"].active { background: #C0392B; color: #F9D5D3; border-color: #C0392B; }
+.pchip[data-p="ACT"].active { background: #2D6A1F; color: #C5E0BE; border-color: #2D6A1F; }
+.pchip[data-p="Greens"].active { background: #1D9E75; color: #C2EDE1; border-color: #1D9E75; }
+.pchip[data-p="NZFirst"].active { background: #B8640E; color: #F9DEC0; border-color: #B8640E; }
+.pchip[data-p="TPM"].active { background: #6B5FCC; color: #DDD9F7; border-color: #6B5FCC; }
+.pchip[data-p="TOP"].active { background: #0A5E47; color: #B8E4D8; border-color: #0A5E47; }
+.policy-section-hd {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 0 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+.policy-section-hd:first-of-type { margin-top: 4px; }
+.pcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  transition: border-color 0.15s;
+}
+.pcard:hover { border-color: var(--border-strong); }
+.pcard-top {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.pbadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+.b-National { background: #D8E8F8; color: #1E4A8C; }
+.b-Labour { background: #FDDCDA; color: #C0392B; }
+.b-ACT { background: #D5EACF; color: #2D6A1F; }
+.b-Greens { background: #C5EDE2; color: #1D9E75; }
+.b-NZFirst { background: #FAEBD7; color: #B8640E; }
+.b-TPM { background: #E2DFF8; color: #6B5FCC; }
+.b-TOP { background: #C0E8DC; color: #0A5E47; }
+.ptitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.ptext {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.pcard-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.srclink {
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.srclink:hover { text-decoration: underline; }
+.toggle-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.toggle-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.analogy-box {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent);
+}
+.analogy-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.analogy-text {
+  font-size: 12px;
+  color: #1A3528;
+  line-height: 1.65;
+}
+.empty { font-size: 14px; color: var(--text-muted); text-align: center; padding: 40px 0; }
+
+/* FOOTER */
+footer {
+  background: var(--accent);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+footer a { color: #7EC8A4; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer strong { color: rgba(255,255,255,0.9); }
+
+/* RESPONSIVE */
+@media (max-width: 520px) {
+  .fact-grid { grid-template-columns: 1fr 1fr; }
+  .fact-value { font-size: 28px; }
+  .compare-hdr, .compare-row { grid-template-columns: 80px 1fr 1fr; }
+  .hero { padding: 40px 20px 36px; }
+  .pcard-top { grid-template-columns: 76px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">7 November 2026 · New Zealand General Election</div>
+  <h1>Know your <em>vote.</em></h1>
+  <p class="hero-sub">A plain-English guide to the parties, their policies, and how Parliament works — so you can make up your own mind.</p>
+  <div class="hero-meta">
+    <span class="hero-badge">7 parties covered</span>
+    <span class="hero-badge">Sourced from official party websites</span>
+    <span class="hero-badge">Updated June 2026</span>
+  </div>
+</div>
+
+<nav class="nav-wrap">
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-tab="parliament">Current Parliament</button>
+    <button class="nav-tab" data-tab="parties">The Parties</button>
+    <button class="nav-tab" data-tab="spectrum">Spectrum</button>
+    <button class="nav-tab" data-tab="compare">Compare</button>
+    <button class="nav-tab" data-tab="coalitions">Coalitions</button>
+    <button class="nav-tab" data-tab="policies">Policies</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- PARLIAMENT -->
+<div class="tab-content active" id="tab-parliament">
+<div class="container">
+  <h2>The current Parliament</h2>
+  <p class="lead">Objective facts about the 54th New Zealand Parliament, elected 14 October 2023. Source: parliament.nz</p>
+
+  <div class="fact-grid">
+    <div class="fact-card">
+      <div class="fact-label">Total MPs</div>
+      <div class="fact-value">123</div>
+      <div class="fact-sub">Normally 120 — 3 overhang seats because Te Pāti Māori won more electorates than their party vote entitled them to</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Seats to govern</div>
+      <div class="fact-value">62</div>
+      <div class="fact-sub">A majority in the current 123-seat Parliament</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Electorate seats</div>
+      <div class="fact-value">72</div>
+      <div class="fact-sub">65 general electorates + 7 Māori electorates</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">List seats</div>
+      <div class="fact-value">51</div>
+      <div class="fact-sub">Allocated proportionally by each party's share of the party vote</div>
+    </div>
+  </div>
+
+  <div class="section-label">2023 Election Result</div>
+  <div class="parl-bar" id="parlBar"></div>
+  <div class="parl-labels" id="parlLabels"></div>
+
+  <table class="seat-table">
+    <thead>
+      <tr><th>Party</th><th>Role</th><th>Seats</th><th>Party vote</th><th></th></tr>
+    </thead>
+    <tbody id="seatTbody"></tbody>
+  </table>
+
+  <div class="section-label" style="margin-top:28px">How MMP works</div>
+  <div class="info-block">
+    <h4>Two votes</h4>
+    <p>Every voter gets two votes: an <strong>electorate vote</strong> for their local MP, and a <strong>party vote</strong> that determines each party's total seat share in Parliament. The party vote is the more important of the two for the overall result.</p>
+  </div>
+  <div class="info-block">
+    <h4>The 5% threshold</h4>
+    <p>A party must win either 5% of the party vote, or at least one electorate seat, to enter Parliament. Parties that don't clear this threshold receive no seats even if they received hundreds of thousands of votes. This is why smaller parties often campaign hard in specific electorates — ACT in Epsom, for example.</p>
+  </div>
+  <div class="info-block">
+    <h4>Overhang seats</h4>
+    <p>If a party wins more electorate seats than their party vote entitles them to, Parliament temporarily expands to accommodate them. In 2023, Te Pāti Māori won 6 electorate seats but only 3.1% of the party vote (entitling them to ~4 seats), creating a 3-seat overhang and a 123-seat Parliament.</p>
+  </div>
+  <div class="info-block">
+    <h4>Coalition governments</h4>
+    <p>Because MMP produces proportional results, no single party usually wins a majority alone. Parties negotiate coalition agreements after the election. The current government is a three-party coalition — National, ACT, and NZ First — holding 67 of 123 seats.</p>
+  </div>
+</div>
+</div>
+
+<!-- PARTIES -->
+<div class="tab-content" id="tab-parties">
+<div class="container">
+  <h2>The seven parties</h2>
+  <p class="lead">Every party with a realistic chance of entering Parliament at the 7 November 2026 election. Source links go to each party's official website.</p>
+  <div id="partyList"></div>
+  <p style="font-size:12px;color:var(--text-muted);margin-top:20px;line-height:1.6">New Zealand uses MMP (Mixed Member Proportional) voting. Parties need 5% of the party vote OR at least one electorate seat to enter Parliament. The 54th Parliament dissolves 1 October 2026.</p>
+</div>
+</div>
+
+<!-- SPECTRUM -->
+<div class="tab-content" id="tab-spectrum">
+<div class="container">
+  <h2>Political spectrum</h2>
+  <p class="lead">A rough visual guide to where each party sits across three axes, based on their announced 2026 policies. These are approximations, not official classifications.</p>
+
+  <div class="spectrum-block">
+    <div class="spectrum-label">Economic policy — Left ↔ Right</div>
+    <div class="spectrum-desc">Left = more government spending, higher taxes on wealth and corporations, public ownership. Right = lower taxes, smaller government, free markets.</div>
+    <div class="axis-wrap">
+      <div class="axis-track" style="background:linear-gradient(to right,#C0392B,#aaa,#1E4A8C)"></div>
+      <div class="axis-ends"><span>Left</span><span>Centre</span><span>Right</span></div>
+      <div class="spin" style="left:8%"><div class="spin-dot" style="background:#6B5FCC">TPM</div><div class="spin-lbl">Te Pāti Māori</div></div>
+      <div class="spin" style="left:20%"><div class="spin-dot" style="background:#1D9E75">GRN</div><div class="spin-lbl">Greens</div></div>
+      <div class="spin" style="left:35%"><div class="spin-dot" style="background:#C0392B">LAB</div><div class="spin-lbl">Labour</div></div>
+      <div class="spin" style="left:52%"><div class="spin-dot" style="background:#0A5E47">TOP</div><div class="spin-lbl">TOP</div></div>
+      <div class="spin" style="left:68%"><div class="spin-dot" style="background:#1E4A8C">NAT</div><div class="spin-lbl">National</div></div>
+      <div class="spin" style="left:81%"><div class="spin-dot" style="background:#B8640E">NZF</div><div class="spin-lbl">NZ First</div></div>
+      <div class="spin" style="left:93%"><div class="spin-dot" style="background:#2D6A1F">ACT</div><div class="spin-lbl">ACT</div></div>
+    </div>
+  </div>
+
+  <div class="spectrum-block">
+    <div class="spectrum-label">Social policy — Progressive ↔ Conservative</div>
+    <div class="spectrum-desc">Progressive = more change on social issues, Treaty recognition, diversity. Conservative = traditional values, national identity, opposition to co-governance.</div>
+    <div class="axis-wrap">
+      <div class="axis-track" style="background:linear-gradient(to right,#1D9E75,#aaa,#B8640E)"></div>
+      <div class="axis-ends"><span>Progressive</span><span>Centre</span><span>Conservative</span></div>
+      <div class="spin" style="left:6%"><div class="spin-dot" style="background:#6B5FCC">TPM</div><div class="spin-lbl">Te Pāti Māori</div></div>
+      <div class="spin" style="left:18%"><div class="spin-dot" style="background:#1D9E75">GRN</div><div class="spin-lbl">Greens</div></div>
+      <div class="spin" style="left:33%"><div class="spin-dot" style="background:#C0392B">LAB</div><div class="spin-lbl">Labour</div></div>
+      <div class="spin" style="left:50%"><div class="spin-dot" style="background:#0A5E47">TOP</div><div class="spin-lbl">TOP</div></div>
+      <div class="spin" style="left:64%"><div class="spin-dot" style="background:#1E4A8C">NAT</div><div class="spin-lbl">National</div></div>
+      <div class="spin" style="left:78%"><div class="spin-dot" style="background:#2D6A1F">ACT</div><div class="spin-lbl">ACT</div></div>
+      <div class="spin" style="left:91%"><div class="spin-dot" style="background:#B8640E">NZF</div><div class="spin-lbl">NZ First</div></div>
+    </div>
+  </div>
+
+  <div class="spectrum-block">
+    <div class="spectrum-label">Environment — Central priority ↔ Low priority</div>
+    <div class="spectrum-desc">How central is climate and environmental policy to the party's 2026 campaign platform?</div>
+    <div class="axis-wrap">
+      <div class="axis-track" style="background:linear-gradient(to right,#1D9E75,#aaa,#B8640E)"></div>
+      <div class="axis-ends"><span>Central</span><span>Moderate</span><span>Low priority</span></div>
+      <div class="spin" style="left:5%"><div class="spin-dot" style="background:#1D9E75">GRN</div><div class="spin-lbl">Greens</div></div>
+      <div class="spin" style="left:20%"><div class="spin-dot" style="background:#0A5E47">TOP</div><div class="spin-lbl">TOP</div></div>
+      <div class="spin" style="left:35%"><div class="spin-dot" style="background:#6B5FCC">TPM</div><div class="spin-lbl">Te Pāti Māori</div></div>
+      <div class="spin" style="left:52%"><div class="spin-dot" style="background:#C0392B">LAB</div><div class="spin-lbl">Labour</div></div>
+      <div class="spin" style="left:67%"><div class="spin-dot" style="background:#1E4A8C">NAT</div><div class="spin-lbl">National</div></div>
+      <div class="spin" style="left:82%"><div class="spin-dot" style="background:#2D6A1F">ACT</div><div class="spin-lbl">ACT</div></div>
+      <div class="spin" style="left:93%"><div class="spin-dot" style="background:#B8640E">NZF</div><div class="spin-lbl">NZ First</div></div>
+    </div>
+  </div>
+  <p class="spectrum-note">These positions reflect announced 2026 policies. Reasonable people may place parties differently on any of these scales.</p>
+</div>
+</div>
+
+<!-- COMPARE -->
+<div class="tab-content" id="tab-compare">
+<div class="container">
+  <h2>Compare two parties</h2>
+  <p class="lead">Select any two parties to see their announced 2026 policies side by side, topic by topic.</p>
+  <div class="compare-selects">
+    <select class="pselect" id="cmpA">
+      <option value="National">National</option><option value="Labour">Labour</option>
+      <option value="ACT">ACT</option><option value="Greens">Greens</option>
+      <option value="NZFirst">NZ First</option><option value="TPM">Te Pāti Māori</option>
+      <option value="TOP">TOP</option>
+    </select>
+    <span class="vs-text">vs</span>
+    <select class="pselect" id="cmpB">
+      <option value="National">National</option><option value="Labour" selected>Labour</option>
+      <option value="ACT">ACT</option><option value="Greens">Greens</option>
+      <option value="NZFirst">NZ First</option><option value="TPM">Te Pāti Māori</option>
+      <option value="TOP">TOP</option>
+    </select>
+  </div>
+  <div id="cmpOut"></div>
+</div>
+</div>
+
+<!-- COALITIONS -->
+<div class="tab-content" id="tab-coalitions">
+<div class="container">
+  <h2>Coalition calculator</h2>
+  <p class="lead">Under MMP, a party or bloc needs 61+ seats in a 120-seat Parliament to govern. Here are the realistic scenarios based on current polling.</p>
+  <div id="coalGrid"></div>
+  <div class="poll-note">Seat projections based on Roy Morgan June 2026 poll: National 31%, NZ First 10.5%, ACT 9.5%, Labour 25.5%, Greens 13.5%, Te Pāti Māori 3%, TOP 6.5%. Projections are indicative — the final result depends on electorate outcomes and special votes. NZ First has publicly ruled out working with a Labour-led government. Te Pāti Māori polls below 5% but is expected to enter Parliament via Māori electorate seats.</div>
+</div>
+</div>
+
+<!-- POLICIES -->
+<div class="tab-content" id="tab-policies">
+<div class="container">
+  <h2>All policies</h2>
+  <p class="lead">Sourced directly from official party websites, 2025–2026 announcements only. Click "plain English" on any policy for a plain-language explanation.</p>
+  <div class="filter-bar" id="topicBar"></div>
+  <div class="filter-bar" id="partyBar"></div>
+  <div id="polOut"></div>
+</div>
+</div>
+
+</main>
+
+<footer>
+  <p><strong>NZ Election 2026 — Policy Guide</strong></p>
+  <p>Built by <a href="https://www.linkedin.com/in/richard" target="_blank">Richard</a> &nbsp;·&nbsp; Sources: national.org.nz, labour.org.nz, act.org.nz, greens.org.nz, nzfirst.nz, maoriparty.org.nz, opportunity.org.nz</p>
+  <p style="margin-top:6px">Policies sourced from official party websites, 2025–2026 only &nbsp;·&nbsp; Last updated June 2026 &nbsp;·&nbsp; More policies added as manifestos are released closer to 7 November 2026</p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.6">This tool is non-partisan. No political opinion is expressed. All source links go directly to party websites.</p>
+</footer>
+
+<script>
+const PL = p => ({NZFirst:'NZ First',TPM:'Te Pāti Māori'}[p]||p);
+const PC = {National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
+const PBG = {National:'#D8E8F8',Labour:'#FDDCDA',ACT:'#D5EACF',Greens:'#C5EDE2',NZFirst:'#FAEBD7',TPM:'#E2DFF8',TOP:'#C0E8DC'};
+const PFG = {National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
+const TOPICS = {all:'All topics',tax:'Tax & cost of living',economy:'Economy & jobs',housing:'Housing',healthcare:'Healthcare',environment:'Environment',treaty:'Treaty & Māori',governance:'Governance',foreign:'Foreign policy'};
+
+const PARTIES = [
+  {key:'National',leader:'Christopher Luxon',role:'Currently governing',url:'https://www.national.org.nz'},
+  {key:'Labour',leader:'Chris Hipkins',role:'Main opposition',url:'https://www.labour.org.nz'},
+  {key:'ACT',leader:'David Seymour',role:'Currently governing (coalition partner)',url:'https://www.act.org.nz'},
+  {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz'},
+  {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz'},
+  {key:'TPM',label:'Te Pāti Māori',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz'},
+  {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament · Polling ~6%',url:'https://www.opportunity.org.nz'},
+];
+
+const SEATS = [
+  {p:'National',seats:48,vote:'38.1%',role:'gov'},
+  {p:'Labour',seats:34,vote:'26.9%',role:'opp'},
+  {p:'Greens',seats:15,vote:'11.6%',role:'opp'},
+  {p:'ACT',seats:11,vote:'8.6%',role:'gov'},
+  {p:'NZFirst',seats:8,vote:'6.1%',role:'gov'},
+  {p:'TPM',seats:6,vote:'3.1%',role:'opp'},
+];
+
+const POLICIES = [
+  {p:'National',t:'economy',title:'KiwiSaver compulsory + contributions to 6%',detail:'Make KiwiSaver compulsory for all workers and automatically enrol newborns. Gradually increase employer and employee contributions from 3% to 6% each by 2032.',src:'national.org.nz',url:'https://www.national.org.nz/kiwisaver',analogy:"Think of it like a workplace where everyone is automatically signed up to a savings plan — including brand new babies. The amount set aside for retirement grows gradually over years, like a slow drip that fills a bucket you can only access when you retire."},
+  {p:'National',t:'economy',title:'Economic growth plan',detail:'Projects 2.7% average GDP growth over four years, creating 220,000 jobs. Wages expected to grow faster than inflation. Government borrowing reduced by $6B, targeting return to surplus by 2028/29.',src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:"Like a household budget running at a loss — the plan is to stop overspending, slowly pay down the credit card, and earn enough that more is coming in than going out by a set date. The 220,000 jobs figure is the government's forecast of what a growing economy produces."},
+  {p:'National',t:'tax',title:'Keep taxes low — no new taxes',detail:'Delivered tax relief in 2024 for the first time in 14 years. Campaigning on disciplined spending and no new taxes.',src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:"Like a business promising its customers it won't raise prices while it works on cutting its own costs. The argument is that money left in people's pockets gets spent or invested in ways that benefit the broader economy."},
+  {p:'National',t:'housing',title:'Home Energy Fund — solar, heat pumps, insulation',detail:'Low-interest loans for households to install solar panels, battery storage, heat pumps, and insulation. Funded by the Crown, local councils, and LGFA.',src:'national.org.nz',url:'https://www.national.org.nz/solar',analogy:"Like a bank offering a cheap loan to insulate your house — you pay a little interest now, but over time your power bills drop enough that you come out ahead. The government acts as the lender rather than giving money away outright."},
+  {p:'National',t:'environment',title:'Accelerate renewable energy & energy security',detail:"Speed up renewable energy and backup generation projects to improve NZ's energy security and lower power bills.",src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:"Like a town that relies on one petrol station deciding to build its own solar panels so it's not stuck if supply dries up or prices spike. More renewable generation means less dependence on fossil fuels and more competition that can push prices down."},
+  {p:'National',t:'healthcare',title:'Healthcare investment record + further commitments',detail:'Funded 66 new medicines (33 cancer), ~2,000 more nurses, hundreds more doctors, 24/7 Online GP Care, bowel screening age lowered to 56. Three post-natal hospital nights for new mothers.',src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:"Like a hospital that has hired more staff, stocked more medicines, and extended its hours — then committed to keeping new mothers in hospital longer for extra support after birth. The specific numbers are the government's account of what it has already delivered."},
+  {p:'National',t:'governance',title:'Sentencing reform — scrap good character discounts',detail:"Campaign on removing 'good character' sentencing discounts for sexual offending.",src:'national.org.nz',url:'https://www.national.org.nz/news/20260517-honpaulgoldsmith',analogy:"Currently judges can reduce a sentence if the offender has no prior convictions or a good reputation. This policy removes that option specifically for sexual offences — so a first-time offender respected in their community wouldn't receive a lighter sentence than the law otherwise prescribes."},
+  {p:'National',t:'governance',title:'Three generational reforms',detail:'KiwiSaver overhaul, NCEA replacement with a new national qualification, and full RMA replacement if re-elected.',src:'national.org.nz',url:'https://www.national.org.nz/news/20260119-rt-hon-christopher-luxon-state-of-the-nation-speech-2026',analogy:"Like a landlord who has fixed the leaking pipes and now wants to rebuild the kitchen, rewire the house, and replace the roof — three large structural jobs put off for years. Each reform is substantial enough to shape how the country operates for decades."},
+  {p:'National',t:'foreign',title:'Double defence spending & strengthen alliances',detail:'Implement the Defence Capability Plan, double defence expenditure as a share of GDP, prioritise interoperability with Australia. Strengthen Indo-Pacific relationships.',src:'national.org.nz',url:'https://www.national.org.nz/news/20260513-rthonchristopherluxon-speech',analogy:"Like a small shop on a busy street investing in a proper security system and coordinating with neighbouring shops — not because trouble is certain, but because the area is becoming less predictable and being prepared is cheaper than scrambling later."},
+  {p:'Labour',t:'tax',title:'Capital gains tax on investment property',detail:'28% CGT on investment and commercial property. Excludes family home, farms, KiwiSaver, and businesses. Revenue funds three free GP visits per year.',src:'labour.org.nz',url:'https://capitalgainstax.nz/',analogy:"If you bought an investment property for $500,000 and sell it for $700,000, you'd pay 28% tax on the $200,000 gain — similar to paying income tax on wages. Your own home is excluded. The revenue raised funds free GP visits for everyone."},
+  {p:'Labour',t:'healthcare',title:'Medicard — three free GP visits per year',detail:'Every New Zealander gets three free doctor\'s visits annually through a new Medicard.',src:'labour.org.nz',url:'https://www.labour.org.nz/medicard',analogy:"Like a card that gives every New Zealander three free entries at the doctor each year — no co-payment required. After the three free visits, standard charges apply. The card is funded through revenue from the capital gains tax."},
+  {p:'Labour',t:'healthcare',title:'Free prescriptions',detail:'Remove the $5 co-payment per prescription item to make prescriptions free for adults.',src:'labour.org.nz',url:'https://www.labour.org.nz/prescriptions',analogy:"Adults currently pay a $5 co-payment per prescription item (free for under 14s). Removing that charge means picking up medication costs nothing — like removing a small toll booth that everyone passes through when they're already unwell."},
+  {p:'Labour',t:'healthcare',title:'Free maternity scans',detail:'Make maternity scans free everywhere in New Zealand through the Medicard.',src:'labour.org.nz',url:'https://www.labour.org.nz/maternityscans',analogy:"Maternity scans currently cost $150–$300 depending on where you live. Making them free nationwide removes a cost that falls unevenly on families depending on which region they're in."},
+  {p:'Labour',t:'healthcare',title:'Free cervical screening',detail:'Free cervical screening for all New Zealanders through the Medicard.',src:'labour.org.nz',url:'https://www.labour.org.nz/cervicalscreening',analogy:"Cervical screening currently costs around $25–$35 at most clinics. Making it free removes the financial barrier for people who might delay or skip it because of cost — similar to how free breast screening has increased uptake of that programme."},
+  {p:'Labour',t:'healthcare',title:'Family Doctor Loan Scheme',detail:'Loan scheme to attract and retain GPs in underserved communities, making it easier to get a doctor\'s appointment.',src:'labour.org.nz',url:'https://www.labour.org.nz/familydoctorloanscheme',analogy:"Like a rural town offering subsidised housing to attract a teacher — if training and setup costs are reduced, more GPs will choose to set up in areas where appointments are scarce, making it easier for people in those communities to get seen."},
+  {p:'Labour',t:'economy',title:'$20 weekly public transport fare cap',detail:'Cap the cost of getting around by bus or train at $20 per week.',src:'labour.org.nz',url:'https://www.labour.org.nz/farecap',analogy:"Like a weekly gym membership but for public transport — no matter how many times you catch the bus or train in a week, you'd never pay more than $20. Frequent commuters who currently spend $50+ a week would see the biggest savings."},
+  {p:'Labour',t:'economy',title:'NZ Future Fund',detail:'Sovereign wealth fund seeded with Crown assets and $200M capital. Managed by NZ Super Fund to invest domestically and create well-paid jobs.',src:'labour.org.nz',url:'https://www.labour.org.nz/futurefund',analogy:"Like Norway's oil fund — a government investment vehicle that pools public assets and invests them to generate returns for the country. New Zealand's version focuses on domestic investment, with the goal of creating better-paid jobs here rather than sending capital overseas."},
+  {p:'ACT',t:'governance',title:'Radically smaller government',detail:'Reduce from 43 departments and 28 ministers to a leaner structure. Each department reports to one minister. Fixed-term chief executives with clear accountability. Benchmarked against Norway: similar population, 20 ministers across 17 ministries.',src:'act.org.nz',url:'https://www.act.org.nz/news/act-unveils-plan-for-radically-simpler-smaller-government',analogy:"Imagine a company with 43 different teams and 28 managers, where multiple managers share responsibility for the same team. ACT wants to restructure it so each team has exactly one manager who is clearly accountable for its results — the way a smaller, well-run business would operate."},
+  {p:'ACT',t:'governance',title:'Stop professional regulators policing private beliefs',detail:'Legislation to prevent professional bodies from disciplining members for lawful personal opinions expressed outside work.',src:'act.org.nz',url:'https://www.act.org.nz/news/act-to-stop-professional-regulators-policing-private-beliefs',analogy:"Currently a nurse or teacher can face professional sanctions for views they express on social media in their own time, even if those views are legal. This policy would mean your professional registration is tied to how you perform at work — not what you say outside of it."},
+  {p:'ACT',t:'treaty',title:'Treaty principles referendum',detail:'A referendum at the 2026 election on co-governance arrangements. Would define Treaty principles in law, affecting Crown Research Institutes, SOEs, and healthcare providers.',src:'act.org.nz',url:'https://www.act.org.nz/news/state-of-the-nation-2026-telling-it-like-it-is',analogy:"Co-governance means some public bodies are jointly governed by the Crown and Māori. ACT wants to put the question of whether this is appropriate to a public vote, and write specific Treaty principles into law so their application is determined by Parliament rather than by courts interpreting them case by case."},
+  {p:'ACT',t:'economy',title:'Year 11 investment programme',detail:'Use a fraction of the KiwiSaver subsidy to give Year 11 students a live investment exercise, targeting students from non-investing households.',src:'act.org.nz',url:'https://www.act.org.nz/news/will-it-make-the-boa',analogy:"Instead of learning about investing from a textbook, Year 11 students would manage a small amount of real money — watching it go up and down and making decisions about it. The aim is to give financial literacy to teenagers who haven't grown up around investing."},
+  {p:'Greens',t:'tax',title:'Tax system overhaul — cut income tax for 96%',detail:'Tax-free threshold below $10,000. Wealth tax of 2.5% on net assets above $10M. Corporate tax back to 33% for large corporations. Bank levy of 0.06%. New rate for income over $160,000. Projected to raise $5.15B annually.',src:'greens.org.nz',url:'https://www.greens.org.nz/greens_commit_to_tax_the_super_rich_and_large_corporates_fairly_cut_income_tax_for_96',analogy:"Think of it as flattening the slope at the bottom and steepening it at the top. The first $10,000 anyone earns becomes tax-free. But people and companies with very large accumulated wealth start paying a percentage on those assets each year — like a rate on land, but applied to total net worth above $10 million."},
+  {p:'Greens',t:'environment',title:'National Electrification Plan',detail:'Campaign for a national plan to electrify transport, heating, and industry across New Zealand.',src:'greens.org.nz',url:'https://www.greens.org.nz/electrifyeverything',analogy:"Like converting a whole neighbourhood from gas to electric appliances — the Greens want to do that at a national scale, replacing petrol engines, gas heaters, and industrial fossil fuel use with electric alternatives powered by NZ's largely renewable electricity grid."},
+  {p:'Greens',t:'housing',title:'A home for everybody',detail:'Campaign to stop attacks on public housing and ensure access to stable homes for all New Zealanders.',src:'greens.org.nz',url:'https://www.greens.org.nz/housing2026',analogy:"The policy responds to reductions in public housing support under the current government. The Greens argue that stable housing is a foundation for everything else — health, education, employment — so cutting it creates costs elsewhere in the system."},
+  {p:'Greens',t:'governance',title:'Keep Fees Free — tertiary education',detail:'Campaign to retain free first year of tertiary education, which the current government has reduced.',src:'greens.org.nz',url:'https://www.greens.org.nz/keep_fees_free',analogy:"The first year of uni or polytech would remain free under the Greens, as it was under the previous Labour government. The argument is that removing the financial barrier in year one increases the number of people who start — and complete — further education."},
+  {p:'Greens',t:'governance',title:'Independent Parliamentary Budget Office',detail:"Establish an independent office to cost all parties' policy commitments before elections.",src:'greens.org.nz',url:'https://www.greens.org.nz/parliamentary_budget_office_clearly_needed_ahead_of_election',analogy:"Like having an independent referee check the maths on every team's game plan before the final. Currently parties publish their own costings. An independent Budget Office would give voters a neutral check on whether the numbers in any party's promises actually add up."},
+  {p:'Greens',t:'environment',title:'Protect conservation land',detail:'Oppose the Conservation Amendment Bill; protect conservation land from mining and development under fast-track legislation.',src:'greens.org.nz',url:'https://www.greens.org.nz/protect_conservation_land',analogy:"The current government's fast-track approval process can grant permits for mining or development on conservation land more quickly than before. The Greens want to block that pathway — keeping conservation land off the table regardless of how a project is approved."},
+  {p:'NZFirst',t:'economy',title:'Break up the four power companies',detail:'Split the four major electricity generators to increase competition and reduce household power bills.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/power_to_the_people_sotn_2026',analogy:"NZ's four main power generators are also large retailers, meaning they control both the supply and the sale of electricity. NZ First wants to separate those functions — like forcing a supermarket chain to sell off its own farms so it can't both grow food and control the price it sells it at."},
+  {p:'NZFirst',t:'economy',title:'Establish a competitive state-owned bank',detail:'Create a state-owned bank to challenge the four major Australian-owned banks on price and competition.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/winston_peters_keep_hope_alive',analogy:"New Zealand's four main banks are all Australian-owned and among the most profitable in the world relative to size. A state-owned bank would compete with them directly — like a council-owned bus service that keeps private operators honest on fares."},
+  {p:'NZFirst',t:'economy',title:'KiwiSaver Generation — compulsory from birth',detail:'Compulsory KiwiSaver enrolment from birth with a Crown contribution. Increase contribution rates over time.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/winston_peters_keep_hope_alive',analogy:"Every baby would be enrolled in KiwiSaver on day one, with the government putting in a starting contribution. By the time that child is working age, decades of compounding growth means they already have a retirement nest egg — similar to planting a tree the day someone is born."},
+  {p:'NZFirst',t:'treaty',title:'Referendum on Māori electorates',detail:'Campaign on a referendum on the future of the Māori electorates. Disestablish Auckland Council\'s Independent Māori Statutory Board.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/',analogy:"Māori electorates are dedicated seats in Parliament reserved for voters on the Māori roll — a system existing since 1867. NZ First wants all New Zealanders to vote on whether those seats should continue. Critics argue the seats protect Māori representation; supporters of the referendum say all voters should have a say."},
+  {p:'NZFirst',t:'foreign',title:'Oppose India Free Trade Agreement',detail:'Opposes the NZ-India FTA, arguing it disadvantages dairy, diverts rather than creates exports, and lifts GDP by only 0.1%.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/winston_peters_keep_hope_alive',analogy:"NZ First argues the deal is like opening a new lane on a motorway that just moves existing traffic rather than reducing congestion — exports would largely shift from other markets to India rather than representing genuinely new sales."},
+  {p:'NZFirst',t:'governance',title:'Reinstate ministerial fast-track powers',detail:'Campaign on giving ministers back direct approval powers for fast-track infrastructure projects.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/',analogy:"Currently the Fast-track Approvals Act routes decisions through an expert panel. NZ First wants ministers to have direct sign-off power again — faster, but with less independent oversight, similar to a CEO bypassing an approval committee for urgent decisions."},
+  {p:'TPM',t:'treaty',title:'Parliamentary Commissioner for Te Tiriti',detail:'Create a Commissioner with powers to audit and veto legislation that does not comply with the Treaty of Waitangi. Non-negotiable coalition bottom-line.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Think of it as a Waitangi auditor with teeth. Just as a financial auditor can flag problems with a company's accounts, this Commissioner could flag — and block — laws that don't comply with the Treaty. Te Pāti Māori describes it as a safeguard against future governments rolling back Treaty obligations."},
+  {p:'TPM',t:'governance',title:'Abolish prisons by 2040',detail:'Replace prisons with community-led solutions. Establish a Māori Justice Authority. Māori make up ~52% of prisoners while being 17.5% of the population.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Te Pāti Māori points to Māori being 17.5% of the population but 52% of prisoners as evidence the current system isn't working. The policy replaces imprisonment with community accountability and restorative approaches — similar to how some countries have moved away from youth detention toward supervised community programmes."},
+  {p:'TPM',t:'tax',title:'Remove GST from food',detail:'Eradicate GST on food to reduce the cost of kai for whānau.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Currently 15% GST is added to groceries. Removing it would mean a $100 grocery shop costs $87 instead — a direct reduction in the cost of living that benefits lower-income households most, since they spend a higher proportion of income on food."},
+  {p:'TPM',t:'economy',title:'Māori food sovereignty',detail:'Protect Māori food systems, support Māori-owned supermarkets, invest in regenerative Māori agriculture.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Like backing local farmers' markets over international supermarket chains — but with a specific focus on Māori-led food production and distribution. The policy aims to keep more of the food supply chain in Māori hands, from growing to selling."},
+  {p:'TPM',t:'environment',title:'Oppose deep sea drilling',detail:'Oppose all deep sea drilling and advocate for protection of the moana as a taonga.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Te Pāti Māori views the ocean as a taonga — a treasure with spiritual, cultural, and ecological significance. Allowing deep sea drilling is, in their framing, like allowing mining in a cathedral. The policy is absolute opposition regardless of the economic case made for it."},
+  {p:'TOP',t:'tax',title:"Citizen's Income — $19,400/year for all adults",detail:"Replace most welfare with a Citizen's Income of $19,400/year ($370/week) for all adult NZ citizens and permanent residents. Funded by the Land Value Tax.",src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/tax-reset',analogy:"Instead of a complicated system where different people qualify for different benefits, everyone gets the same base payment automatically. It's a universal floor every adult stands on, with extra top-ups for those with additional needs like disability."},
+  {p:'TOP',t:'housing',title:'Land Value Tax — 1.75% on urban land',detail:'1.75% annual tax on urban land value (0.5% rural) replacing current property taxes. Deters land banking and speculation. Exemptions for Māori communal land, conservation land, and social housing.',src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/tax-reset',analogy:"Owning a section in Auckland and leaving it empty would cost you 1.75% of the land value every year — so a $1M section costs $17,500 annually just to hold. This makes land banking expensive and encourages owners to build or sell, which TOP argues would increase housing supply and bring prices down."},
+  {p:'TOP',t:'economy',title:'KiwiSaver 2.0 — compulsory contributions to 6%',detail:'Compulsory retirement savings with employer and employee contributions rising to 6% each, building a capital pool for infrastructure and national development.',src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/tax-reset',analogy:"Like Australia's superannuation system, where both you and your employer are required to put a set percentage of wages aside every pay cycle. Over decades, this builds a large pool of savings that can be invested in the country's infrastructure rather than flowing offshore."},
+  {p:'TOP',t:'governance',title:"Citizens' Voice — citizens' assemblies",detail:"Citizens' assemblies for major policy issues, giving ordinary New Zealanders direct input beyond standard electoral cycles.",src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/',analogy:"Like a jury, but for policy. A randomly selected group of everyday New Zealanders is brought together, given expert briefings on a major issue, and asked to deliberate and recommend a course of action. It's used in Ireland and other countries to work through complex issues that political parties find difficult to resolve."},
+  {p:'TOP',t:'environment',title:'30% oceans protected + ban bottom trawling',detail:"Protect 30% of NZ's oceans, invest $500M in aquaculture, phase out bottom trawling, boost renewable energy by 30GW by 2050.",src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/',analogy:"Bottom trawling drags nets along the seafloor, catching large volumes of fish but damaging the habitat. Banning it is like banning clear-cutting a forest — it reduces the short-term harvest but preserves the ecosystem that future harvests depend on. Protecting 30% of oceans sets aside areas where fishing is off-limits."},
+];
+
+// Parliament bar + table
+(function(){
+  const bar = document.getElementById('parlBar');
+  const lbl = document.getElementById('parlLabels');
+  const tbody = document.getElementById('seatTbody');
+  SEATS.forEach(s => {
+    const seg = document.createElement('div');
+    seg.style.cssText = `flex:${s.seats};background:${PC[s.p]};height:100%`;
+    bar.appendChild(seg);
+    const l = document.createElement('div');
+    l.className = 'parl-label';
+    l.innerHTML = `<span class="dot" style="background:${PC[s.p]}"></span>${PL(s.p)} — ${s.seats}`;
+    lbl.appendChild(l);
+    const pct = Math.round((s.seats/123)*100);
+    tbody.innerHTML += `<tr>
+      <td><span style="display:inline-flex;align-items:center;gap:8px"><span class="dot" style="background:${PC[s.p]}"></span>${PL(s.p)}</span></td>
+      <td><span class="pill ${s.role==='gov'?'pill-gov':'pill-opp'}">${s.role==='gov'?'Government':'Opposition'}</span></td>
+      <td><strong>${s.seats}</strong></td>
+      <td>${s.vote}</td>
+      <td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${PC[s.p]}"></div></div></td>
+    </tr>`;
+  });
+  tbody.innerHTML += `
+    <tr class="total-row"><td colspan="2">Government total (National + ACT + NZ First)</td><td><strong>67</strong></td><td></td><td></td></tr>
+    <tr class="total-row"><td colspan="2">Opposition total (Labour + Greens + Te Pāti Māori)</td><td><strong>55</strong></td><td></td><td></td></tr>`;
+})();
+
+// Party list
+(function(){
+  const el = document.getElementById('partyList');
+  PARTIES.forEach(p => {
+    el.innerHTML += `<div class="party-row">
+      <div class="party-swatch" style="background:${PC[p.key]}"></div>
+      <div class="party-info">
+        <div class="party-name">${p.label||PL(p.key)}</div>
+        <div class="party-meta-text">${p.leader} · ${p.role}</div>
+      </div>
+      <a class="party-link" href="${p.url}" target="_blank">Visit website ↗</a>
+    </div>`;
+  });
+})();
+
+// Compare
+function renderCompare() {
+  const a = document.getElementById('cmpA').value;
+  const b = document.getElementById('cmpB').value;
+  const topics = Object.entries(TOPICS).filter(([k]) => k !== 'all');
+  const rows = topics.map(([k, lbl]) => {
+    const ap = POLICIES.filter(x => x.p===a && x.t===k).map(x => x.title).join('; ');
+    const bp = POLICIES.filter(x => x.p===b && x.t===k).map(x => x.title).join('; ');
+    if (!ap && !bp) return '';
+    return `<div class="compare-row">
+      <div class="compare-topic">${lbl}</div>
+      <div class="compare-cell ${!ap?'none':''}">${ap||'No announced policy'}</div>
+      <div class="compare-cell ${!bp?'none':''}">${bp||'No announced policy'}</div>
+    </div>`;
+  }).filter(Boolean).join('');
+  document.getElementById('cmpOut').innerHTML = `<div class="compare-table">
+    <div class="compare-hdr">
+      <div class="compare-hdr-cell">Topic</div>
+      <div class="compare-hdr-cell" style="color:${PC[a]}">${PL(a)}</div>
+      <div class="compare-hdr-cell" style="color:${PC[b]}">${PL(b)}</div>
+    </div>${rows}</div>`;
+}
+document.getElementById('cmpA').addEventListener('change', renderCompare);
+document.getElementById('cmpB').addEventListener('change', renderCompare);
+
+// Coalitions
+(function(){
+  const COAL = [
+    {title:'National-led government (current)',parties:['National','ACT','NZFirst'],seats:63,status:'likely',note:'The current governing coalition since 2023. Roy Morgan June 2026 poll projects ~63 seats — a narrow working majority. NZ First has publicly confirmed it will not work with a Labour-led government.'},
+    {title:'Labour-led government',parties:['Labour','Greens','TPM'],seats:50,status:'possible',note:'Roy Morgan June 2026 poll projects ~50 seats — short of the 61 needed. Would likely require TOP to cross 5% and join, or rely on overhang seats from Te Pāti Māori\'s Māori electorates.'},
+    {title:'Labour + Greens + TOP',parties:['Labour','Greens','TOP'],seats:59,status:'possible',note:'If TOP enters Parliament (~8 seats), this bloc gets close to 61. Te Pāti Māori would likely provide confidence and supply support. Depends on TOP clearing 5%.'},
+    {title:'National + Labour (grand coalition)',parties:['National','Labour'],seats:74,status:'unlikely',note:'Would have a comfortable majority (~74 seats) but no NZ precedent and neither party has signalled interest. Included for completeness only.'},
+  ];
+  const grid = document.getElementById('coalGrid');
+  COAL.forEach(c => {
+    const bars = c.parties.map(p => `<div style="flex:1;background:${PC[p]};height:100%"></div>`).join('') + `<div style="flex:${120-c.seats};background:var(--surface2);height:100%"></div>`;
+    const badges = c.parties.map(p => `<span class="cbadge" style="background:${PBG[p]};color:${PFG[p]}">${PL(p)}</span>`).join('');
+    const sl = {likely:'s-likely',possible:'s-possible',unlikely:'s-unlikely'}[c.status];
+    const st = {likely:'Likely',possible:'Possible',unlikely:'Unlikely'}[c.status];
+    grid.innerHTML += `<div class="coal-card">
+      <div class="coal-header">
+        <span class="coal-title">${c.title}</span>
+        <span class="status-pill ${sl}">${st}</span>
+      </div>
+      <div class="coal-badges">${badges}</div>
+      <div class="coal-bar" style="border:1px solid var(--border);border-radius:4px;overflow:hidden">${bars}</div>
+      <div class="coal-meta">~${c.seats} seats &nbsp;·&nbsp; 61 needed for a majority</div>
+      <div class="coal-note">${c.note}</div>
+    </div>`;
+  });
+})();
+
+// Policies
+let activeTopic = 'all';
+let activeParties = new Set(['National','Labour','ACT','Greens','NZFirst','TPM','TOP']);
+
+(function buildFilters(){
+  const tBar = document.getElementById('topicBar');
+  Object.entries(TOPICS).forEach(([k, lbl]) => {
+    const b = document.createElement('button');
+    b.className = 'tbtn' + (k==='all'?' active':'');
+    b.dataset.t = k;
+    b.textContent = lbl;
+    b.addEventListener('click', () => {
+      activeTopic = k;
+      document.querySelectorAll('.tbtn').forEach(x => x.classList.toggle('active', x===b));
+      renderPolicies();
+    });
+    tBar.appendChild(b);
+  });
+  const pBar = document.getElementById('partyBar');
+  ['National','Labour','ACT','Greens','NZFirst','TPM','TOP'].forEach(p => {
+    const c = document.createElement('button');
+    c.className = 'pchip active';
+    c.dataset.p = p;
+    c.textContent = PL(p);
+    c.addEventListener('click', () => {
+      if (activeParties.has(p)) { if (activeParties.size===1) return; activeParties.delete(p); c.classList.remove('active'); }
+      else { activeParties.add(p); c.classList.add('active'); }
+      renderPolicies();
+    });
+    pBar.appendChild(c);
+  });
+})();
+
+function renderPolicies() {
+  const filtered = POLICIES.filter(p => activeParties.has(p.p) && (activeTopic==='all' || p.t===activeTopic));
+  const out = document.getElementById('polOut');
+  if (!filtered.length) { out.innerHTML = '<div class="empty">No policies match the current filters.</div>'; return; }
+  const byT = {};
+  filtered.forEach(p => {
+    const lbl = TOPICS[p.t]||p.t;
+    if (!byT[lbl]) byT[lbl] = [];
+    byT[lbl].push(p);
+  });
+  const idx = p => POLICIES.indexOf(p);
+  out.innerHTML = Object.entries(byT).map(([lbl, items]) => `
+    <div class="policy-section-hd">${lbl}</div>
+    ${items.map(p => `
+      <div class="pcard" id="pc-${idx(p)}">
+        <div class="pcard-top">
+          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span></div>
+          <div>
+            <div class="ptitle">${p.title}</div>
+            <div class="ptext">${p.detail}</div>
+          </div>
+        </div>
+        <div class="pcard-foot">
+          <a class="srclink" href="${p.url}" target="_blank">↗ ${p.src}</a>
+          <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})">Plain English</button>
+        </div>
+        <div id="ax-${idx(p)}" style="display:none">
+          <div class="analogy-box">
+            <div class="analogy-lbl">Plain English</div>
+            <div class="analogy-text">${p.analogy}</div>
+          </div>
+        </div>
+      </div>`).join('')}`).join('');
+}
+
+window.toggleAnalogy = function(i) {
+  const box = document.getElementById('ax-'+i);
+  const btn = document.querySelector('#pc-'+i+' .toggle-btn');
+  const visible = box.style.display !== 'none';
+  box.style.display = visible ? 'none' : 'block';
+  btn.textContent = visible ? 'Plain English' : 'Hide';
+};
+
+// Nav
+document.querySelectorAll('.nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const t = btn.dataset.tab;
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.toggle('active', b===btn));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id==='tab-'+t));
+    if (t==='compare') renderCompare();
+    if (t==='policies') renderPolicies();
+  });
+});
+
+renderPolicies();
+</script>
+</body>
+</html>
