@@ -5,11 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Know Your Vote — NZ Election 2026</title>
 <meta name="description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#1B4332">
+<link rel="canonical" href="https://knowyourvote.nz/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knowyourvote.nz/">
+<meta property="og:title" content="Know Your Vote — NZ Election 2026">
+<meta property="og:description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
+<meta property="og:image" content="https://knowyourvote.nz/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Know Your Vote — NZ Election 2026">
+<meta name="twitter:description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
+<meta name="twitter:image" content="https://knowyourvote.nz/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#8C8A80;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
+:root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;}
 .hero{background:var(--accent);color:#fff;padding:56px 24px 48px;text-align:center;}
@@ -40,7 +54,8 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .parl-labels{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
 .parl-label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-secondary);}
 .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.seat-table{width:100%;border-collapse:collapse;margin-bottom:24px;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:24px;}
+.seat-table{width:100%;min-width:460px;border-collapse:collapse;}
 .seat-table th{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:8px 12px;border-bottom:1.5px solid var(--border-strong);}
 .seat-table td{font-size:13px;padding:11px 12px;border-bottom:1px solid var(--border);color:var(--text);}
 .seat-table tr:last-child td{border-bottom:none;}
@@ -157,30 +172,32 @@ footer strong{color:rgba(255,255,255,0.9);}
   <h2>The current Parliament</h2>
   <p class="lead">Objective facts about the 54th New Zealand Parliament, elected 14 October 2023. Source: parliament.nz and Electoral Commission NZ.</p>
   <div class="fact-grid">
-    <div class="fact-card"><div class="fact-label">Total MPs</div><div class="fact-value">123</div><div class="fact-sub">Normally 120 — a 3-seat overhang exists because Te Pāti Māori won more electorate seats than their party vote entitled them to</div></div>
+    <div class="fact-card"><div class="fact-label">Total MPs</div><div class="fact-value">123</div><div class="fact-sub">Normally 120 — a 2-seat overhang exists because Te Pāti Māori won more electorate seats than their party vote entitled them to, plus 1 extra seat from National's December 2023 Port Waikato by-election win</div></div>
     <div class="fact-card"><div class="fact-label">Seats to govern</div><div class="fact-value">62</div><div class="fact-sub">A simple majority in the current 123-seat Parliament</div></div>
     <div class="fact-card"><div class="fact-label">Electorate seats</div><div class="fact-value">72</div><div class="fact-sub">65 general electorates + 7 Māori electorates, each won by whichever candidate gets the most votes</div></div>
     <div class="fact-card"><div class="fact-label">List seats</div><div class="fact-value">51</div><div class="fact-sub">Allocated proportionally so each party's total seat share matches their party vote percentage</div></div>
   </div>
 
   <div class="section-label">Who is governing right now?</div>
-  <div class="info-block"><h4>The current government — National, ACT and NZ First</h4><p>New Zealand is governed by a three-party coalition elected in October 2023. <strong>National</strong> leads the coalition with Christopher Luxon as Prime Minister. <strong>ACT</strong>'s David Seymour is Deputy Prime Minister. <strong>NZ First</strong>'s Winston Peters holds several senior portfolios. Together the three parties hold <strong>67 of 123 seats</strong> — a working majority of 5 seats.</p></div>
+  <div class="info-block"><h4>The current government — National, ACT and NZ First</h4><p>New Zealand is governed by a three-party coalition elected in October 2023. <strong>National</strong> leads the coalition with Christopher Luxon as Prime Minister. <strong>ACT</strong>'s David Seymour is Deputy Prime Minister. <strong>NZ First</strong>'s Winston Peters holds several senior portfolios. Together the three parties hold <strong>68 of 123 seats</strong> — a working majority of 6 seats.</p></div>
   <div class="info-block"><h4>The opposition</h4><p><strong>Labour</strong> is the main opposition party, led by Chris Hipkins. <strong>The Green Party</strong> (co-led by Chlöe Swarbrick and Marama Davidson) and <strong>Te Pāti Māori</strong> (co-led by Rawiri Waititi and Debbie Ngarewa-Packer) also sit in opposition. Together they hold <strong>55 of 123 seats</strong>. <strong>The Opportunity Party (TOP)</strong> is not currently in Parliament but is polling around 6%.</p></div>
 
   <div class="section-label" style="margin-top:24px">2023 election result</div>
   <div class="parl-bar" id="parlBar"></div>
   <div class="parl-labels" id="parlLabels"></div>
+  <div class="table-scroll">
   <table class="seat-table">
     <thead><tr><th>Party</th><th>Role</th><th>Seats</th><th>Party vote %</th><th></th></tr></thead>
     <tbody id="seatTbody"></tbody>
   </table>
+  </div>
 
   <div class="section-label" style="margin-top:24px">How your vote works</div>
   <div class="info-block"><h4>You get two votes on election day</h4><p>Every voter gets two votes: an <strong>electorate vote</strong> for their local MP candidate, and a <strong>party vote</strong> for the party they want in Parliament. The party vote is more important for the overall result — it determines what share of seats each party receives nationally, regardless of who wins individual electorates.</p></div>
   <div class="info-block"><h4>What does your party vote actually do?</h4><p>Your party vote determines the percentage of Parliament each party receives. If a party wins 30% of party votes, they get roughly 30% of the 120 seats (about 36 seats). Even if your local electorate candidate loses, your party vote still counts toward that party's national total.</p></div>
   <div class="info-block"><h4>The 5% threshold</h4><p>A party must win either <strong>5% of the party vote</strong>, or at least <strong>one electorate seat</strong>, to enter Parliament. Parties that don't clear this threshold receive no seats, even if they received hundreds of thousands of votes. This is why smaller parties often campaign hard in specific electorates — ACT in Epsom is a well-known example.</p></div>
-  <div class="info-block"><h4>What is an overhang seat?</h4><p>If a party wins more electorate seats than their party vote entitles them to, Parliament temporarily expands to accommodate them. In 2023, Te Pāti Māori won 6 electorate seats but only 3.1% of the party vote (which would entitle them to ~4 seats). This created a 3-seat overhang, giving Parliament 123 seats instead of 120.</p></div>
-  <div class="info-block"><h4>Why do parties need to form coalitions?</h4><p>Because MMP produces proportional results, no single party usually wins a majority on its own. Parties must negotiate coalition agreements after the election, combining their seats to reach a majority. The current government (National 48 + ACT 11 + NZ First 8 = 67 seats) is a typical example of how this works in practice.</p></div>
+  <div class="info-block"><h4>What is an overhang seat?</h4><p>If a party wins more electorate seats than their party vote entitles them to, Parliament temporarily expands to accommodate them. In 2023, Te Pāti Māori won 6 electorate seats but only 3.1% of the party vote (which would entitle them to ~4 seats). This created a 2-seat overhang, giving Parliament 122 seats instead of 120. A further seat was added in December 2023 when National won the Port Waikato by-election, bringing the total to 123.</p></div>
+  <div class="info-block"><h4>Why do parties need to form coalitions?</h4><p>Because MMP produces proportional results, no single party usually wins a majority on its own. Parties must negotiate coalition agreements after the election, combining their seats to reach a majority. The current government (National 49 + ACT 11 + NZ First 8 = 68 seats) is a typical example of how this works in practice.</p></div>
   <p class="footer-note">Source: parliament.nz · Electoral Commission NZ · 2023 official results. The 54th Parliament dissolves 1 October 2026 ahead of the 7 November 2026 election.</p>
 </div>
 </div>
@@ -258,7 +275,7 @@ const PARTIES=[
 ];
 
 const SEATS=[
-  {p:'National',seats:48,vote:'38.1%',role:'gov'},
+  {p:'National',seats:49,vote:'38.1%',role:'gov'},
   {p:'Labour',seats:34,vote:'26.9%',role:'opp'},
   {p:'Greens',seats:15,vote:'11.6%',role:'opp'},
   {p:'ACT',seats:11,vote:'8.6%',role:'gov'},
@@ -349,7 +366,7 @@ const POLICIES=[
     const pct=Math.round((s.seats/123)*100);
     tbody.innerHTML+=`<tr><td><span style="display:inline-flex;align-items:center;gap:8px"><span class="dot" style="background:${PC[s.p]}"></span>${PL(s.p)}</span></td><td><span class="pill ${s.role==='gov'?'pill-gov':'pill-opp'}">${s.role==='gov'?'Government':'Opposition'}</span></td><td><strong>${s.seats}</strong></td><td>${s.vote}</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${PC[s.p]}"></div></div></td></tr>`;
   });
-  tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Government total (National + ACT + NZ First)</td><td><strong>67</strong></td><td></td><td></td></tr>`;
+  tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Government total (National + ACT + NZ First)</td><td><strong>68</strong></td><td></td><td></td></tr>`;
   tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Opposition total (Labour + Greens + Te Pāti Māori)</td><td><strong>55</strong></td><td></td><td></td></tr>`;
 })();
 
