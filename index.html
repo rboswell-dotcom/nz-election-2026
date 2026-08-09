@@ -26,8 +26,10 @@
 :root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;}
-.hero{background:var(--accent);color:#fff;padding:56px 24px 48px;text-align:center;}
+body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial-gradient(circle at 1px 1px,var(--border) 1px,transparent 0);background-size:26px 26px;color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;}
+.hero{background:linear-gradient(155deg,#1B4332 0%,#163828 100%);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(126,200,164,0.08);right:-160px;top:-160px;}
+.hero>*{position:relative;}
 .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7EC8A4;margin-bottom:16px;}
 .hero h1{font-family:'Fraunces',serif;font-size:clamp(32px,6vw,52px);font-weight:300;line-height:1.1;color:#fff;margin-bottom:16px;letter-spacing:-0.02em;}
 .hero h1 em{font-style:italic;color:#7EC8A4;}
@@ -37,9 +39,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .hero-badge-updated{background:#7EC8A4;color:#0F2B1F;border-color:#7EC8A4;font-weight:600;}
 .hero-cta{display:inline-block;margin-top:24px;background:#fff;color:var(--accent);font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;text-decoration:none;transition:opacity 0.15s;}
 .hero-cta:hover{opacity:0.85;}
-.container{max-width:780px;margin:0 auto;padding:0 20px;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
 .nav-wrap{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;max-width:780px;margin:0 auto;padding:0 20px;}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;max-width:960px;margin:0 auto;padding:0 20px;}
 .nav-tabs::-webkit-scrollbar{display:none;}
 .nav-tab{flex-shrink:0;font-size:13px;font-weight:500;padding:14px 14px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;white-space:nowrap;font-family:'Inter',sans-serif;}
 .nav-tab:hover{color:var(--text);}
@@ -131,11 +133,21 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .analogy-text{font-size:12px;color:#1A3528;line-height:1.65;}
 .empty{font-size:14px;color:var(--text-muted);text-align:center;padding:40px 0;}
 .footer-note{font-size:11px;color:var(--text-muted);margin-top:1.25rem;padding-top:0.75rem;border-top:1px solid var(--border);line-height:1.6;}
-footer{background:var(--accent);color:rgba(255,255,255,0.6);text-align:center;padding:32px 20px;font-size:12px;line-height:1.8;}
+footer{background:linear-gradient(155deg,#1B4332 0%,#163828 100%);color:rgba(255,255,255,0.6);text-align:center;padding:32px 20px;font-size:12px;line-height:1.8;}
 footer a{color:#7EC8A4;text-decoration:none;}
 footer a:hover{text-decoration:underline;}
 footer strong{color:rgba(255,255,255,0.9);}
 @media(max-width:520px){.fact-grid{grid-template-columns:1fr 1fr;}.pcard-top{grid-template-columns:76px 1fr;}}
+@media(min-width:860px){
+  .fact-grid{grid-template-columns:repeat(4,1fr);}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;}
+  .info-grid .info-block{margin-bottom:0;}
+  #partyList{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  #partyList .party-row{margin-bottom:0;}
+  .coal-grid{display:grid;grid-template-columns:1fr 1fr;}
+  .pcard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;align-items:start;}
+  .pcard-grid .pcard{margin-bottom:0;}
+}
 </style>
 </head>
 <body>
@@ -174,8 +186,10 @@ footer strong{color:rgba(255,255,255,0.9);}
   </div>
 
   <div class="section-label">Who is governing right now?</div>
+  <div class="info-grid">
   <div class="info-block"><h4>The current government — National, ACT and NZ First</h4><p>New Zealand is governed by a three-party coalition elected in October 2023. <strong>National</strong> leads the coalition with Christopher Luxon as Prime Minister. <strong>ACT</strong>'s David Seymour is Deputy Prime Minister. <strong>NZ First</strong>'s Winston Peters holds several senior portfolios. Together the three parties hold <strong>68 of 123 seats</strong> — a working majority of 6 seats.</p></div>
   <div class="info-block"><h4>The opposition</h4><p><strong>Labour</strong> is the main opposition party, led by Chris Hipkins. <strong>The Green Party</strong> (co-led by Chlöe Swarbrick and Marama Davidson) and <strong>Te Pāti Māori</strong> (co-led by Rawiri Waititi and Debbie Ngarewa-Packer) also sit in opposition. Together they hold <strong>55 of 123 seats</strong>. <strong>The Opportunity Party (TOP)</strong> is not currently in Parliament but is polling around 6%.</p></div>
+  </div>
 
   <div class="section-label" style="margin-top:24px">2023 election result</div>
   <div class="parl-bar" id="parlBar"></div>
@@ -188,11 +202,13 @@ footer strong{color:rgba(255,255,255,0.9);}
   </div>
 
   <div class="section-label" style="margin-top:24px">How your vote works</div>
+  <div class="info-grid">
   <div class="info-block"><h4>You get two votes on election day</h4><p>Every voter gets two votes: an <strong>electorate vote</strong> for their local MP candidate, and a <strong>party vote</strong> for the party they want in Parliament. The party vote is more important for the overall result — it determines what share of seats each party receives nationally, regardless of who wins individual electorates.</p></div>
   <div class="info-block"><h4>What does your party vote actually do?</h4><p>Your party vote determines the percentage of Parliament each party receives. If a party wins 30% of party votes, they get roughly 30% of the 120 seats (about 36 seats). Even if your local electorate candidate loses, your party vote still counts toward that party's national total.</p></div>
   <div class="info-block"><h4>The 5% threshold</h4><p>A party must win either <strong>5% of the party vote</strong>, or at least <strong>one electorate seat</strong>, to enter Parliament. Parties that don't clear this threshold receive no seats, even if they received hundreds of thousands of votes. This is why smaller parties often campaign hard in specific electorates — ACT in Epsom is a well-known example.</p></div>
   <div class="info-block"><h4>What is an overhang seat?</h4><p>If a party wins more electorate seats than their party vote entitles them to, Parliament temporarily expands to accommodate them. In 2023, Te Pāti Māori won 6 electorate seats but only 3.1% of the party vote (which would entitle them to ~4 seats). This created a 2-seat overhang, giving Parliament 122 seats instead of 120. A further seat was added in December 2023 when National won the Port Waikato by-election, bringing the total to 123.</p></div>
   <div class="info-block"><h4>Why do parties need to form coalitions?</h4><p>Because MMP produces proportional results, no single party usually wins a majority on its own. Parties must negotiate coalition agreements after the election, combining their seats to reach a majority. The current government (National 49 + ACT 11 + NZ First 8 = 68 seats) is a typical example of how this works in practice.</p></div>
+  </div>
   <p class="footer-note">Source: parliament.nz · Electoral Commission NZ · 2023 official results. The 54th Parliament dissolves 1 October 2026 ahead of the 7 November 2026 election.</p>
 </div>
 </div>
@@ -253,6 +269,7 @@ const PL=p=>({NZFirst:'NZ First',TPM:'Te Pāti Māori'}[p]||p);
 const PC={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
 const PBG={National:'#D8E8F8',Labour:'#FDDCDA',ACT:'#D5EACF',Greens:'#C5EDE2',NZFirst:'#FAEBD7',TPM:'#E2DFF8',TOP:'#C0E8DC'};
 const PFG={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
+const POLL_PCT={National:31,Labour:25.5,Greens:13.5,NZFirst:10.5,ACT:9.5,TOP:6.5,TPM:3};
 const TOPICS={all:'All topics',tax:'Tax & cost of living',economy:'Economy & jobs',transport:'Transport & infrastructure',housing:'Housing',healthcare:'Healthcare',environment:'Environment',treaty:'Te Ao Māori',governance:'Governance',laworder:'Law & order',foreign:'Foreign affairs & defence',migration:'Immigration'};
 
 const PARTIES=[
@@ -384,7 +401,7 @@ function renderByIssue(){
     const items=POLICIES.filter(x=>x.p===party.key&&x.t===activeIssueTopic);
     const heading=`<div class="policy-section-hd">${party.label||PL(party.key)}</div>`;
     if(!items.length)return`${heading}<div class="empty" style="padding:0 0 20px;text-align:left">No announced policy on this topic yet.</div>`;
-    return heading+items.map(p=>`
+    return heading+'<div class="pcard-grid">'+items.map(p=>`
       <div class="pcard" id="isspc-${idx(p)}">
         <div class="pcard-top">
           <div><span class="pbadge b-${p.p}">${PL(p.p)}</span></div>
@@ -395,7 +412,7 @@ function renderByIssue(){
           <button class="toggle-btn" onclick="toggleIssueAnalogy(${idx(p)})">Plain English</button>
         </div>
         <div id="issax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
-      </div>`).join('');
+      </div>`).join('')+'</div>';
   }).join('');
   document.getElementById('issueOut').innerHTML=out;
 }
@@ -417,7 +434,8 @@ window.toggleIssueAnalogy=function(i){
   ];
   const grid=document.getElementById('coalGrid');
   COAL.forEach(c=>{
-    const bars=c.parties.map(p=>`<div style="flex:1;background:${PC[p]};height:100%"></div>`).join('')+`<div style="flex:${120-c.seats};background:var(--surface2);height:100%"></div>`;
+    const pollTotal=c.parties.reduce((s,p)=>s+POLL_PCT[p],0);
+    const bars=c.parties.map(p=>`<div style="flex:${(POLL_PCT[p]/pollTotal)*c.seats};background:${PC[p]};height:100%"></div>`).join('')+`<div style="flex:${120-c.seats};background:var(--surface2);height:100%"></div>`;
     const badges=c.parties.map(p=>`<span class="cbadge" style="background:${PBG[p]};color:${PFG[p]}">${PL(p)}</span>`).join('');
     grid.innerHTML+=`<div class="coal-card"><div class="coal-title">${c.title}</div><div class="coal-badges">${badges}</div><div class="coal-bar" style="overflow:hidden;border-radius:4px;border:1px solid var(--border)">${bars}</div><div class="coal-meta">~${c.seats} seats &nbsp;·&nbsp; 61 needed for a majority</div><div class="coal-detail">${c.detail}</div></div>`;
   });
@@ -449,7 +467,7 @@ function renderPolicies(){
     const items=filtered.filter(p=>p.t===k);
     return `
     <div class="policy-section-hd" id="sec-${k}">${lbl}</div>
-    ${items.map(p=>`
+    <div class="pcard-grid">${items.map(p=>`
       <div class="pcard" id="pc-${idx(p)}">
         <div class="pcard-top">
           <div><span class="pbadge b-${p.p}">${PL(p.p)}</span></div>
@@ -460,7 +478,7 @@ function renderPolicies(){
           <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})">Plain English</button>
         </div>
         <div id="ax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
-      </div>`).join('')}`;
+      </div>`).join('')}</div>`;
   }).join('');
 }
 
