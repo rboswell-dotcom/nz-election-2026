@@ -25,6 +25,7 @@
 <style>
 :root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
 *{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;}
 .hero{background:var(--accent);color:#fff;padding:56px 24px 48px;text-align:center;}
 .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7EC8A4;margin-bottom:16px;}
@@ -91,6 +92,9 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .coal-detail{font-size:12px;color:var(--text-secondary);line-height:1.6;}
 .poll-note{font-size:12px;color:var(--text-muted);margin-top:20px;padding:16px 18px;background:var(--surface2);border-radius:var(--radius);line-height:1.6;border:1px solid var(--border);}
 .filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.jump-nav{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.jump-nav a{font-size:12px;color:var(--text-secondary);text-decoration:none;}
+.jump-nav a:hover{color:var(--accent);text-decoration:underline;}
 .tbtn{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border-strong);background:transparent;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;}
 .tbtn:hover{background:var(--surface2);}
 .tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
@@ -102,7 +106,7 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .pchip[data-p="NZFirst"].active{background:#B8640E;color:#F9DEC0;border-color:#B8640E;}
 .pchip[data-p="TPM"].active{background:#6B5FCC;color:#DDD9F7;border-color:#6B5FCC;}
 .pchip[data-p="TOP"].active{background:#0A5E47;color:#B8E4D8;border-color:#0A5E47;}
-.policy-section-hd{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;margin-top:20px;}
+.policy-section-hd{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;margin-top:20px;scroll-margin-top:64px;}
 .policy-section-hd:first-of-type{margin-top:4px;}
 .pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:8px;transition:border-color 0.15s;}
 .pcard:hover{border-color:var(--border-strong);}
@@ -229,7 +233,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <div class="container">
   <h2>All policies</h2>
   <p class="lead">Sourced directly from official party websites and official press releases, 2025–2026 only. Click "Plain English" on any policy for a plain-language explanation of what it means in practice.</p>
-  <div class="filter-bar" id="topicBar"></div>
+  <div class="jump-nav" id="jumpNav"></div>
   <div class="filter-bar" id="partyBar"></div>
   <div id="polOut"></div>
   <p class="footer-note">Last updated August 2026 · Sources: national.org.nz · labour.org.nz · act.org.nz · greens.org.nz · nzfirst.nz · maoriparty.org.nz · opportunity.org.nz · 2025–2026 announcements only · Full manifestos expected September–October 2026 — this page will be updated when they are released.</p>
@@ -420,14 +424,8 @@ window.toggleIssueAnalogy=function(i){
 })();
 
 // Policies
-let activeTopic='all',activeParties=new Set(['National','Labour','ACT','Greens','NZFirst','TPM','TOP']);
+let activeParties=new Set(['National','Labour','ACT','Greens','NZFirst','TPM','TOP']);
 (function buildFilters(){
-  const tBar=document.getElementById('topicBar');
-  Object.entries(TOPICS).forEach(([k,lbl])=>{
-    const b=document.createElement('button');b.className='tbtn'+(k==='all'?' active':'');b.dataset.t=k;b.textContent=lbl;
-    b.addEventListener('click',()=>{activeTopic=k;document.querySelectorAll('.tbtn').forEach(x=>x.classList.toggle('active',x===b));renderPolicies();});
-    tBar.appendChild(b);
-  });
   const pBar=document.getElementById('partyBar');
   ['National','Labour','ACT','Greens','NZFirst','TPM','TOP'].forEach(p=>{
     const c=document.createElement('button');c.className='pchip active';c.dataset.p=p;c.textContent=PL(p);
@@ -441,14 +439,16 @@ let activeTopic='all',activeParties=new Set(['National','Labour','ACT','Greens',
 })();
 
 function renderPolicies(){
-  const filtered=POLICIES.filter(p=>activeParties.has(p.p)&&(activeTopic==='all'||p.t===activeTopic));
+  const filtered=POLICIES.filter(p=>activeParties.has(p.p));
+  const idx=p=>POLICIES.indexOf(p);
+  const topicsPresent=Object.entries(TOPICS).filter(([k])=>k!=='all').filter(([k])=>filtered.some(p=>p.t===k));
+  document.getElementById('jumpNav').innerHTML=topicsPresent.map(([k,lbl])=>`<a href="#sec-${k}">${lbl}</a>`).join('');
   const out=document.getElementById('polOut');
   if(!filtered.length){out.innerHTML='<div class="empty">No policies match the current filters.</div>';return;}
-  const byT={};
-  filtered.forEach(p=>{const lbl=TOPICS[p.t]||p.t;if(!byT[lbl])byT[lbl]=[];byT[lbl].push(p);});
-  const idx=p=>POLICIES.indexOf(p);
-  out.innerHTML=Object.entries(byT).map(([lbl,items])=>`
-    <div class="policy-section-hd">${lbl}</div>
+  out.innerHTML=topicsPresent.map(([k,lbl])=>{
+    const items=filtered.filter(p=>p.t===k);
+    return `
+    <div class="policy-section-hd" id="sec-${k}">${lbl}</div>
     ${items.map(p=>`
       <div class="pcard" id="pc-${idx(p)}">
         <div class="pcard-top">
@@ -460,7 +460,8 @@ function renderPolicies(){
           <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})">Plain English</button>
         </div>
         <div id="ax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
-      </div>`).join('')}`).join('');
+      </div>`).join('')}`;
+  }).join('');
 }
 
 window.toggleAnalogy=function(i){
