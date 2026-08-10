@@ -26,6 +26,8 @@
 :root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
+.skip-link{position:absolute;top:-100px;left:12px;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;z-index:200;transition:top 0.15s;}
+.skip-link:focus{top:12px;}
 body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial-gradient(circle at 1px 1px,var(--border) 1px,transparent 0);background-size:26px 26px;color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;}
 .hero{background:linear-gradient(155deg,#1B4332 0%,#163828 100%);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(126,200,164,0.08);right:-160px;top:-160px;}
@@ -62,6 +64,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial
 .explore-grid{display:grid;grid-template-columns:1fr;gap:8px;max-width:960px;margin:0 auto;padding:16px 20px 20px;}
 .explore-item{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
 .explore-item:hover{border-color:var(--accent);background:var(--accent-light);}
+.explore-item.active{border-color:var(--accent);}
 .explore-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
 .explore-item-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;}
 .hub-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px;}
@@ -181,6 +184,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="hero">
   <div class="hero-eyebrow">7 November 2026 · New Zealand General Election</div>
   <h1>Know your <em>vote.</em></h1>
@@ -192,12 +196,12 @@ footer strong{color:rgba(255,255,255,0.9);}
   </div>
   <a class="hero-cta" href="https://vote.nz/enrolling/enrol-or-update/enrol-or-update-online" target="_blank" rel="noopener">Check or update your enrolment ↗</a>
 </div>
-<nav class="nav-wrap">
+<nav class="nav-wrap" aria-label="Site navigation">
   <div class="nav-inner">
     <button class="nav-brand" data-tab="home">Know your <em>vote</em>.</button>
     <button class="nav-explore" id="exploreBtn" aria-haspopup="true" aria-expanded="false">Explore <span class="nav-chev">▾</span></button>
   </div>
-  <div class="subnav hidden" id="subnav">
+  <div class="subnav hidden" id="subnav" aria-label="Jump to section">
     <button class="subnav-item" data-tab="parliament">Current Parliament</button>
     <button class="subnav-item" data-tab="parties">The Parties</button>
     <button class="subnav-item" data-tab="issue">By Issue</button>
@@ -206,16 +210,16 @@ footer strong{color:rgba(255,255,255,0.9);}
     <button class="subnav-item" data-tab="policies">All Policies</button>
   </div>
   <div class="explore-panel" id="explorePanel" hidden>
-    <div class="explore-grid" id="exploreGrid"></div>
+    <div class="explore-grid" id="exploreGrid" aria-label="All sections"></div>
   </div>
 </nav>
 <div class="explore-backdrop" id="exploreBackdrop"></div>
-<main>
+<main id="main-content" tabindex="-1">
 
 <!-- HOME -->
 <div class="tab-content active" id="tab-home">
 <div class="container">
-  <h2>Everything you need to vote informed</h2>
+  <h2 tabindex="-1">Everything you need to vote informed</h2>
   <p class="lead">One stop for the facts, the parties, and the policies. Pick where you want to start.</p>
   <div class="hub-grid" id="hubGrid"></div>
 </div>
@@ -224,7 +228,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- PARLIAMENT -->
 <div class="tab-content" id="tab-parliament">
 <div class="container">
-  <h2>The current Parliament</h2>
+  <h2 tabindex="-1">The current Parliament</h2>
   <p class="lead">Objective facts about the 54th New Zealand Parliament, elected 14 October 2023. Source: parliament.nz and Electoral Commission NZ.</p>
   <div class="fact-grid">
     <div class="fact-card"><div class="fact-label">Total MPs</div><div class="fact-value">123</div><div class="fact-sub">Normally 120 — a 2-seat overhang exists because Te Pāti Māori won more electorate seats than their party vote entitled them to, plus 1 extra seat from National's December 2023 Port Waikato by-election win</div></div>
@@ -264,7 +268,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- PARTIES -->
 <div class="tab-content" id="tab-parties">
 <div class="container">
-  <h2>The seven parties</h2>
+  <h2 tabindex="-1">The seven parties</h2>
   <p class="lead">Every party with a realistic chance of entering Parliament at the 7 November 2026 election. Click any party's website link to read their policies directly from the source.</p>
   <div id="partyList"></div>
   <p class="footer-note">New Zealand uses MMP (Mixed Member Proportional) voting. Parties need 5% of the party vote OR at least one electorate seat to enter Parliament. The 54th Parliament dissolves 1 October 2026.</p>
@@ -274,7 +278,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- BY ISSUE -->
 <div class="tab-content" id="tab-issue">
 <div class="container">
-  <h2>Compare by issue</h2>
+  <h2 tabindex="-1">Compare by issue</h2>
   <p class="lead">Pick a topic to see every party's announced policy on it, side by side — sourced from each party's own website.</p>
   <p class="poll-note" style="margin-bottom:20px;">Unless flagged otherwise, these are campaign promises, not law. <button class="inline-link" data-tab="after">See what a policy actually has to survive to become real →</button></p>
   <div class="filter-bar" id="issueTopicBar"></div>
@@ -285,7 +289,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- COALITIONS -->
 <div class="tab-content" id="tab-coalitions">
 <div class="container">
-  <h2>How coalitions work</h2>
+  <h2 tabindex="-1">How coalitions work</h2>
   <p class="lead">Under MMP, no single party usually wins enough seats to govern alone. Parties must combine their seats to reach 61+ in a standard 120-seat Parliament. Here's what the current polling suggests.</p>
   <div class="coal-note-box"><p><strong>Why does this matter to you?</strong> Your party vote doesn't just elect your preferred party — it also affects which combinations of parties can form a government. A party you vote for might win seats but end up in a government you didn't anticipate. Understanding the possible coalition mathematics helps you vote with the full picture.</p></div>
   <div class="coal-grid" id="coalGrid"></div>
@@ -296,7 +300,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- AFTER YOU VOTE -->
 <div class="tab-content" id="tab-after">
 <div class="container">
-  <h2>From your vote to the law</h2>
+  <h2 tabindex="-1">From your vote to the law</h2>
   <p class="lead">Every policy on this site is a campaign promise, not law. Here's the process one actually has to survive to become a real, working piece of legislation.</p>
   <div class="info-block"><h4>Step 1 — Your vote decides who's in Parliament</h4><p>Your party vote determines how many seats each party wins, and under MMP a single party almost never wins a majority outright. See <button class="inline-link" data-tab="parliament">Current Parliament</button> for exactly how that works.</p></div>
   <div class="info-block"><h4>Step 2 — Coalition talks decide what actually gets pursued</h4><p>When no party has a majority, the parties that can combine to reach 62+ seats negotiate a coalition or confidence-and-supply agreement. Individual policies get traded in that process — kept, watered down, or dropped entirely — and the resulting coalition agreement, not any single party's manifesto, becomes the government's actual work programme. See <button class="inline-link" data-tab="coalitions">Coalitions</button> for what the current numbers suggest is possible.</p></div>
@@ -308,7 +312,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <!-- POLICIES -->
 <div class="tab-content" id="tab-policies">
 <div class="container">
-  <h2>All policies</h2>
+  <h2 tabindex="-1">All policies</h2>
   <p class="lead">Sourced directly from official party websites and official press releases, 2025–2026 only. Click "Plain English" on any policy for a plain-language explanation of what it means in practice.</p>
   <p class="poll-note" style="margin-bottom:20px;">Unless flagged otherwise, these are campaign promises, not law. <button class="inline-link" data-tab="after">See what a policy actually has to survive to become real →</button></p>
   <div class="jump-nav" id="jumpNav"></div>
@@ -328,6 +332,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 
 <script>
 const PL=p=>({NZFirst:'NZ First',TPM:'Te Pāti Māori'}[p]||p);
+const PLhtml=p=>p==='TPM'?'<span lang="mi">Te Pāti Māori</span>':PL(p);
 const statusBadge=p=>p.status==='bottom-line'?'<span class="status-tag status-bottomline">Coalition bottom line</span>':p.status==='delivered'?'<span class="status-tag status-delivered">Already delivered</span>':'';
 const PC={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
 const PBG={National:'#D8E8F8',Labour:'#FDDCDA',ACT:'#D5EACF',Greens:'#C5EDE2',NZFirst:'#FAEBD7',TPM:'#E2DFF8',TOP:'#C0E8DC'};
@@ -341,7 +346,7 @@ const PARTIES=[
   {key:'ACT',leader:'David Seymour',role:'Deputy Prime Minister · Currently governing (coalition partner)',url:'https://www.act.org.nz'},
   {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz'},
   {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz'},
-  {key:'TPM',label:'Te Pāti Māori',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz'},
+  {key:'TPM',label:'<span lang="mi">Te Pāti Māori</span>',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz'},
   {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament · Polling ~6.5%',url:'https://www.opportunity.org.nz'},
 ];
 
@@ -442,9 +447,9 @@ const POLICIES=[
   const bar=document.getElementById('parlBar'),lbl=document.getElementById('parlLabels'),tbody=document.getElementById('seatTbody');
   SEATS.forEach(s=>{
     const seg=document.createElement('div');seg.style.cssText=`flex:${s.seats};background:${PC[s.p]};height:100%`;bar.appendChild(seg);
-    const l=document.createElement('div');l.className='parl-label';l.innerHTML=`<span class="dot" style="background:${PC[s.p]}"></span>${PL(s.p)} — ${s.seats}`;lbl.appendChild(l);
+    const l=document.createElement('div');l.className='parl-label';l.innerHTML=`<span class="dot" style="background:${PC[s.p]}"></span>${PLhtml(s.p)} — ${s.seats}`;lbl.appendChild(l);
     const pct=Math.round((s.seats/123)*100);
-    tbody.innerHTML+=`<tr><td><span style="display:inline-flex;align-items:center;gap:8px"><span class="dot" style="background:${PC[s.p]}"></span>${PL(s.p)}</span></td><td><span class="pill ${s.role==='gov'?'pill-gov':'pill-opp'}">${s.role==='gov'?'Government':'Opposition'}</span></td><td><strong>${s.seats}</strong></td><td>${s.vote}</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${PC[s.p]}"></div></div></td></tr>`;
+    tbody.innerHTML+=`<tr><td><span style="display:inline-flex;align-items:center;gap:8px"><span class="dot" style="background:${PC[s.p]}"></span>${PLhtml(s.p)}</span></td><td><span class="pill ${s.role==='gov'?'pill-gov':'pill-opp'}">${s.role==='gov'?'Government':'Opposition'}</span></td><td><strong>${s.seats}</strong></td><td>${s.vote}</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${PC[s.p]}"></div></div></td></tr>`;
   });
   tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Government total (National + ACT + NZ First)</td><td><strong>68</strong></td><td></td><td></td></tr>`;
   tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Opposition total (Labour + Greens + Te Pāti Māori)</td><td><strong>55</strong></td><td></td><td></td></tr>`;
@@ -453,7 +458,7 @@ const POLICIES=[
 // Party list
 (function(){
   const el=document.getElementById('partyList');
-  PARTIES.forEach(p=>{el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-name">${p.label||PL(p.key)}</div><div class="party-meta-text">${p.leader} · ${p.role}</div></div><a class="party-link" href="${p.url}" target="_blank">Visit website ↗</a></div>`;});
+  PARTIES.forEach(p=>{el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-name">${p.label||PLhtml(p.key)}</div><div class="party-meta-text">${p.leader} · ${p.role}</div></div><a class="party-link" href="${p.url}" target="_blank">Visit website ↗</a></div>`;});
 })();
 
 // By Issue
@@ -461,8 +466,8 @@ let activeIssueTopic='tax';
 (function buildIssueFilters(){
   const bar=document.getElementById('issueTopicBar');
   Object.entries(TOPICS).filter(([k])=>k!=='all').forEach(([k,lbl])=>{
-    const b=document.createElement('button');b.className='tbtn'+(k===activeIssueTopic?' active':'');b.dataset.t=k;b.textContent=lbl;
-    b.addEventListener('click',()=>{activeIssueTopic=k;document.querySelectorAll('#issueTopicBar .tbtn').forEach(x=>x.classList.toggle('active',x===b));renderByIssue();});
+    const b=document.createElement('button');b.className='tbtn'+(k===activeIssueTopic?' active':'');b.dataset.t=k;b.textContent=lbl;b.setAttribute('aria-pressed',k===activeIssueTopic?'true':'false');if(k==='treaty')b.lang='mi';
+    b.addEventListener('click',()=>{activeIssueTopic=k;document.querySelectorAll('#issueTopicBar .tbtn').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',x===b?'true':'false');});renderByIssue();});
     bar.appendChild(b);
   });
 })();
@@ -471,17 +476,17 @@ function renderByIssue(){
   const idx=p=>POLICIES.indexOf(p);
   const out=PARTIES.map(party=>{
     const items=POLICIES.filter(x=>x.p===party.key&&x.t===activeIssueTopic);
-    const heading=`<div class="policy-section-hd">${party.label||PL(party.key)}</div>`;
+    const heading=`<div class="policy-section-hd">${party.label||PLhtml(party.key)}</div>`;
     if(!items.length)return`${heading}<div class="empty" style="padding:0 0 20px;text-align:left">No announced policy on this topic yet.</div>`;
     return heading+'<div class="pcard-grid">'+items.map(p=>`
       <div class="pcard" id="isspc-${idx(p)}">
         <div class="pcard-top">
-          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span>${statusBadge(p)}</div>
+          <div><span class="pbadge b-${p.p}">${PLhtml(p.p)}</span>${statusBadge(p)}</div>
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
           <a class="srclink" href="${p.url}" target="_blank">↗ ${p.src}</a>
-          <button class="toggle-btn" onclick="toggleIssueAnalogy(${idx(p)})">Plain English</button>
+          <button class="toggle-btn" onclick="toggleIssueAnalogy(${idx(p)})" aria-expanded="false" aria-controls="issax-${idx(p)}">Plain English</button>
         </div>
         <div id="issax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
       </div>`).join('')+'</div>';
@@ -494,6 +499,7 @@ window.toggleIssueAnalogy=function(i){
   const visible=box.style.display!=='none';
   box.style.display=visible?'none':'block';
   btn.textContent=visible?'Plain English':'Hide';
+  btn.setAttribute('aria-expanded',visible?'false':'true');
 };
 
 // Coalitions
@@ -508,7 +514,7 @@ window.toggleIssueAnalogy=function(i){
   COAL.forEach(c=>{
     const pollTotal=c.parties.reduce((s,p)=>s+POLL_PCT[p],0);
     const bars=c.parties.map(p=>`<div style="flex:${(POLL_PCT[p]/pollTotal)*c.seats};background:${PC[p]};height:100%"></div>`).join('')+`<div style="flex:${120-c.seats};background:var(--surface2);height:100%"></div>`;
-    const badges=c.parties.map(p=>`<span class="cbadge" style="background:${PBG[p]};color:${PFG[p]}">${PL(p)}</span>`).join('');
+    const badges=c.parties.map(p=>`<span class="cbadge" style="background:${PBG[p]};color:${PFG[p]}">${PLhtml(p)}</span>`).join('');
     grid.innerHTML+=`<div class="coal-card"><div class="coal-title">${c.title}</div><div class="coal-badges">${badges}</div><div class="coal-bar" style="overflow:hidden;border-radius:4px;border:1px solid var(--border)">${bars}</div><div class="coal-meta">~${c.seats} seats &nbsp;·&nbsp; 61 needed for a majority</div><div class="coal-detail">${c.detail}</div></div>`;
   });
 })();
@@ -518,10 +524,10 @@ let activeParties=new Set(['National','Labour','ACT','Greens','NZFirst','TPM','T
 (function buildFilters(){
   const pBar=document.getElementById('partyBar');
   ['National','Labour','ACT','Greens','NZFirst','TPM','TOP'].forEach(p=>{
-    const c=document.createElement('button');c.className='pchip active';c.dataset.p=p;c.textContent=PL(p);
+    const c=document.createElement('button');c.className='pchip active';c.dataset.p=p;c.textContent=PL(p);c.setAttribute('aria-pressed','true');if(p==='TPM')c.lang='mi';
     c.addEventListener('click',()=>{
-      if(activeParties.has(p)){if(activeParties.size===1)return;activeParties.delete(p);c.classList.remove('active');}
-      else{activeParties.add(p);c.classList.add('active');}
+      if(activeParties.has(p)){if(activeParties.size===1)return;activeParties.delete(p);c.classList.remove('active');c.setAttribute('aria-pressed','false');}
+      else{activeParties.add(p);c.classList.add('active');c.setAttribute('aria-pressed','true');}
       renderPolicies();
     });
     pBar.appendChild(c);
@@ -532,22 +538,22 @@ function renderPolicies(){
   const filtered=POLICIES.filter(p=>activeParties.has(p.p));
   const idx=p=>POLICIES.indexOf(p);
   const topicsPresent=Object.entries(TOPICS).filter(([k])=>k!=='all').filter(([k])=>filtered.some(p=>p.t===k));
-  document.getElementById('jumpNav').innerHTML=topicsPresent.map(([k,lbl])=>`<a href="#sec-${k}">${lbl}</a>`).join('');
+  document.getElementById('jumpNav').innerHTML=topicsPresent.map(([k,lbl])=>`<a href="#sec-${k}"${k==='treaty'?' lang="mi"':''}>${lbl}</a>`).join('');
   const out=document.getElementById('polOut');
   if(!filtered.length){out.innerHTML='<div class="empty">No policies match the current filters.</div>';return;}
   out.innerHTML=topicsPresent.map(([k,lbl])=>{
     const items=filtered.filter(p=>p.t===k);
     return `
-    <div class="policy-section-hd" id="sec-${k}">${lbl}</div>
+    <div class="policy-section-hd" id="sec-${k}"${k==='treaty'?' lang="mi"':''}>${lbl}</div>
     <div class="pcard-grid">${items.map(p=>`
       <div class="pcard" id="pc-${idx(p)}">
         <div class="pcard-top">
-          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span>${statusBadge(p)}</div>
+          <div><span class="pbadge b-${p.p}">${PLhtml(p.p)}</span>${statusBadge(p)}</div>
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
           <a class="srclink" href="${p.url}" target="_blank">↗ ${p.src}</a>
-          <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})">Plain English</button>
+          <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})" aria-expanded="false" aria-controls="ax-${idx(p)}">Plain English</button>
         </div>
         <div id="ax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
       </div>`).join('')}</div>`;
@@ -559,6 +565,7 @@ window.toggleAnalogy=function(i){
   const visible=box.style.display!=='none';
   box.style.display=visible?'none':'block';
   btn.textContent=visible?'Plain English':'Hide';
+  btn.setAttribute('aria-expanded',visible?'false':'true');
 };
 
 // Home hub + Explore menu
@@ -573,11 +580,18 @@ window.toggleAnalogy=function(i){
 function goToTab(t){
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+t));
   document.getElementById('subnav').classList.toggle('hidden',t==='home');
-  document.querySelectorAll('.subnav-item').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  document.querySelectorAll('.subnav-item,.explore-item').forEach(b=>{
+    const current=b.dataset.tab===t;
+    b.classList.toggle('active',current);
+    b.setAttribute('aria-current',current?'true':'false');
+  });
+  document.querySelector('.nav-brand').setAttribute('aria-current',t==='home'?'page':'false');
   if(t==='issue')renderByIssue();
   if(t==='policies')renderPolicies();
   closeExplore();
   window.scrollTo({top:0,behavior:'smooth'});
+  const heading=document.querySelector('.tab-content.active h2');
+  if(heading)heading.focus();
 }
 document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>goToTab(el.dataset.tab)));
 
