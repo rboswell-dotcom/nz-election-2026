@@ -41,11 +41,35 @@ body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial
 .hero-cta:hover{opacity:0.85;}
 .container{max-width:960px;margin:0 auto;padding:0 20px;}
 .nav-wrap{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;max-width:960px;margin:0 auto;padding:0 20px;}
-.nav-tabs::-webkit-scrollbar{display:none;}
-.nav-tab{flex-shrink:0;font-size:13px;font-weight:500;padding:14px 14px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;white-space:nowrap;font-family:'Inter',sans-serif;}
-.nav-tab:hover{color:var(--text);}
-.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto;padding:14px 20px;}
+.nav-brand{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--text);background:none;border:none;cursor:pointer;padding:0;}
+.nav-brand em{font-style:italic;color:var(--accent);}
+.nav-explore{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border-strong);border-radius:20px;padding:8px 16px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.nav-explore:hover{border-color:var(--accent);color:var(--accent);}
+.nav-explore.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.nav-chev{font-size:10px;transition:transform 0.15s;}
+.nav-explore.active .nav-chev{transform:rotate(180deg);}
+.subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:960px;margin:0 auto;padding:0 20px 12px;}
+.subnav::-webkit-scrollbar{display:none;}
+.subnav.hidden{display:none;}
+.subnav-item{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 13px;border:1px solid var(--border);border-radius:16px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.subnav-item:hover{border-color:var(--accent);color:var(--accent);}
+.subnav-item.active{background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:600;}
+.explore-panel{position:absolute;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 16px 28px rgba(20,30,25,0.12);z-index:101;}
+.explore-panel[hidden]{display:none;}
+.explore-backdrop{position:fixed;inset:0;background:rgba(15,25,20,0.28);z-index:90;opacity:0;pointer-events:none;transition:opacity 0.15s;}
+.explore-backdrop.active{opacity:1;pointer-events:auto;}
+.explore-grid{display:grid;grid-template-columns:1fr;gap:8px;max-width:960px;margin:0 auto;padding:16px 20px 20px;}
+.explore-item{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.explore-item:hover{border-color:var(--accent);background:var(--accent-light);}
+.explore-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.explore-item-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;}
+.hub-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px;}
+.hub-card{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.hub-card:hover{border-color:var(--accent);box-shadow:0 8px 20px rgba(20,30,25,0.08);}
+.hub-card-title{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px;}
+.hub-card-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;}
+.hub-card-cta{font-size:12px;color:var(--accent);font-weight:600;margin-top:12px;}
 .tab-content{display:none;padding:36px 0 60px;}
 .tab-content.active{display:block;}
 h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text);margin-bottom:8px;letter-spacing:-0.01em;}
@@ -108,7 +132,7 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .pchip[data-p="NZFirst"].active{background:#B8640E;color:#F9DEC0;border-color:#B8640E;}
 .pchip[data-p="TPM"].active{background:#6B5FCC;color:#DDD9F7;border-color:#6B5FCC;}
 .pchip[data-p="TOP"].active{background:#0A5E47;color:#B8E4D8;border-color:#0A5E47;}
-.policy-section-hd{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;margin-top:20px;scroll-margin-top:64px;}
+.policy-section-hd{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;margin-top:20px;scroll-margin-top:112px;}
 .policy-section-hd:first-of-type{margin-top:4px;}
 .pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:8px;transition:border-color 0.15s;}
 .pcard:hover{border-color:var(--border-strong);}
@@ -147,6 +171,8 @@ footer strong{color:rgba(255,255,255,0.9);}
   .coal-grid{display:grid;grid-template-columns:1fr 1fr;}
   .pcard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;align-items:start;}
   .pcard-grid .pcard{margin-bottom:0;}
+  .hub-grid{grid-template-columns:1fr 1fr;}
+  .explore-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -163,18 +189,35 @@ footer strong{color:rgba(255,255,255,0.9);}
   <a class="hero-cta" href="https://vote.nz/enrolling/enrol-or-update/enrol-or-update-online" target="_blank" rel="noopener">Check or update your enrolment ↗</a>
 </div>
 <nav class="nav-wrap">
-  <div class="nav-tabs">
-    <button class="nav-tab active" data-tab="parliament">Current Parliament</button>
-    <button class="nav-tab" data-tab="parties">The Parties</button>
-    <button class="nav-tab" data-tab="issue">By Issue</button>
-    <button class="nav-tab" data-tab="coalitions">Coalitions</button>
-    <button class="nav-tab" data-tab="policies">All Policies</button>
+  <div class="nav-inner">
+    <button class="nav-brand" data-tab="home">Know your <em>vote</em>.</button>
+    <button class="nav-explore" id="exploreBtn" aria-haspopup="true" aria-expanded="false">Explore <span class="nav-chev">▾</span></button>
+  </div>
+  <div class="subnav hidden" id="subnav">
+    <button class="subnav-item" data-tab="parliament">Current Parliament</button>
+    <button class="subnav-item" data-tab="parties">The Parties</button>
+    <button class="subnav-item" data-tab="issue">By Issue</button>
+    <button class="subnav-item" data-tab="coalitions">Coalitions</button>
+    <button class="subnav-item" data-tab="policies">All Policies</button>
+  </div>
+  <div class="explore-panel" id="explorePanel" hidden>
+    <div class="explore-grid" id="exploreGrid"></div>
   </div>
 </nav>
+<div class="explore-backdrop" id="exploreBackdrop"></div>
 <main>
 
+<!-- HOME -->
+<div class="tab-content active" id="tab-home">
+<div class="container">
+  <h2>Everything you need to vote informed</h2>
+  <p class="lead">One stop for the facts, the parties, and the policies. Pick where you want to start.</p>
+  <div class="hub-grid" id="hubGrid"></div>
+</div>
+</div>
+
 <!-- PARLIAMENT -->
-<div class="tab-content active" id="tab-parliament">
+<div class="tab-content" id="tab-parliament">
 <div class="container">
   <h2>The current Parliament</h2>
   <p class="lead">Objective facts about the 54th New Zealand Parliament, elected 14 October 2023. Source: parliament.nz and Electoral Commission NZ.</p>
@@ -280,6 +323,14 @@ const PARTIES=[
   {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz'},
   {key:'TPM',label:'Te Pāti Māori',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz'},
   {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament · Polling ~6.5%',url:'https://www.opportunity.org.nz'},
+];
+
+const SECTIONS=[
+  {tab:'parliament',title:'Current Parliament',desc:"Objective facts about the 54th Parliament — who's governing, how MMP works, and the 2023 result."},
+  {tab:'parties',title:'The Parties',desc:'All 7 parties with a realistic shot at Parliament, and direct links to their official websites.'},
+  {tab:'issue',title:'By Issue',desc:"Pick a topic — tax, housing, health — and see every party's stance on it side by side."},
+  {tab:'coalitions',title:'Coalitions',desc:'How coalition-building works under MMP, and what current polling suggests about government options.'},
+  {tab:'policies',title:'All Policies',desc:'Every sourced policy from every party, with a plain-English explanation on demand.'},
 ];
 
 const SEATS=[
@@ -489,15 +540,34 @@ window.toggleAnalogy=function(i){
   btn.textContent=visible?'Plain English':'Hide';
 };
 
-document.querySelectorAll('.nav-tab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const t=btn.dataset.tab;
-    document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b===btn));
-    document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+t));
-    if(t==='issue')renderByIssue();
-    if(t==='policies')renderPolicies();
+// Home hub + Explore menu
+(function(){
+  const hubGrid=document.getElementById('hubGrid'),exploreGrid=document.getElementById('exploreGrid');
+  SECTIONS.forEach(s=>{
+    hubGrid.innerHTML+=`<button class="hub-card" data-tab="${s.tab}"><div class="hub-card-title">${s.title}</div><div class="hub-card-desc">${s.desc}</div><div class="hub-card-cta">Open →</div></button>`;
+    exploreGrid.innerHTML+=`<button class="explore-item" data-tab="${s.tab}"><div class="explore-item-title">${s.title}</div><div class="explore-item-desc">${s.desc}</div></button>`;
   });
-});
+})();
+
+function goToTab(t){
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+t));
+  document.getElementById('subnav').classList.toggle('hidden',t==='home');
+  document.querySelectorAll('.subnav-item').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  if(t==='issue')renderByIssue();
+  if(t==='policies')renderPolicies();
+  closeExplore();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>goToTab(el.dataset.tab)));
+
+const exploreBtn=document.getElementById('exploreBtn'),explorePanel=document.getElementById('explorePanel');
+const exploreBackdrop=document.getElementById('exploreBackdrop');
+function openExplore(){explorePanel.hidden=false;exploreBtn.classList.add('active');exploreBtn.setAttribute('aria-expanded','true');exploreBackdrop.classList.add('active');}
+function closeExplore(){explorePanel.hidden=true;exploreBtn.classList.remove('active');exploreBtn.setAttribute('aria-expanded','false');exploreBackdrop.classList.remove('active');}
+exploreBtn.addEventListener('click',e=>{e.stopPropagation();explorePanel.hidden?openExplore():closeExplore();});
+document.addEventListener('click',e=>{if(!explorePanel.hidden&&!explorePanel.contains(e.target)&&e.target!==exploreBtn)closeExplore();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeExplore();});
+
 renderPolicies();
 </script>
 </body>
