@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self';">
 <title>Know Your Vote — NZ Election 2026</title>
 <meta name="description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -325,7 +326,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 </main>
 <footer>
   <p><strong>knowyourvote.nz</strong></p>
-  <p>Built by <a href="https://www.linkedin.com/in/richard-boswell-bbb9a615b/" target="_blank">Richard Boswell</a></p>
+  <p>Built by <a href="https://www.linkedin.com/in/richard-boswell-bbb9a615b/" target="_blank" rel="noopener">Richard Boswell</a></p>
   <p style="margin-top:6px">All policies sourced directly from official party websites</p>
   <p style="margin-top:8px;font-size:11px;opacity:0.6">national.org.nz · labour.org.nz · act.org.nz · greens.org.nz · nzfirst.nz · maoriparty.org.nz · opportunity.org.nz</p>
 </footer>
@@ -458,7 +459,7 @@ const POLICIES=[
 // Party list
 (function(){
   const el=document.getElementById('partyList');
-  PARTIES.forEach(p=>{el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-name">${p.label||PLhtml(p.key)}</div><div class="party-meta-text">${p.leader} · ${p.role}</div></div><a class="party-link" href="${p.url}" target="_blank">Visit website ↗</a></div>`;});
+  PARTIES.forEach(p=>{el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-name">${p.label||PLhtml(p.key)}</div><div class="party-meta-text">${p.leader} · ${p.role}</div></div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div>`;});
 })();
 
 // By Issue
@@ -485,7 +486,7 @@ function renderByIssue(){
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
-          <a class="srclink" href="${p.url}" target="_blank">↗ ${p.src}</a>
+          <a class="srclink" href="${p.url}" target="_blank" rel="noopener">↗ ${p.src}</a>
           <button class="toggle-btn" onclick="toggleIssueAnalogy(${idx(p)})" aria-expanded="false" aria-controls="issax-${idx(p)}">Plain English</button>
         </div>
         <div id="issax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
@@ -552,7 +553,7 @@ function renderPolicies(){
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
-          <a class="srclink" href="${p.url}" target="_blank">↗ ${p.src}</a>
+          <a class="srclink" href="${p.url}" target="_blank" rel="noopener">↗ ${p.src}</a>
           <button class="toggle-btn" onclick="toggleAnalogy(${idx(p)})" aria-expanded="false" aria-controls="ax-${idx(p)}">Plain English</button>
         </div>
         <div id="ax-${idx(p)}" style="display:none"><div class="analogy-box"><div class="analogy-lbl">Plain English</div><div class="analogy-text">${p.analogy}</div></div></div>
