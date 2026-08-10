@@ -138,6 +138,10 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .pcard:hover{border-color:var(--border-strong);}
 .pcard-top{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start;}
 .pbadge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;white-space:nowrap;letter-spacing:0.02em;margin-top:1px;}
+.status-tag{display:block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:5px;letter-spacing:0.02em;white-space:nowrap;width:fit-content;}
+.status-bottomline{background:#FBE6C8;color:#8A4E0C;}
+.status-delivered{background:#D2ECD8;color:#1B6B3A;}
+.inline-link{background:none;border:none;padding:0;margin:0;color:var(--accent);font-weight:600;text-decoration:underline;cursor:pointer;font:inherit;}
 .b-National{background:#D8E8F8;color:#1E4A8C;}
 .b-Labour{background:#FDDCDA;color:#C0392B;}
 .b-ACT{background:#D5EACF;color:#2D6A1F;}
@@ -198,6 +202,7 @@ footer strong{color:rgba(255,255,255,0.9);}
     <button class="subnav-item" data-tab="parties">The Parties</button>
     <button class="subnav-item" data-tab="issue">By Issue</button>
     <button class="subnav-item" data-tab="coalitions">Coalitions</button>
+    <button class="subnav-item" data-tab="after">After You Vote</button>
     <button class="subnav-item" data-tab="policies">All Policies</button>
   </div>
   <div class="explore-panel" id="explorePanel" hidden>
@@ -271,6 +276,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <div class="container">
   <h2>Compare by issue</h2>
   <p class="lead">Pick a topic to see every party's announced policy on it, side by side — sourced from each party's own website.</p>
+  <p class="poll-note" style="margin-bottom:20px;">Unless flagged otherwise, these are campaign promises, not law. <button class="inline-link" data-tab="after">See what a policy actually has to survive to become real →</button></p>
   <div class="filter-bar" id="issueTopicBar"></div>
   <div id="issueOut"></div>
 </div>
@@ -287,11 +293,24 @@ footer strong{color:rgba(255,255,255,0.9);}
 </div>
 </div>
 
+<!-- AFTER YOU VOTE -->
+<div class="tab-content" id="tab-after">
+<div class="container">
+  <h2>From your vote to the law</h2>
+  <p class="lead">Every policy on this site is a campaign promise, not law. Here's the process one actually has to survive to become a real, working piece of legislation.</p>
+  <div class="info-block"><h4>Step 1 — Your vote decides who's in Parliament</h4><p>Your party vote determines how many seats each party wins, and under MMP a single party almost never wins a majority outright. See <button class="inline-link" data-tab="parliament">Current Parliament</button> for exactly how that works.</p></div>
+  <div class="info-block"><h4>Step 2 — Coalition talks decide what actually gets pursued</h4><p>When no party has a majority, the parties that can combine to reach 62+ seats negotiate a coalition or confidence-and-supply agreement. Individual policies get traded in that process — kept, watered down, or dropped entirely — and the resulting coalition agreement, not any single party's manifesto, becomes the government's actual work programme. See <button class="inline-link" data-tab="coalitions">Coalitions</button> for what the current numbers suggest is possible.</p></div>
+  <div class="info-block"><h4>Step 3 — It still has to pass through Parliament as a bill</h4><p>A policy that survives coalition talks still has to be introduced as a bill, go through a select committee where the public can make submissions, be debated, and be voted on. It can be amended significantly, or fail to pass, even with government backing — particularly where a support party has agreed only to "confidence and supply" rather than a full coalition.</p></div>
+  <div class="info-block"><h4>What's more likely to actually happen?</h4><p>Not all commitments carry equal weight. Some parties label a specific policy a coalition "bottom line" — something they say they won't govern without — and this site flags those with a badge wherever they appear. A policy a government has already implemented is different again, flagged "Already delivered" rather than treated as a promise.</p></div>
+</div>
+</div>
+
 <!-- POLICIES -->
 <div class="tab-content" id="tab-policies">
 <div class="container">
   <h2>All policies</h2>
   <p class="lead">Sourced directly from official party websites and official press releases, 2025–2026 only. Click "Plain English" on any policy for a plain-language explanation of what it means in practice.</p>
+  <p class="poll-note" style="margin-bottom:20px;">Unless flagged otherwise, these are campaign promises, not law. <button class="inline-link" data-tab="after">See what a policy actually has to survive to become real →</button></p>
   <div class="jump-nav" id="jumpNav"></div>
   <div class="filter-bar" id="partyBar"></div>
   <div id="polOut"></div>
@@ -309,6 +328,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 
 <script>
 const PL=p=>({NZFirst:'NZ First',TPM:'Te Pāti Māori'}[p]||p);
+const statusBadge=p=>p.status==='bottom-line'?'<span class="status-tag status-bottomline">Coalition bottom line</span>':p.status==='delivered'?'<span class="status-tag status-delivered">Already delivered</span>':'';
 const PC={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
 const PBG={National:'#D8E8F8',Labour:'#FDDCDA',ACT:'#D5EACF',Greens:'#C5EDE2',NZFirst:'#FAEBD7',TPM:'#E2DFF8',TOP:'#C0E8DC'};
 const PFG={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
@@ -330,6 +350,7 @@ const SECTIONS=[
   {tab:'parties',title:'The Parties',desc:'All 7 parties with a realistic shot at Parliament, and direct links to their official websites.'},
   {tab:'issue',title:'By Issue',desc:"Pick a topic — tax, housing, health — and see every party's stance on it side by side."},
   {tab:'coalitions',title:'Coalitions',desc:'How coalition-building works under MMP, and what current polling suggests about government options.'},
+  {tab:'after',title:'After You Vote',desc:'Why a policy is a promise, not law — and what it actually has to survive to become one.'},
   {tab:'policies',title:'All Policies',desc:'Every sourced policy from every party, with a plain-English explanation on demand.'},
 ];
 
@@ -350,7 +371,7 @@ const POLICIES=[
   {p:'National',t:'housing',title:'Home Energy Fund — loans for solar, heat pumps, insulation',detail:'Low-interest Crown-backed loans for households to install solar panels, battery storage, heat pumps, and insulation upgrades. Funded by the Crown, local councils, and the Local Government Funding Agency (LGFA). Announced 25 June 2026.',src:'national.org.nz',url:'https://www.national.org.nz/solar',analogy:'Like a bank offering a cheap loan to upgrade your home — you pay a little interest now, but your power bills drop enough over time that you come out ahead. The government acts as the lender rather than giving money away outright.'},
   {p:'National',t:'governance',title:'Replace NCEA with a new national qualification',detail:'Replace NCEA with a new qualification featuring clearer grades out of 100, stronger vocational pathways, and high standards for literacy and numeracy. Consultation underway; the first cohort starts secondary school in 2026.',src:'national.org.nz',url:'https://www.national.org.nz/education',analogy:'Like replacing a pass/fail scoring system with a clear mark out of 100 — giving employers and universities an exact picture of where a student sits rather than just whether they passed or failed.'},
   {p:'National',t:'governance',title:'Replace the RMA — full resource management overhaul',detail:'Two new bills to replace the Resource Management Act entirely. Around half of all resource consents would no longer be required once the new system is in place. National standards to govern development including agriculture, mining, and housing.',src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:'Like replacing a complex building code that requires council sign-off for every small change with clear national rules that automatically allow most things. You would only need approval for major exceptions, not routine changes.'},
-  {p:'National',t:'healthcare',title:'Healthcare investment record',detail:'Funded 66 new medicines (33 for cancer), approximately 2,000 more nurses and hundreds more doctors, 24/7 Online GP Care launched, bowel screening age lowered from 60 to 56, and three post-natal hospital nights guaranteed for new mothers.',src:'national.org.nz',url:'https://www.national.org.nz/healthcare',analogy:'These are the government\'s own figures on what has already been delivered — like a business reporting on what it has achieved in the last two years. The question for voters is whether to continue this direction or change course.'},
+  {p:'National',t:'healthcare',title:'Healthcare investment record',status:'delivered',detail:'Funded 66 new medicines (33 for cancer), approximately 2,000 more nurses and hundreds more doctors, 24/7 Online GP Care launched, bowel screening age lowered from 60 to 56, and three post-natal hospital nights guaranteed for new mothers.',src:'national.org.nz',url:'https://www.national.org.nz/healthcare',analogy:'These are the government\'s own figures on what has already been delivered — like a business reporting on what it has achieved in the last two years. The question for voters is whether to continue this direction or change course.'},
   {p:'National',t:'laworder',title:"Scrap 'good character' sentencing discounts for sexual offending",detail:"Campaign on removing the ability of judges to reduce sentences for sexual offences on the basis that the offender has no prior convictions or a good community reputation. Announced by Justice Minister Paul Goldsmith, 17 May 2026.",src:'national.org.nz',url:'https://www.national.org.nz/lawandorder',analogy:'Currently, having a clean record or a good reputation can result in a shorter sentence. This policy removes that option specifically for sexual offences — meaning your standing in the community cannot reduce your sentence for this category of crime.'},
   {p:'National',t:'foreign',title:'Double defence spending + strengthen Indo-Pacific alliances',detail:'Implement the Defence Capability Plan, double defence expenditure as a share of GDP, and prioritise interoperability with Australia. Deepen relationships across the Indo-Pacific. Supported Ukraine against Russia and championed EU-CPTPP trade ties.',src:'national.org.nz',url:'https://www.national.org.nz/plan',analogy:'Like a neighbourhood watch group investing in proper security systems and coordinating with neighbouring households — not because trouble is certain, but because being prepared is less costly than responding after the fact.'},
 
@@ -398,7 +419,7 @@ const POLICIES=[
   {p:'NZFirst',t:'governance',title:'Reinstate direct ministerial fast-track approval powers',detail:'Give ministers back direct approval powers for fast-track infrastructure projects, rather than routing decisions through an expert panel as currently required under the Fast-track Approvals Act.',src:'nzfirst.nz',url:'https://www.nzfirst.nz/',analogy:"Currently fast-track project approvals go through an independent expert panel before ministers can sign off. NZ First wants ministers to have direct approval — faster decisions, but with less independent oversight, similar to a CEO bypassing a board committee for urgent investment decisions."},
 
   // TE PĀTI MĀORI — sourced from maoriparty.org.nz
-  {p:'TPM',t:'treaty',title:'Parliamentary Commissioner for Te Tiriti — coalition bottom-line',detail:'Create a Commissioner with powers to audit all legislation for Treaty of Waitangi compliance and veto bills that do not comply. Described by Te Pāti Māori as a non-negotiable bottom-line in any coalition negotiations.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Like a Waitangi auditor with real enforcement power. Just as a financial auditor can halt a transaction that doesn't comply with the law, this Commissioner could block legislation that doesn't meet Treaty obligations. Te Pāti Māori describes it as a permanent safeguard."},
+  {p:'TPM',t:'treaty',title:'Parliamentary Commissioner for Te Tiriti — coalition bottom-line',status:'bottom-line',detail:'Create a Commissioner with powers to audit all legislation for Treaty of Waitangi compliance and veto bills that do not comply. Described by Te Pāti Māori as a non-negotiable bottom-line in any coalition negotiations.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Like a Waitangi auditor with real enforcement power. Just as a financial auditor can halt a transaction that doesn't comply with the law, this Commissioner could block legislation that doesn't meet Treaty obligations. Te Pāti Māori describes it as a permanent safeguard."},
   {p:'TPM',t:'governance',title:'Abolish prisons by 2040 — establish Māori Justice Authority',detail:'Replace prisons with community-led and community-based solutions by 2040. Establish a Māori Justice Authority. Māori make up approximately 52% of prisoners while being 17.5% of the total population.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Te Pāti Māori points to the gap between Māori being 17.5% of the population but 52% of prisoners as evidence the current system has failed. The alternative involves community accountability, restorative justice, and rehabilitation — similar to how some countries have replaced youth detention with community programmes with better reoffending outcomes."},
   {p:'TPM',t:'tax',title:'Remove GST from food',detail:'Remove GST from food to reduce the cost of groceries for whānau. GST is currently 15% and applies to almost all food.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"Currently 15% GST is added to groceries. Removing it means a $100 grocery shop costs $87 instead — a direct cost-of-living reduction. Lower-income households benefit most because they spend a higher proportion of their income on food."},
   {p:'TPM',t:'governance',title:'Lower voting age to 16 + repeal Electoral Amendment Act',detail:'Lower the voting age to 16. Repeal the Electoral Amendment Act 2025, which bans enrolment in the 13 days before election day and bans prisoners from voting. The Electoral Commission told the Justice Select Committee this Act will eliminate 58,000 votes in 2026, rising to over 100,000 per election cycle.',src:'maoriparty.org.nz',url:'https://www.maoriparty.org.nz/',analogy:"16-year-olds can pay tax, work, drive, and serve in the military — Te Pāti Māori argues they should also vote in the elections that shape their future. Repealing the Electoral Amendment Act restores enrolment rights that were removed in December 2025."},
@@ -455,7 +476,7 @@ function renderByIssue(){
     return heading+'<div class="pcard-grid">'+items.map(p=>`
       <div class="pcard" id="isspc-${idx(p)}">
         <div class="pcard-top">
-          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span></div>
+          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span>${statusBadge(p)}</div>
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
@@ -521,7 +542,7 @@ function renderPolicies(){
     <div class="pcard-grid">${items.map(p=>`
       <div class="pcard" id="pc-${idx(p)}">
         <div class="pcard-top">
-          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span></div>
+          <div><span class="pbadge b-${p.p}">${PL(p.p)}</span>${statusBadge(p)}</div>
           <div><div class="ptitle">${p.title}</div><div class="ptext">${p.detail}</div></div>
         </div>
         <div class="pcard-foot">
