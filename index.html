@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self';">
+<script>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 <title>Know Your Vote — NZ Election 2026</title>
 <meta name="description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -24,7 +25,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--radius:10px;--radius-lg:16px;}
+:root{--bg:#F7F6F2;--surface:#FFFFFF;--surface2:#F0EFE9;--border:#E2E0D8;--border-strong:#C8C5BA;--text:#1A1916;--text-secondary:#5A584F;--text-muted:#6E6C62;--accent:#1B4332;--accent-light:#D4EAE0;--analogy-text:#1A3528;--radius:10px;--radius-lg:16px;}
+:root[data-theme="dark"]{--bg:#12201A;--surface:#1A2C22;--surface2:#21362A;--border:#2E4536;--border-strong:#3E5A47;--text:#EDEEE8;--text-secondary:#B7C4BA;--text-muted:#8CA093;--accent:#6FCB9B;--accent-light:#1F3D2E;--analogy-text:#CFEEDC;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 .skip-link{position:absolute;top:-100px;left:12px;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;z-index:200;transition:top 0.15s;}
@@ -46,6 +48,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial
 .nav-wrap{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto;padding:14px 20px;}
 .nav-brand{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--text);background:none;border:none;cursor:pointer;padding:0;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface2);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;padding:0;}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.theme-toggle .icon-sun{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
 .nav-brand em{font-style:italic;color:var(--accent);}
 .nav-explore{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border-strong);border-radius:20px;padding:8px 16px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
 .nav-explore:hover{border-color:var(--accent);color:var(--accent);}
@@ -84,7 +92,10 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .fact-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
 .fact-value{font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1;margin-bottom:6px;}
 .fact-sub{font-size:12px;color:var(--text-secondary);line-height:1.5;}
-.parl-bar{display:flex;height:24px;border-radius:6px;overflow:hidden;margin-bottom:12px;border:1px solid var(--border);}
+.hemicycle-wrap{margin-bottom:16px;}
+.hemicycle{width:100%;height:auto;display:block;}
+.hemicycle circle{transition:opacity 0.15s;}
+.hemicycle circle:hover{opacity:0.72;}
 .parl-labels{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
 .parl-label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-secondary);}
 .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
@@ -162,7 +173,7 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .toggle-btn:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent);}
 .analogy-box{margin-top:12px;padding:12px 14px;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent);}
 .analogy-lbl{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
-.analogy-text{font-size:12px;color:#1A3528;line-height:1.65;}
+.analogy-text{font-size:12px;color:var(--analogy-text);line-height:1.65;}
 .empty{font-size:14px;color:var(--text-muted);text-align:center;padding:40px 0;}
 .footer-note{font-size:11px;color:var(--text-muted);margin-top:1.25rem;padding-top:0.75rem;border-top:1px solid var(--border);line-height:1.6;}
 footer{background:linear-gradient(155deg,#1B4332 0%,#163828 100%);color:rgba(255,255,255,0.6);text-align:center;padding:32px 20px;font-size:12px;line-height:1.8;}
@@ -200,7 +211,13 @@ footer strong{color:rgba(255,255,255,0.9);}
 <nav class="nav-wrap" aria-label="Site navigation">
   <div class="nav-inner">
     <button class="nav-brand" data-tab="home">Know your <em>vote</em>.</button>
-    <button class="nav-explore" id="exploreBtn" aria-haspopup="true" aria-expanded="false">Explore <span class="nav-chev">▾</span></button>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button class="nav-explore" id="exploreBtn" aria-haspopup="true" aria-expanded="false">Explore <span class="nav-chev">▾</span></button>
+    </div>
   </div>
   <div class="subnav hidden" id="subnav" aria-label="Jump to section">
     <button class="subnav-item" data-tab="parliament">Current Parliament</button>
@@ -245,7 +262,7 @@ footer strong{color:rgba(255,255,255,0.9);}
   </div>
 
   <div class="section-label" style="margin-top:24px">2023 election result</div>
-  <div class="parl-bar" id="parlBar"></div>
+  <div class="hemicycle-wrap" id="parlBar"></div>
   <div class="parl-labels" id="parlLabels"></div>
   <div class="table-scroll">
   <table class="seat-table">
@@ -443,11 +460,38 @@ const POLICIES=[
   {p:'TOP',t:'treaty',title:"Honour Te Tiriti o Waitangi",detail:'Honour the Treaty of Waitangi as a founding document of Aotearoa. Support Treaty-based partnerships in governance. TOP sits in a centrist position on Treaty issues, supporting obligations without co-governance in the same form as some other parties.',src:'opportunity.org.nz',url:'https://www.opportunity.org.nz/honouring_te_tiriti',analogy:"TOP supports recognising the Treaty as a valid founding document and honouring the obligations it creates, while keeping the specific governance arrangements open for democratic debate. It is a centrist position between ACT's opposition to co-governance and Te Pāti Māori's or the Greens' stronger Treaty frameworks."},
 ];
 
-// Parliament bar + table
+// Hemicycle seat chart
+function buildHemicycle(seats,total){
+  const numRows=6,innerR=70,rowGap=24;
+  const radii=Array.from({length:numRows},(_,i)=>innerR+i*rowGap);
+  const sumR=radii.reduce((a,b)=>a+b,0);
+  const perRow=radii.map(r=>Math.round(total*r/sumR));
+  perRow[numRows-1]+=total-perRow.reduce((a,b)=>a+b,0);
+  const ordered=[];
+  seats.filter(s=>s.role==='gov').sort((a,b)=>b.seats-a.seats)
+    .concat(seats.filter(s=>s.role==='opp').sort((a,b)=>b.seats-a.seats))
+    .forEach(s=>{for(let i=0;i<s.seats;i++)ordered.push(s.p);});
+  const cx=250,cy=205;
+  let idx=0,circles='';
+  for(let r=0;r<numRows;r++){
+    const n=perRow[r],radius=radii[r];
+    for(let i=0;i<n;i++){
+      const t=n===1?0.5:i/(n-1);
+      const angle=Math.PI-t*Math.PI;
+      const x=(cx+radius*Math.cos(angle)).toFixed(1);
+      const y=(cy-radius*Math.sin(angle)).toFixed(1);
+      const p=ordered[idx++];
+      circles+=`<circle cx="${x}" cy="${y}" r="6.2" fill="${PC[p]}"><title>${PL(p)}</title></circle>`;
+    }
+  }
+  return `<svg class="hemicycle" viewBox="0 0 500 220" aria-hidden="true">${circles}</svg>`;
+}
+
+// Parliament chart + table
 (function(){
   const bar=document.getElementById('parlBar'),lbl=document.getElementById('parlLabels'),tbody=document.getElementById('seatTbody');
+  bar.innerHTML=buildHemicycle(SEATS,123);
   SEATS.forEach(s=>{
-    const seg=document.createElement('div');seg.style.cssText=`flex:${s.seats};background:${PC[s.p]};height:100%`;bar.appendChild(seg);
     const l=document.createElement('div');l.className='parl-label';l.innerHTML=`<span class="dot" style="background:${PC[s.p]}"></span>${PLhtml(s.p)} — ${s.seats}`;lbl.appendChild(l);
     const pct=Math.round((s.seats/123)*100);
     tbody.innerHTML+=`<tr><td><span style="display:inline-flex;align-items:center;gap:8px"><span class="dot" style="background:${PC[s.p]}"></span>${PLhtml(s.p)}</span></td><td><span class="pill ${s.role==='gov'?'pill-gov':'pill-opp'}">${s.role==='gov'?'Government':'Opposition'}</span></td><td><strong>${s.seats}</strong></td><td>${s.vote}</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${PC[s.p]}"></div></div></td></tr>`;
@@ -595,6 +639,14 @@ function goToTab(t){
   if(heading)heading.focus();
 }
 document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>goToTab(el.dataset.tab)));
+
+// Theme toggle
+(function(){
+  const themeToggle=document.getElementById('themeToggle');
+  function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('theme',t);themeToggle.setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' mode');}
+  themeToggle.addEventListener('click',()=>{const current=document.documentElement.getAttribute('data-theme');setTheme(current==='dark'?'light':'dark');});
+  setTheme(document.documentElement.getAttribute('data-theme'));
+})();
 
 const exploreBtn=document.getElementById('exploreBtn'),explorePanel=document.getElementById('explorePanel');
 const exploreBackdrop=document.getElementById('exploreBackdrop');
