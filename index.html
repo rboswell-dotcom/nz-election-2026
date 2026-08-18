@@ -55,27 +55,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial
 :root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
 :root[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
 .nav-brand em{font-style:italic;color:var(--accent);}
-.nav-explore{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border-strong);border-radius:20px;padding:8px 16px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
-.nav-explore:hover{border-color:var(--accent);color:var(--accent);}
-.nav-explore.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-.nav-chev{font-size:10px;transition:transform 0.15s;}
-.nav-explore.active .nav-chev{transform:rotate(180deg);}
 .subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:960px;margin:0 auto;padding:0 20px 12px;}
 .subnav::-webkit-scrollbar{display:none;}
-.subnav.hidden{display:none;}
 .subnav-item{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 13px;border:1px solid var(--border);border-radius:16px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:all 0.15s;}
 .subnav-item:hover{border-color:var(--accent);color:var(--accent);}
 .subnav-item.active{background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:600;}
-.explore-panel{position:absolute;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 16px 28px rgba(20,30,25,0.12);z-index:101;}
-.explore-panel[hidden]{display:none;}
-.explore-backdrop{position:fixed;inset:0;background:rgba(15,25,20,0.28);z-index:90;opacity:0;pointer-events:none;transition:opacity 0.15s;}
-.explore-backdrop.active{opacity:1;pointer-events:auto;}
-.explore-grid{display:grid;grid-template-columns:1fr;gap:8px;max-width:960px;margin:0 auto;padding:16px 20px 20px;}
-.explore-item{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
-.explore-item:hover{border-color:var(--accent);background:var(--accent-light);}
-.explore-item.active{border-color:var(--accent);}
-.explore-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.explore-item-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;}
 .hub-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px;}
 .hub-card{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
 .hub-card:hover{border-color:var(--accent);box-shadow:0 8px 20px rgba(20,30,25,0.08);}
@@ -191,7 +175,6 @@ footer strong{color:rgba(255,255,255,0.9);}
   .pcard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;align-items:start;}
   .pcard-grid .pcard{margin-bottom:0;}
   .hub-grid{grid-template-columns:1fr 1fr;}
-  .explore-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -216,10 +199,9 @@ footer strong{color:rgba(255,255,255,0.9);}
         <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <button class="nav-explore" id="exploreBtn" aria-haspopup="true" aria-expanded="false">Explore <span class="nav-chev">▾</span></button>
     </div>
   </div>
-  <div class="subnav hidden" id="subnav" aria-label="Jump to section">
+  <div class="subnav" id="subnav" aria-label="Jump to section">
     <button class="subnav-item" data-tab="parliament">Current Parliament</button>
     <button class="subnav-item" data-tab="parties">The Parties</button>
     <button class="subnav-item" data-tab="issue">By Issue</button>
@@ -227,11 +209,7 @@ footer strong{color:rgba(255,255,255,0.9);}
     <button class="subnav-item" data-tab="after">After You Vote</button>
     <button class="subnav-item" data-tab="policies">All Policies</button>
   </div>
-  <div class="explore-panel" id="explorePanel" hidden>
-    <div class="explore-grid" id="exploreGrid" aria-label="All sections"></div>
-  </div>
 </nav>
-<div class="explore-backdrop" id="exploreBackdrop"></div>
 <main id="main-content" tabindex="-1">
 
 <!-- HOME -->
@@ -613,19 +591,17 @@ window.toggleAnalogy=function(i){
   btn.setAttribute('aria-expanded',visible?'false':'true');
 };
 
-// Home hub + Explore menu
+// Home hub
 (function(){
-  const hubGrid=document.getElementById('hubGrid'),exploreGrid=document.getElementById('exploreGrid');
+  const hubGrid=document.getElementById('hubGrid');
   SECTIONS.forEach(s=>{
     hubGrid.innerHTML+=`<button class="hub-card" data-tab="${s.tab}"><div class="hub-card-title">${s.title}</div><div class="hub-card-desc">${s.desc}</div><div class="hub-card-cta">Open →</div></button>`;
-    exploreGrid.innerHTML+=`<button class="explore-item" data-tab="${s.tab}"><div class="explore-item-title">${s.title}</div><div class="explore-item-desc">${s.desc}</div></button>`;
   });
 })();
 
 function goToTab(t){
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+t));
-  document.getElementById('subnav').classList.toggle('hidden',t==='home');
-  document.querySelectorAll('.subnav-item,.explore-item').forEach(b=>{
+  document.querySelectorAll('.subnav-item').forEach(b=>{
     const current=b.dataset.tab===t;
     b.classList.toggle('active',current);
     b.setAttribute('aria-current',current?'true':'false');
@@ -633,7 +609,6 @@ function goToTab(t){
   document.querySelector('.nav-brand').setAttribute('aria-current',t==='home'?'page':'false');
   if(t==='issue')renderByIssue();
   if(t==='policies')renderPolicies();
-  closeExplore();
   window.scrollTo({top:0,behavior:'smooth'});
   const heading=document.querySelector('.tab-content.active h2');
   if(heading)heading.focus();
@@ -647,14 +622,6 @@ document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',
   themeToggle.addEventListener('click',()=>{const current=document.documentElement.getAttribute('data-theme');setTheme(current==='dark'?'light':'dark');});
   setTheme(document.documentElement.getAttribute('data-theme'));
 })();
-
-const exploreBtn=document.getElementById('exploreBtn'),explorePanel=document.getElementById('explorePanel');
-const exploreBackdrop=document.getElementById('exploreBackdrop');
-function openExplore(){explorePanel.hidden=false;exploreBtn.classList.add('active');exploreBtn.setAttribute('aria-expanded','true');exploreBackdrop.classList.add('active');}
-function closeExplore(){explorePanel.hidden=true;exploreBtn.classList.remove('active');exploreBtn.setAttribute('aria-expanded','false');exploreBackdrop.classList.remove('active');}
-exploreBtn.addEventListener('click',e=>{e.stopPropagation();explorePanel.hidden?openExplore():closeExplore();});
-document.addEventListener('click',e=>{if(!explorePanel.hidden&&!explorePanel.contains(e.target)&&e.target!==exploreBtn)closeExplore();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeExplore();});
 
 renderPolicies();
 </script>
