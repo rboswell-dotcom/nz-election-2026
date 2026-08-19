@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--no-sandbox",
+        "--isolated",
+        "--proxy-server=http://127.0.0.1:38547",
+        "--ignore-https-errors"
+      ]
+    }
+  }
+}
