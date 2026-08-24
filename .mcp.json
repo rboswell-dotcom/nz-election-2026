@@ -8,6 +8,7 @@
         "--headless",
         "--no-sandbox",
         "--isolated",
+        "--executable-path=/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
         "--proxy-server=http://127.0.0.1:38547",
         "--ignore-https-errors"
       ]
