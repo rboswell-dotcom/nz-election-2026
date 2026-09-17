@@ -97,13 +97,20 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .info-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:10px;}
 .info-block h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;}
 .info-block p{font-size:13px;color:var(--text-secondary);line-height:1.65;}
-.party-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:8px;display:flex;align-items:center;gap:14px;}
-.party-swatch{width:12px;height:36px;border-radius:4px;flex-shrink:0;}
-.party-info{flex:1;}
+.party-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:8px;display:flex;align-items:flex-start;gap:14px;}
+.party-swatch{width:12px;height:36px;border-radius:4px;flex-shrink:0;margin-top:2px;}
+.party-info{flex:1;min-width:0;}
+.party-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
 .party-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px;}
 .party-meta-text{font-size:12px;color:var(--text-muted);}
 .party-link{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;flex-shrink:0;}
 .party-link:hover{text-decoration:underline;}
+.party-about{font-size:12px;color:var(--text-secondary);font-style:italic;line-height:1.55;margin-top:10px;padding-left:10px;border-left:2px solid var(--border);}
+.party-about-src{font-style:normal;color:var(--text-muted);margin-top:3px;}
+.party-about-src a{color:var(--accent);text-decoration:none;}
+.party-about-src a:hover{text-decoration:underline;}
+.party-verified{font-size:11px;color:var(--text-muted);margin-top:8px;}
+.party-verified-pending{color:var(--text-muted);font-style:italic;}
 .coal-note-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:20px;}
 .coal-note-box p{font-size:13px;color:var(--text-secondary);line-height:1.6;}
 .coal-note-box strong{color:var(--text);}
@@ -181,7 +188,7 @@ footer strong{color:rgba(255,255,255,0.9);}
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="hero">
-  <div class="hero-eyebrow">7 November 2026 · New Zealand General Election</div>
+  <div class="hero-eyebrow">7 November 2026 · New Zealand General Election<span id="electionCountdown"></span></div>
   <h1>Know your <em>vote.</em></h1>
   <p class="hero-sub">A plain-English, non-partisan guide to the parties, their policies, and how Parliament works — so you can make up your own mind.</p>
   <div class="hero-meta">
@@ -217,6 +224,12 @@ footer strong{color:rgba(255,255,255,0.9);}
 <div class="container">
   <h2 tabindex="-1">Everything you need to vote informed</h2>
   <p class="lead">One stop for the facts, the parties, and the policies. Pick where you want to start.</p>
+  <div class="info-block" style="margin-bottom:20px;">
+    <h4>Key dates</h4>
+    <p><strong>Parliament dissolves:</strong> 1 October 2026<br>
+    <strong>Election day:</strong> 7 November 2026<br>
+    <strong>Enrolling, advance voting, and special votes:</strong> exact dates and locations are set by the Electoral Commission — check and update your enrolment anytime at <a href="https://vote.nz/enrolling/enrol-or-update/enrol-or-update-online" target="_blank" rel="noopener">vote.nz</a>.</p>
+  </div>
   <div class="hub-grid" id="hubGrid"></div>
 </div>
 </div>
@@ -337,9 +350,9 @@ const POLL_PCT={National:31,Labour:25.5,Greens:13.5,NZFirst:10.5,ACT:9.5,TOP:6.5
 const TOPICS={all:'All topics',tax:'Tax & cost of living',economy:'Economy & jobs',transport:'Transport & infrastructure',housing:'Housing',healthcare:'Healthcare',education:'Education',environment:'Environment',treaty:'Te Ao Māori',governance:'Governance',laworder:'Law & order',foreign:'Foreign affairs & defence',migration:'Immigration'};
 
 const PARTIES=[
-  {key:'National',leader:'Christopher Luxon',role:'Prime Minister · Currently governing',url:'https://www.national.org.nz',about:'The foundation of our Party is built on the values of ambition and success; with lower taxes, reward for hard work, and equal opportunity for all at its core.',aboutUrl:'https://www.national.org.nz/values'},
-  {key:'Labour',leader:'Chris Hipkins',role:'Leader of the Opposition',url:'https://www.labour.org.nz',about:'Labour wants to make New Zealand a better place to live in by providing opportunities for all, jobs, strong public services, quality education, and affordable healthcare.',aboutUrl:'https://www.labour.org.nz/party-information/'},
-  {key:'ACT',leader:'David Seymour',role:'Deputy Prime Minister · Currently governing (coalition partner)',url:'https://www.act.org.nz',about:'We believe it is inherent in the nature of human beings as individuals that they are the owners of their own lives and must be free to act according to their own judgments so long as they accept and respect the like freedom of others.',aboutUrl:'https://www.act.org.nz/people'},
+  {key:'National',leader:'Christopher Luxon',role:'Prime Minister · Currently governing',url:'https://www.national.org.nz',about:'The foundation of our Party is built on the values of ambition and success; with lower taxes, reward for hard work, and equal opportunity for all at its core.',aboutUrl:'https://www.national.org.nz/values',verified:'2026-08-27'},
+  {key:'Labour',leader:'Chris Hipkins',role:'Leader of the Opposition',url:'https://www.labour.org.nz',about:'Labour wants to make New Zealand a better place to live in by providing opportunities for all, jobs, strong public services, quality education, and affordable healthcare.',aboutUrl:'https://www.labour.org.nz/party-information/',verified:'2026-08-19'},
+  {key:'ACT',leader:'David Seymour',role:'Deputy Prime Minister · Currently governing (coalition partner)',url:'https://www.act.org.nz',about:'We believe it is inherent in the nature of human beings as individuals that they are the owners of their own lives and must be free to act according to their own judgments so long as they accept and respect the like freedom of others.',aboutUrl:'https://www.act.org.nz/people',verified:'2026-08-27'},
   {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz'},
   {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz'},
   {key:'TPM',label:'<span lang="mi">Te Pāti Māori</span>',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz'},
@@ -494,7 +507,23 @@ function buildHemicycle(seats,total){
 // Party list
 (function(){
   const el=document.getElementById('partyList');
-  PARTIES.forEach(p=>{el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-name">${p.label||PLhtml(p.key)}</div><div class="party-meta-text">${p.leader} · ${p.role}</div></div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div>`;});
+  const fmtDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'});
+  const hostOf=url=>{try{return new URL(url).hostname.replace(/^www\./,'');}catch(e){return url;}};
+  PARTIES.forEach(p=>{
+    const about=p.about?`<div class="party-about">"${p.about}"<div class="party-about-src">— from their <a href="${p.aboutUrl}" target="_blank" rel="noopener">${hostOf(p.aboutUrl)}</a> page</div></div>`:'';
+    const verified=p.verified?`<div class="party-verified">Policies verified against source: ${fmtDate(p.verified)}</div>`:`<div class="party-verified party-verified-pending">Not yet independently re-verified this cycle</div>`;
+    el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-top"><div class="party-name">${p.label||PLhtml(p.key)}</div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div><div class="party-meta-text">${p.leader} · ${p.role}</div>${about}${verified}</div></div>`;
+  });
+})();
+
+(function(){
+  const el=document.getElementById('electionCountdown');
+  if(!el)return;
+  const election=new Date('2026-11-07T00:00:00+13:00');
+  const days=Math.ceil((election-new Date())/86400000);
+  if(days>0)el.textContent=' · '+days+' day'+(days===1?'':'s')+' to go';
+  else if(days===0)el.textContent=' · Today is Election Day';
+  else el.textContent=' · Election day has passed';
 })();
 
 // By Issue
