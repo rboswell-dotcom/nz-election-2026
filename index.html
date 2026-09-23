@@ -299,10 +299,11 @@ footer strong{color:rgba(255,255,255,0.9);}
 <div class="tab-content" id="tab-coalitions">
 <div class="container">
   <h2 tabindex="-1">How coalitions work</h2>
-  <p class="lead">Under MMP, no single party usually wins enough seats to govern alone. Parties must combine their seats to reach 61+ in a standard 120-seat Parliament. Here's what the current polling suggests.</p>
-  <div class="coal-note-box"><p><strong>Why does this matter to you?</strong> Your party vote doesn't just elect your preferred party — it also affects which combinations of parties can form a government. A party you vote for might win seats but end up in a government you didn't anticipate. Understanding the possible coalition mathematics helps you vote with the full picture.</p></div>
+  <p class="lead">Under MMP, no single party usually wins enough seats to govern alone. Parties must combine their seats to reach a majority. Here's the last confirmed election result and how coalition-building actually works — not opinion polling, which this site doesn't use to project outcomes.</p>
+  <div class="coal-note-box"><p><strong>Why does this matter to you?</strong> Your party vote doesn't just elect your preferred party — it also affects which combinations of parties can form a government. A party you vote for might win seats but end up in a government you didn't anticipate. Understanding how coalition-building works helps you vote with the full picture.</p></div>
   <div class="coal-grid" id="coalGrid"></div>
-  <p class="poll-note">Seat projections based on the average of three polls from September 2026 — Roy Morgan (fieldwork 27 July–23 Aug), Taxpayers' Union–Curia (1–3 Sept), and The Post/Freshwater Strategy (published 15 Sept): National 29%, Labour 26%, Greens 14.5%, NZ First 9.6%, ACT 10%, TOP 6.7%, Te Pāti Māori 1.8%. Projections are indicative only — the final result depends on electorate outcomes, special votes, and whether parties like TOP cross the 5% threshold. NZ First has publicly ruled out working with a Labour-led government. Te Pāti Māori polls below 5% but is expected to enter Parliament via Māori electorate seats regardless.</p>
+  <div class="info-block" style="margin-top:20px"><h4>Full coalition vs. confidence and supply</h4><p>Parties that agree to govern together typically choose one of two arrangements. A <strong>full coalition</strong> gives the smaller party seats in Cabinet and binds it to collective responsibility for government decisions generally. <strong>Confidence and supply</strong> is looser: the smaller party agrees to support the government on confidence votes and budget bills, but can vote independently on everything else. The exact mix used by any government is set out in its coalition agreement, published after negotiations conclude.</p></div>
+  <p class="poll-note">Seat and vote-share figures are the official 2023 general election result (parliament.nz, Electoral Commission NZ) — the composition of the sitting 54th Parliament, not a projection of the 7 November 2026 result. This page deliberately doesn't publish or model opinion polling: polls carry real margins of error, can shift quickly, and the actual coalition arithmetic after the election depends on the real result.</p>
 </div>
 </div>
 
@@ -346,7 +347,6 @@ const statusBadge=p=>p.status==='bottom-line'?'<span class="status-tag status-bo
 const PC={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
 const PBG={National:'#D8E8F8',Labour:'#FDDCDA',ACT:'#D5EACF',Greens:'#C5EDE2',NZFirst:'#FAEBD7',TPM:'#E2DFF8',TOP:'#C0E8DC'};
 const PFG={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZFirst:'#B8640E',TPM:'#6B5FCC',TOP:'#0A5E47'};
-const POLL_PCT={National:29,Labour:26,Greens:14.5,NZFirst:9.6,ACT:10,TOP:6.7,TPM:1.8};
 const TOPICS={all:'All topics',tax:'Tax & cost of living',economy:'Economy & jobs',transport:'Transport & infrastructure',housing:'Housing',energy:'Energy',healthcare:'Healthcare',education:'Education',environment:'Environment',treaty:'Te Ao Māori',governance:'Governance',laworder:'Law & order',foreign:'Foreign affairs & defence',migration:'Immigration'};
 
 const PARTIES=[
@@ -356,7 +356,7 @@ const PARTIES=[
   {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz',about:'An Aotearoa that honours Te Tiriti o Waitangi, where power and wealth sit with our communities, and where people and the rest of nature thrive together.',aboutUrl:'https://www.greens.org.nz/manifesto_2026',verified:'2026-09-18'},
   {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz',about:'New Zealand First was formed in 1993 to represent those New Zealanders concerned about the social and economic direction of our country, and who were seeking pragmatic, common sense representation in Parliament.',aboutUrl:'https://www.nzfirst.nz/about',verified:'2026-09-18'},
   {key:'TPM',label:'<span lang="mi">Te Pāti Māori</span>',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz',about:'Te Pāti Māori will look after you the way a marae looks after all people. Everyone will have a home, be cared for, protected, connected and empowered.',aboutUrl:'https://www.maoriparty.org.nz/',verified:'2026-09-18'},
-  {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament · Polling ~6.7%',url:'https://www.opportunity.org.nz',about:"We're standing to rebuild trust in politics, so together we can build the next economy - a future where fairness, wealth, and nature grow together.",aboutUrl:'https://www.opportunity.org.nz/about',verified:'2026-09-18'},
+  {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament',url:'https://www.opportunity.org.nz',about:"We're standing to rebuild trust in politics, so together we can build the next economy - a future where fairness, wealth, and nature grow together.",aboutUrl:'https://www.opportunity.org.nz/about',verified:'2026-09-18'},
 ];
 
 const SECTIONS=[
@@ -592,20 +592,20 @@ window.toggleIssueAnalogy=function(i){
   btn.setAttribute('aria-expanded',visible?'false':'true');
 };
 
-// Coalitions
+// Coalitions — real 2023 election result, not polling
 (function(){
+  const seatOf=p=>SEATS.find(s=>s.p===p).seats;
+  const TOTAL_SEATS=SEATS.reduce((s,r)=>s+r.seats,0);
   const COAL=[
-    {title:'National-led government — current coalition',parties:['National','ACT','NZFirst'],seats:61,detail:'The current governing coalition since 2023. Averaging the three September 2026 polls above, this combination projects to approximately 61 seats — exactly on the line for a majority in a standard 120-seat Parliament. NZ First has stated it will not work with a Labour-led government, which is the basis for treating this and the Labour-led grouping below as the two main blocs.'},
-    {title:'Labour + Greens + Te Pāti Māori',parties:['Labour','Greens','TPM'],seats:53,detail:'Averaging current polling, this combination projects to approximately 53 seats — short of the 61 needed for a majority on its own. Reaching a majority with this bloc would require TOP (see below), contingent on TOP clearing the 5% party-vote threshold to enter Parliament at all.'},
-    {title:'Labour + Greens + TOP + Te Pāti Māori',parties:['Labour','Greens','TOP','TPM'],seats:62,detail:'If TOP clears the 5% party-vote threshold, adding it to the Labour + Greens + Te Pāti Māori grouping above projects to approximately 62 seats under current polling — a majority. Below 5%, TOP\'s votes are redistributed among parties that do clear the threshold, and this combination would not reach the seat count shown here.'},
-    {title:'National + Labour — grand coalition',parties:['National','Labour'],seats:69,detail:'Mathematically this would give a comfortable majority of approximately 69 seats, but there is no NZ precedent for this and neither party has signalled any interest. Included to illustrate the mathematical possibilities under MMP.'},
+    {title:'The current government',parties:['National','ACT','NZFirst'],detail:'The governing coalition since 2023, formed after that election. National leads with Christopher Luxon as Prime Minister; ACT\'s David Seymour is Deputy Prime Minister; NZ First\'s Winston Peters holds several senior portfolios. The specific arrangement each partner has with National (full coalition or confidence and supply) is set out in their individual coalition agreements.'},
+    {title:'The opposition',parties:['Labour','Greens','TPM'],detail:'The parties currently sitting outside government. Labour is the largest opposition party, with the Green Party and Te Pāti Māori also in opposition. The Opportunity Party (TOP) did not win any seats at the 2023 election and is not currently represented in Parliament.'},
   ];
   const grid=document.getElementById('coalGrid');
   COAL.forEach(c=>{
-    const pollTotal=c.parties.reduce((s,p)=>s+POLL_PCT[p],0);
-    const bars=c.parties.map(p=>`<div style="flex:${(POLL_PCT[p]/pollTotal)*c.seats};background:${PC[p]};height:100%"></div>`).join('')+`<div style="flex:${120-c.seats};background:var(--surface2);height:100%"></div>`;
+    const seats=c.parties.reduce((s,p)=>s+seatOf(p),0);
+    const bars=c.parties.map(p=>`<div style="flex:${seatOf(p)};background:${PC[p]};height:100%"></div>`).join('')+`<div style="flex:${TOTAL_SEATS-seats};background:var(--surface2);height:100%"></div>`;
     const badges=c.parties.map(p=>`<span class="cbadge" style="background:${PBG[p]};color:${PFG[p]}">${PLhtml(p)}</span>`).join('');
-    grid.innerHTML+=`<div class="coal-card"><div class="coal-title">${c.title}</div><div class="coal-badges">${badges}</div><div class="coal-bar" style="overflow:hidden;border-radius:4px;border:1px solid var(--border)">${bars}</div><div class="coal-meta">~${c.seats} seats &nbsp;·&nbsp; 61 needed for a majority</div><div class="coal-detail">${c.detail}</div></div>`;
+    grid.innerHTML+=`<div class="coal-card"><div class="coal-title">${c.title}</div><div class="coal-badges">${badges}</div><div class="coal-bar" style="overflow:hidden;border-radius:4px;border:1px solid var(--border)">${bars}</div><div class="coal-meta">${seats} of ${TOTAL_SEATS} seats &nbsp;·&nbsp; 62 needed for a majority in the current Parliament</div><div class="coal-detail">${c.detail}</div></div>`;
   });
 })();
 
