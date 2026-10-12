@@ -104,10 +104,6 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .party-meta-text{font-size:12px;color:var(--text-muted);}
 .party-link{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;flex-shrink:0;}
 .party-link:hover{text-decoration:underline;}
-.party-about{font-size:12px;color:var(--text-secondary);font-style:italic;line-height:1.55;margin-top:10px;padding-left:10px;border-left:2px solid var(--border);}
-.party-about-src{font-style:normal;color:var(--text-muted);margin-top:3px;}
-.party-about-src a{color:var(--accent);text-decoration:none;}
-.party-about-src a:hover{text-decoration:underline;}
 .party-verified{font-size:11px;color:var(--text-muted);margin-top:8px;}
 .party-verified-pending{color:var(--text-muted);font-style:italic;}
 .coal-note-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:20px;}
@@ -352,13 +348,13 @@ const PFG={National:'#1E4A8C',Labour:'#C0392B',ACT:'#2D6A1F',Greens:'#1D9E75',NZ
 const TOPICS={all:'All topics',tax:'Tax & cost of living',economy:'Economy & jobs',transport:'Transport & infrastructure',housing:'Housing',energy:'Energy',healthcare:'Healthcare',education:'Education',environment:'Environment',treaty:'Te Ao Māori',governance:'Governance',laworder:'Law & order',foreign:'Foreign affairs & defence',migration:'Immigration'};
 
 const PARTIES=[
-  {key:'National',leader:'Christopher Luxon',role:'Prime Minister · Currently governing',url:'https://www.national.org.nz',about:'The foundation of our Party is built on the values of ambition and success; with lower taxes, reward for hard work, and equal opportunity for all at its core.',aboutUrl:'https://www.national.org.nz/values',verified:'2026-09-28'},
-  {key:'Labour',leader:'Chris Hipkins',role:'Leader of the Opposition',url:'https://www.labour.org.nz',about:'Labour wants to make New Zealand a better place to live in by providing opportunities for all, jobs, strong public services, quality education, and affordable healthcare.',aboutUrl:'https://www.labour.org.nz/party-information/',verified:'2026-10-04'},
-  {key:'ACT',leader:'David Seymour',role:'Deputy Prime Minister · Currently governing (coalition partner)',url:'https://www.act.org.nz',about:'We believe success spreads — one person\'s success can help, inspire, or give the means to invest in another\'s. We should celebrate and encourage success instead of practicing tall poppy.',aboutUrl:'https://www.act.org.nz/policies/economy',verified:'2026-09-28'},
-  {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz',about:'An Aotearoa that honours Te Tiriti o Waitangi, where power and wealth sit with our communities, and where people and the rest of nature thrive together.',aboutUrl:'https://www.greens.org.nz/manifesto_2026',verified:'2026-09-18'},
-  {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz',about:'New Zealand First was formed in 1993 to represent those New Zealanders concerned about the social and economic direction of our country, and who were seeking pragmatic, common sense representation in Parliament.',aboutUrl:'https://www.nzfirst.nz/about',verified:'2026-09-18'},
-  {key:'TPM',label:'<span lang="mi">Te Pāti Māori</span>',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz',about:'Te Pāti Māori will look after you the way a marae looks after all people. Everyone will have a home, be cared for, protected, connected and empowered.',aboutUrl:'https://www.maoriparty.org.nz/',verified:'2026-09-18'},
-  {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament',url:'https://www.opportunity.org.nz',about:"We're standing to rebuild trust in politics, so together we can build the next economy - a future where fairness, wealth, and nature grow together.",aboutUrl:'https://www.opportunity.org.nz/about',verified:'2026-09-18'},
+  {key:'National',leader:'Christopher Luxon',role:'Prime Minister · Currently governing',url:'https://www.national.org.nz',verified:'2026-09-28'},
+  {key:'Labour',leader:'Chris Hipkins',role:'Leader of the Opposition',url:'https://www.labour.org.nz',verified:'2026-10-04'},
+  {key:'ACT',leader:'David Seymour',role:'Deputy Prime Minister · Currently governing (coalition partner)',url:'https://www.act.org.nz',verified:'2026-09-28'},
+  {key:'Greens',label:'Green Party',leader:'Chlöe Swarbrick & Marama Davidson',role:'Opposition',url:'https://www.greens.org.nz',verified:'2026-09-18'},
+  {key:'NZFirst',label:'NZ First',leader:'Winston Peters',role:'Currently governing (coalition partner)',url:'https://www.nzfirst.nz',verified:'2026-09-18'},
+  {key:'TPM',label:'<span lang="mi">Te Pāti Māori</span>',leader:'Rawiri Waititi & Debbie Ngarewa-Packer',role:'Opposition',url:'https://www.maoriparty.org.nz',verified:'2026-09-18'},
+  {key:'TOP',label:'The Opportunity Party (TOP)',leader:"Qiulae 'Q' Wong",role:'Not currently in Parliament',url:'https://www.opportunity.org.nz',verified:'2026-09-18'},
 ];
 
 const SECTIONS=[
@@ -592,9 +588,8 @@ function buildHemicycle(seats,total){
   const fmtDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'});
   const hostOf=url=>{try{return new URL(url).hostname.replace(/^www\./,'');}catch(e){return url;}};
   PARTIES.forEach(p=>{
-    const about=p.about?`<div class="party-about">"${p.about}"<div class="party-about-src">— from their <a href="${p.aboutUrl}" target="_blank" rel="noopener">${hostOf(p.aboutUrl)}</a> page</div></div>`:'';
     const verified=p.verified?`<div class="party-verified">Policies verified against source: ${fmtDate(p.verified)}</div>`:`<div class="party-verified party-verified-pending">Not yet independently re-verified this cycle</div>`;
-    el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-top"><div class="party-name">${p.label||PLhtml(p.key)}</div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div><div class="party-meta-text">${p.leader} · ${p.role}</div>${about}${verified}</div></div>`;
+    el.innerHTML+=`<div class="party-row"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-top"><div class="party-name">${p.label||PLhtml(p.key)}</div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div><div class="party-meta-text">${p.leader} · ${p.role}</div>${verified}</div></div>`;
   });
 })();
 
