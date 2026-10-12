@@ -79,3 +79,16 @@ test('2023 seat table adds up to the 123-seat Parliament', () => {
   const parties = new Set(data.PARTIES.map(x => x.key));
   for (const s of data.SEATS) assert.ok(parties.has(s.p), `SEATS: unknown party "${s.p}"`);
 });
+
+test('no research or editing notes leak into public text', () => {
+  const NOTES = /this (session|check|pass|run)\b|as of this check|fetched directly|re-?scrap|treat (this|the current)|word-for-word|previously cited/i;
+  data.POLICIES.forEach((p, i) => {
+    for (const k of ['title', 'detail', 'analogy']) {
+      assert.doesNotMatch(p[k], NOTES, `${label(p, i)}: ${k} contains a research note`);
+    }
+  });
+});
+
+test('only promises are listed — no "delivered" government-record entries', () => {
+  data.POLICIES.forEach((p, i) => assert.notEqual(p.status, 'delivered', `${label(p, i)}: delivered records are out of scope`));
+});
