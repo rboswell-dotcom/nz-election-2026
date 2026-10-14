@@ -193,7 +193,6 @@ footer button:hover{text-decoration:underline;}
 .pcar-ft{display:flex;align-items:center;gap:10px;padding:10px 20px;border-top:1px solid var(--border);}
 .pcar-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface2);color:var(--text);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px;}
 .pcar-btn:hover{border-color:var(--accent);color:var(--accent);}
-.pcar-count{font-size:12px;color:var(--text-muted);min-width:56px;text-align:center;font-variant-numeric:tabular-nums;}
 .pcar-all{margin-left:auto;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;}
 .pcar-all:hover{text-decoration:underline;}
 .pcar-verified{font-size:11px;color:var(--text-muted);padding:0 20px 12px;}
@@ -705,9 +704,8 @@ function buildHemicycle(seats,total){
       <div class="pcar-slide" aria-live="polite"></div>
       <div class="pcar-ft">
         <button class="pcar-btn" data-dir="-1" aria-label="Previous ${PL(p.key)} policy">‹</button>
-        <span class="pcar-count"></span>
         <button class="pcar-btn" data-dir="1" aria-label="Next ${PL(p.key)} policy">›</button>
-        <a class="pcar-all" href="#policies/${p.key}">See all ${POLICIES.filter(x=>x.p===p.key).length} →</a>
+        <a class="pcar-all" href="#policies/${p.key}">See all →</a>
       </div>
       <div class="pcar-verified">${verified}</div>
     </section>`;
@@ -715,12 +713,12 @@ function buildHemicycle(seats,total){
   el.querySelectorAll('.pcar').forEach(card=>{
     const items=shuffle(POLICIES.filter(x=>x.p===card.dataset.p));
     let i=0;
-    const slide=card.querySelector('.pcar-slide'),count=card.querySelector('.pcar-count');
+    const slide=card.querySelector('.pcar-slide');
     const show=dir=>{
       i=(i+dir+items.length)%items.length;
       const x=items[i];
       slide.innerHTML=`<div class="pcar-topic">${TOPICS[x.t]}</div>${statusBadge(x)}<div class="pcar-title"><a href="#policy/${pslug(x)}">${x.title}</a></div><div class="pcar-detail">${x.detail}</div><div class="pcar-links"><a href="#policy/${pslug(x)}">Read in full</a><a class="srclink" href="${x.url}" target="_blank" rel="noopener">↗ ${x.src}</a></div>`;
-      count.textContent=`${i+1} of ${items.length}`;
+      card.dataset.i=i;
       if(dir){slide.classList.remove('pcar-in');void slide.offsetWidth;slide.classList.add('pcar-in');}
     };
     card.querySelectorAll('.pcar-btn').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.dir)));

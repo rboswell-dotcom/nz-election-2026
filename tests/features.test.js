@@ -68,16 +68,16 @@ test('party cards: one per party, arrows step through every policy and wrap', as
   assert.equal(await page.locator('.pcar').count(), parties.length);
   for (const [key, n] of parties) {
     const card = page.locator(`.pcar[data-p="${key}"]`);
-    assert.equal(await card.locator('.pcar-count').textContent(), `1 of ${n}`);
+    assert.equal(await card.getAttribute('data-i'), '0');
     const seen = new Set();
     for (let i = 0; i < n; i++) {
       seen.add(await card.locator('.pcar-title').textContent());
       await card.locator('.pcar-btn[data-dir="1"]').click();
     }
     assert.equal(seen.size, n, `${key}: arrows didn't reach every policy`);
-    assert.equal(await card.locator('.pcar-count').textContent(), `1 of ${n}`, `${key}: didn't wrap`);
+    assert.equal(await card.getAttribute('data-i'), '0', `${key}: didn't wrap`);
     await card.locator('.pcar-btn[data-dir="-1"]').click();
-    assert.equal(await card.locator('.pcar-count').textContent(), `${n} of ${n}`);
+    assert.equal(await card.getAttribute('data-i'), String(n - 1));
   }
   assert.deepEqual(site.errors, []);
 });
