@@ -1,4 +1,4 @@
-// Search, headline filter, deep links and the corrections page.
+// Search, party cards, deep links and the corrections page.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { openSite } from './helpers.js';
@@ -35,14 +35,6 @@ test('search narrows policies, ignores case and macrons, and reports no match', 
   assert.deepEqual(site.errors, []);
 });
 
-test('headline toggle shows 5 per party, in rank order', async () => {
-  await page.click('#headlineToggle');
-  const parties = await page.evaluate(() => PARTIES.length);
-  assert.equal(await cards(), parties * 5);
-  assert.match(page.url(), /#policies\?top=1$/);
-  await page.click('#headlineToggle');
-  assert.deepEqual(site.errors, []);
-});
 
 test('deep links open the right tab, topic and filters', async () => {
   await go('issue/housing');
@@ -70,15 +62,39 @@ test('clicking a tab updates the URL, and Back returns', async () => {
   assert.ok(await page.locator('#tab-parliament.active').isVisible());
 });
 
-test('a headline on the Parties tab links to its policy card', async () => {
+test('party cards: one per party, arrows step through every policy and wrap', async () => {
   await page.click('.subnav-item[data-tab="parties"]');
-  const link = page.locator('.headlines a').first();
-  const title = await link.textContent();
-  await link.click();
+  const parties = await page.evaluate(() => PARTIES.map(p => [p.key, POLICIES.filter(x => x.p === p.key).length]));
+  assert.equal(await page.locator('.pcar').count(), parties.length);
+  for (const [key, n] of parties) {
+    const card = page.locator(`.pcar[data-p="${key}"]`);
+    assert.equal(await card.getAttribute('data-i'), '0');
+    const seen = new Set();
+    for (let i = 0; i < n; i++) {
+      seen.add(await card.locator('.pcar-title').textContent());
+      await card.locator('.pcar-btn[data-dir="1"]').click();
+    }
+    assert.equal(seen.size, n, `${key}: arrows didn't reach every policy`);
+    assert.equal(await card.getAttribute('data-i'), '0', `${key}: didn't wrap`);
+    await card.locator('.pcar-btn[data-dir="-1"]').click();
+    assert.equal(await card.getAttribute('data-i'), String(n - 1));
+  }
+  assert.deepEqual(site.errors, []);
+});
+
+test('a party card title links to that policy, and "See all" filters to the party', async () => {
+  const card = page.locator('.pcar[data-p="Labour"]');
+  const title = await card.locator('.pcar-title').textContent();
+  await card.locator('.pcar-title a').click();
   await page.waitForTimeout(50);
-  assert.ok(await page.locator('#tab-policies.active').isVisible());
   const focused = await page.evaluate(() => document.activeElement.querySelector('.ptitle')?.textContent);
   assert.equal(focused, title);
+
+  await page.click('.subnav-item[data-tab="parties"]');
+  await page.locator('.pcar[data-p="ACT"] .pcar-all').click();
+  await page.waitForTimeout(50);
+  assert.equal(await page.locator('#polOut .pbadge:not(.b-ACT)').count(), 0);
+  assert.ok(await page.locator('#polOut .pcard').count() > 0);
   assert.deepEqual(site.errors, []);
 });
 
