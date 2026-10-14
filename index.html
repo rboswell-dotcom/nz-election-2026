@@ -173,6 +173,30 @@ h2[tabindex="-1"]:focus{outline:none;}
 .corr p{font-size:13px;color:var(--text-secondary);line-height:1.6;}
 footer button{background:none;border:none;color:#7EC8A4;font:inherit;cursor:pointer;padding:0;}
 footer button:hover{text-decoration:underline;}
+.calc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:24px;}
+.calc-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+.calc-hd h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;}
+.calc-intro{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;}
+.calc-head,.calc-row{display:grid;grid-template-columns:1fr 94px 74px 44px;gap:6px;align-items:center;}
+.calc-head{font-size:9.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);padding-bottom:6px;border-bottom:1px solid var(--border);}
+.calc-head span:nth-child(n+2){text-align:center;}
+.calc-row{padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.calc-name{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--text);min-width:0;}
+.calc-pct{display:flex;align-items:center;gap:3px;justify-content:center;}
+.calc-pct input{width:70px;font:inherit;font-size:16px;padding:6px 6px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface2);color:var(--text);text-align:right;}
+.calc-pct input:focus{outline:2px solid var(--accent);outline-offset:1px;}
+.calc-row input[type=checkbox]{width:20px;height:20px;justify-self:center;accent-color:var(--accent);}
+.calc-seats{text-align:center;font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--text);}
+.calc-seats.out{font-family:'Inter',sans-serif;font-size:10px;font-weight:500;color:var(--text-muted);line-height:1.2;}
+.calc-other{font-size:12px;color:var(--text-muted);margin:10px 0;}
+.calc-other.warn{color:#B3261E;font-weight:600;}
+:root[data-theme="dark"] .calc-other.warn{color:#F2B8B5;}
+.calc-bar{height:14px;margin:4px 0 0;}
+.calc-pick{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;border:1.5px solid var(--border-strong);background:transparent;color:var(--text-secondary);cursor:pointer;font-family:'Inter',sans-serif;}
+.calc-pick[aria-pressed="true"]{color:#fff;}
+.calc-total{font-size:14px;color:var(--text);margin:6px 0 12px;font-weight:600;}
+.calc-total .yes{color:var(--accent);}
+.calc-fine{font-size:11px;color:var(--text-muted);line-height:1.6;}
 #partyList{display:flex;flex-direction:column;gap:14px;}
 .pcar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
 .pcar-hd{background:linear-gradient(rgba(0,0,0,0.22),rgba(0,0,0,0.22)),var(--pc);color:#fff;padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;}
@@ -278,7 +302,7 @@ footer button:hover{text-decoration:underline;}
   <div class="section-label">Who is governing right now?</div>
   <div class="info-grid">
   <div class="info-block"><h4>The current government: National, ACT and NZ First</h4><p>New Zealand is governed by a three-party coalition elected in October 2023. <strong>National</strong> leads the coalition with Christopher Luxon as Prime Minister. <strong>ACT</strong>'s David Seymour is Deputy Prime Minister. <strong>NZ First</strong>'s Winston Peters holds several senior portfolios. Together the three parties hold <strong>68 of 123 seats</strong>, a working majority of 6 seats.</p></div>
-  <div class="info-block"><h4>The opposition</h4><p><strong>Labour</strong> is the main opposition party, led by Chris Hipkins. <strong>The Green Party</strong> (co-led by Chlöe Swarbrick and Marama Davidson) and <strong>Te Pāti Māori</strong> (co-led by Rawiri Waititi and Debbie Ngarewa-Packer) also sit in opposition. Together they hold <strong>55 of 123 seats</strong>. <strong>The Opportunity Party (TOP)</strong> is not currently in Parliament but is polling around 6%.</p></div>
+  <div class="info-block"><h4>The opposition</h4><p><strong>Labour</strong> is the main opposition party, led by Chris Hipkins. <strong>The Green Party</strong> (co-led by Chlöe Swarbrick and Marama Davidson) and <strong>Te Pāti Māori</strong> (co-led by Rawiri Waititi and Debbie Ngarewa-Packer) also sit in opposition. Together they hold <strong>55 of 123 seats</strong>. <strong>The Opportunity Party (TOP)</strong> is not currently in Parliament.</p></div>
   </div>
 
   <div class="section-label" style="margin-top:24px">2023 election result</div>
@@ -328,8 +352,22 @@ footer button:hover{text-decoration:underline;}
 <div class="tab-content" id="tab-coalitions">
 <div class="container">
   <h2 tabindex="-1">How coalitions work</h2>
-  <p class="lead">Under MMP, no single party usually wins enough seats to govern alone. Parties must combine their seats to reach a majority. Here's the last confirmed election result and how coalition-building actually works. It doesn't use opinion polling, which this site doesn't use to project outcomes.</p>
+  <p class="lead">Under MMP, no single party usually wins enough seats to govern alone. Parties must combine their seats to reach a majority. Use the calculator to see how vote shares become seats, then build a government from them.</p>
   <div class="coal-note-box"><p><strong>Why does this matter to you?</strong> Your party vote doesn't just elect your preferred party. It also affects which combinations of parties can form a government. A party you vote for might win seats but end up in a government you didn't anticipate. Understanding how coalition-building works helps you vote with the full picture.</p></div>
+  <div class="calc" id="seatCalc">
+    <div class="calc-hd"><h3>Seat calculator</h3><button class="tbtn" id="calcReset">Reset to 2023 result</button></div>
+    <p class="calc-intro">Starts with the official 2023 result. Change any party's vote share, for example to match a poll you've seen. This site doesn't publish polls or predict results.</p>
+    <div class="calc-head" aria-hidden="true"><span>Party</span><span>Party vote</span><span>Electorate</span><span>Seats</span></div>
+    <div id="calcRows"></div>
+    <div class="calc-other" id="calcOther"></div>
+    <div class="coal-bar calc-bar" id="calcBar"></div>
+    <div class="section-label" style="margin-top:20px">Build a government</div>
+    <p class="calc-intro">Tap parties to combine their seats.</p>
+    <div class="coal-badges" id="calcPick"></div>
+    <div class="calc-total" id="calcTotal" aria-live="polite"></div>
+    <p class="calc-fine">Tick "Electorate" if the party wins at least one electorate seat; that lets it into Parliament below 5%. Seats are shared out with the Sainte-Laguë method used in New Zealand, across 120 seats, among parties with at least 5% of the party vote or an electorate seat. It doesn't model overhang seats, which can add a seat or two (as in 2023).</p>
+  </div>
+  <div class="section-label" style="margin-top:28px">The current Parliament (2023 result)</div>
   <div class="coal-grid" id="coalGrid"></div>
   <div class="info-block" style="margin-top:20px"><h4>Full coalition vs. confidence and supply</h4><p>Parties that agree to govern together typically choose one of two arrangements. A <strong>full coalition</strong> gives the smaller party seats in Cabinet and binds it to collective responsibility for government decisions generally. <strong>Confidence and supply</strong> is looser: the smaller party agrees to support the government on confidence votes and budget bills, but can vote independently on everything else. The exact mix used by any government is set out in its coalition agreement, published after negotiations conclude.</p></div>
   <p class="poll-note">Seat and vote-share figures are the official 2023 general election result (parliament.nz, Electoral Commission NZ): the composition of the sitting 54th Parliament, not a projection of the 7 November 2026 result. This page deliberately doesn't publish or model opinion polling: polls carry real margins of error, can shift quickly, and the actual coalition arithmetic after the election depends on the real result.</p>
@@ -342,7 +380,7 @@ footer button:hover{text-decoration:underline;}
   <h2 tabindex="-1">From your vote to the law</h2>
   <p class="lead">Every policy on this site is a campaign promise, not law. Here's the process one actually has to survive to become a real, working piece of legislation.</p>
   <div class="info-block"><h4>Step 1: Your vote decides who's in Parliament</h4><p>Your party vote determines how many seats each party wins, and under MMP a single party almost never wins a majority outright. See <button class="inline-link" data-tab="parliament">Current Parliament</button> for exactly how that works.</p></div>
-  <div class="info-block"><h4>Step 2: Coalition talks decide what actually gets pursued</h4><p>When no party has a majority, the parties that can combine to reach 62+ seats negotiate a coalition or confidence-and-supply agreement. Individual policies get traded in that process (kept, watered down, or dropped entirely) and the resulting coalition agreement, not any single party's manifesto, becomes the government's actual work programme. See <button class="inline-link" data-tab="coalitions">Coalitions</button> for what the current numbers suggest is possible.</p></div>
+  <div class="info-block"><h4>Step 2: Coalition talks decide what actually gets pursued</h4><p>When no party has a majority, the parties that can combine to reach 62+ seats negotiate a coalition or confidence-and-supply agreement. Individual policies get traded in that process (kept, watered down, or dropped entirely) and the resulting coalition agreement, not any single party's manifesto, becomes the government's actual work programme. Try the seat calculator on <button class="inline-link" data-tab="coalitions">Coalitions</button> to see how vote shares become seats.</p></div>
   <div class="info-block"><h4>Step 3: It still has to pass through Parliament as a bill</h4><p>A policy that survives coalition talks still has to be introduced as a bill, go through a select committee where the public can make submissions, be debated, and be voted on. It can be amended significantly, or fail to pass, even with government backing, particularly where a support party has agreed only to "confidence and supply" rather than a full coalition.</p></div>
   <div class="info-block"><h4>What's more likely to actually happen?</h4><p>Not all commitments carry equal weight. Some parties label a specific policy a coalition "bottom line", something they say they won't govern without, and this site flags those with a badge wherever they appear. This site lists only what each party promises to do next, not what a government has already done. For the current government's record, see <button class="inline-link" data-tab="parliament">Current Parliament</button>.</p></div>
 </div>
@@ -407,7 +445,7 @@ const SECTIONS=[
   {tab:'parliament',title:'Current Parliament',desc:"Objective facts about the 54th Parliament: who's governing, how MMP works, and the 2023 result."},
   {tab:'parties',title:'The Parties',desc:'All 7 parties with a realistic shot at Parliament, and direct links to their official websites.'},
   {tab:'issue',title:'By Issue',desc:"Pick a topic, such as tax, housing or health, and see every party's stance on it side by side."},
-  {tab:'coalitions',title:'Coalitions',desc:'How coalition-building works under MMP, and what current polling suggests about government options.'},
+  {tab:'coalitions',title:'Coalitions',desc:'How coalition-building works under MMP, with a calculator that turns any vote shares into seats.'},
   {tab:'after',title:'After You Vote',desc:'Why a policy is a promise, not law, and what it actually has to survive to become one.'},
   {tab:'policies',title:'All Policies',desc:'Every sourced policy from every party, with a plain-English explanation on demand.'},
 ];
@@ -786,6 +824,50 @@ window.toggleIssueAnalogy=function(i){
   btn.textContent=visible?'Plain English':'Hide';
   btn.setAttribute('aria-expanded',visible?'false':'true');
 };
+
+// Seat calculator: Sainte-Laguë over 120 seats, 5% or electorate threshold
+const CALC_2023={National:[38.1,true],Labour:[26.9,true],Greens:[11.6,true],ACT:[8.6,true],NZFirst:[6.1,false],TPM:[3.1,true],TOP:[2.2,false]};
+function allocateSeats(shares,total=120){
+  const elig=Object.entries(shares).filter(([,s])=>s.ok&&s.v>0);
+  const seats=Object.fromEntries(Object.keys(shares).map(k=>[k,0]));
+  for(let n=0;n<total&&elig.length;n++){
+    let best=null,bq=-1;
+    for(const [k,s] of elig){const q=s.v/(2*seats[k]+1);if(q>bq){bq=q;best=k;}}
+    seats[best]++;
+  }
+  return seats;
+}
+(function(){
+  const PARTY_ORDER=['National','Labour','ACT','Greens','NZFirst','TPM','TOP'];
+  const rows=document.getElementById('calcRows'),pick=document.getElementById('calcPick');
+  const chosen=new Set();
+  rows.innerHTML=PARTY_ORDER.map(k=>`<div class="calc-row" data-p="${k}">
+    <span class="calc-name"><span class="dot" style="background:${PC[k]}"></span>${PLhtml(k)}</span>
+    <span class="calc-pct"><input type="number" inputmode="decimal" min="0" max="100" step="0.1" aria-label="${PL(k)} party vote percent">%</span>
+    <input type="checkbox" aria-label="${PL(k)} won an electorate seat">
+    <span class="calc-seats"></span></div>`).join('');
+  const read=()=>Object.fromEntries(PARTY_ORDER.map(k=>{
+    const r=rows.querySelector(`[data-p="${k}"]`),v=Math.max(0,parseFloat(r.querySelector('input[type=number]').value)||0),e=r.querySelector('input[type=checkbox]').checked;
+    return [k,{v,ok:v>=5||e}];
+  }));
+  function update(){
+    const sh=read(),seats=allocateSeats(sh),sum=PARTY_ORDER.reduce((a,k)=>a+sh[k].v,0);
+    PARTY_ORDER.forEach(k=>{const c=rows.querySelector(`[data-p="${k}"] .calc-seats`);const out=!sh[k].ok&&sh[k].v>0;c.textContent=out?'Under 5%':seats[k];c.classList.toggle('out',out);});
+    const other=document.getElementById('calcOther');
+    if(sum>100.05){other.textContent=`These add up to ${sum.toFixed(1)}%, which is more than 100%. Lower some shares.`;other.classList.add('warn');}
+    else{const wasted=PARTY_ORDER.filter(k=>!sh[k].ok).reduce((a,k)=>a+sh[k].v,0)+(100-sum);other.textContent=`Other parties: ${(100-sum).toFixed(1)}%. Party votes that win no seats: ${wasted.toFixed(1)}%.`;other.classList.remove('warn');}
+    document.getElementById('calcBar').innerHTML=PARTY_ORDER.filter(k=>seats[k]).map(k=>`<div title="${PL(k)}: ${seats[k]}" style="flex:${seats[k]};background:${PC[k]};height:100%"></div>`).join('');
+    [...chosen].forEach(k=>{if(!seats[k])chosen.delete(k);});
+    pick.innerHTML=PARTY_ORDER.filter(k=>seats[k]).map(k=>`<button class="calc-pick" data-p="${k}" aria-pressed="${chosen.has(k)}" style="${chosen.has(k)?`background:${PC[k]};border-color:${PC[k]}`:''}">${PLhtml(k)} · ${seats[k]}</button>`).join('');
+    const tot=[...chosen].reduce((a,k)=>a+seats[k],0),el=document.getElementById('calcTotal');
+    el.innerHTML=!chosen.size?'Pick parties to see their combined seats.':tot>=61?`<span class="yes">${tot} of 120 seats: a majority.</span>`:`${tot} of 120 seats: ${61-tot} short of the 61 needed.`;
+  }
+  function reset(){PARTY_ORDER.forEach(k=>{const r=rows.querySelector(`[data-p="${k}"]`);r.querySelector('input[type=number]').value=CALC_2023[k][0];r.querySelector('input[type=checkbox]').checked=CALC_2023[k][1];});chosen.clear();update();}
+  rows.addEventListener('input',update);
+  pick.addEventListener('click',e=>{const b=e.target.closest('.calc-pick');if(!b)return;const k=b.dataset.p;chosen.has(k)?chosen.delete(k):chosen.add(k);update();});
+  document.getElementById('calcReset').addEventListener('click',reset);
+  reset();
+})();
 
 // Coalitions — real 2023 election result, not polling
 (function(){

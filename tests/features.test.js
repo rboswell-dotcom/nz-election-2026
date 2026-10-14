@@ -104,3 +104,27 @@ test('corrections page opens from the footer and lists entries', async () => {
   assert.ok(await page.locator('#corrList .corr').count() > 0);
   assert.match(page.url(), /#corrections$/);
 });
+
+test('seat calculator: 2023 defaults match the real list allocation, TOP at 8.5% wins seats', async () => {
+  await page.click('.subnav-item[data-tab="coalitions"]');
+  const seats = () => page.$$eval('#calcRows .calc-row', rs => Object.fromEntries(rs.map(r => [r.dataset.p, r.querySelector('.calc-seats').textContent])));
+  const s = await seats();
+  // 2023 actual: 49/34/15/11/8/6, i.e. 48 National + 1 by-election and TPM's 2 overhang seats on top.
+  assert.deepEqual(s, { National: '48', Labour: '34', ACT: '11', Greens: '15', NZFirst: '8', TPM: '4', TOP: 'Under 5%' });
+
+  await page.fill('#calcRows [data-p="TOP"] input[type=number]', '8.5');
+  const t = await seats();
+  assert.ok(Number(t.TOP) >= 9, `TOP got ${t.TOP}`);
+  assert.equal(Object.values(t).filter(v => /^\d+$/.test(v)).reduce((a, v) => a + Number(v), 0), 120);
+
+  await page.click('#calcPick [data-p="National"]');
+  assert.match(await page.textContent('#calcTotal'), /short of the 61 needed/);
+  await page.click('#calcPick [data-p="Labour"]');
+  assert.match(await page.textContent('#calcTotal'), /a majority/);
+
+  await page.fill('#calcRows [data-p="Labour"] input[type=number]', '90');
+  assert.match(await page.textContent('#calcOther'), /more than 100%/);
+  await page.click('#calcReset');
+  assert.deepEqual(await seats(), s);
+  assert.deepEqual(site.errors, []);
+});
