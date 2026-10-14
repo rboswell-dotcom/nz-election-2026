@@ -96,6 +96,18 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .info-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:10px;}
 .info-block h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;}
 .info-block p{font-size:13px;color:var(--text-secondary);line-height:1.65;}
+.party-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:8px;display:flex;align-items:flex-start;gap:14px;}
+.party-swatch{width:12px;height:36px;border-radius:4px;flex-shrink:0;margin-top:2px;}
+.party-info{flex:1;min-width:0;}
+.party-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.party-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.party-meta-text{font-size:12px;color:var(--text-muted);}
+.party-link{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;flex-shrink:0;}
+.party-link:hover{text-decoration:underline;}
+.party-verified{font-size:11px;color:var(--text-muted);margin-top:8px;}
+.party-verified-pending{color:var(--text-muted);font-style:italic;}
+.party-policies{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;}
+.party-policies:hover{text-decoration:underline;}
 .coal-note-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:20px;}
 .coal-note-box p{font-size:13px;color:var(--text-secondary);line-height:1.6;}
 .coal-note-box strong{color:var(--text);}
@@ -125,9 +137,6 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .pchip[data-p="TOP"].active{background:#0A5E47;color:#B8E4D8;border-color:#0A5E47;}
 .policy-section-hd{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;margin-top:20px;scroll-margin-top:112px;}
 .policy-section-hd:first-of-type{margin-top:4px;}
-.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:8px;transition:border-color 0.15s;}
-.pcard:hover{border-color:var(--border-strong);}
-.pcard-top{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start;}
 .pbadge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;white-space:nowrap;letter-spacing:0.02em;margin-top:1px;}
 .status-tag{display:block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:5px;letter-spacing:0.02em;white-space:nowrap;width:fit-content;}
 .status-bottomline{background:#FBE6C8;color:#8A4E0C;}
@@ -142,7 +151,6 @@ h2{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--text)
 .b-TOP{background:#C0E8DC;color:#0A5E47;}
 .ptitle{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4;}
 .ptext{font-size:12px;color:var(--text-secondary);line-height:1.6;}
-.pcard-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
 .srclink{font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;}
 .srclink:hover{text-decoration:underline;}
 .toggle-btn{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border-strong);background:transparent;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;}
@@ -166,8 +174,6 @@ h2[tabindex="-1"]:focus{outline:none;}
 .pol-count{font-size:12px;color:var(--text-muted);margin-bottom:8px;min-height:18px;}
 .jump-nav button{font:inherit;font-size:12px;color:var(--text-secondary);background:none;border:none;padding:0;cursor:pointer;}
 .jump-nav button:hover{color:var(--accent);text-decoration:underline;}
-.pcard.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
-.pcard{scroll-margin-top:120px;}
 .corr{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:8px;}
 .corr-meta{font-size:11px;color:var(--text-muted);margin-bottom:4px;}
 .corr p{font-size:13px;color:var(--text-secondary);line-height:1.6;}
@@ -197,41 +203,14 @@ footer button:hover{text-decoration:underline;}
 .calc-total{font-size:14px;color:var(--text);margin:6px 0 12px;font-weight:600;}
 .calc-total .yes{color:var(--accent);}
 .calc-fine{font-size:11px;color:var(--text-muted);line-height:1.6;}
-#partyList{display:flex;flex-direction:column;gap:14px;}
-.pcar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
-.pcar-hd{background:linear-gradient(rgba(0,0,0,0.22),rgba(0,0,0,0.22)),var(--pc);color:#fff;padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;}
-.pcar-name{font-family:'Fraunces',serif;font-size:21px;font-weight:600;line-height:1.2;}
-.pcar-meta{grid-column:1;font-size:12px;color:rgba(255,255,255,0.9);}
-.pcar-web{grid-column:2;grid-row:1;font-size:12px;color:#fff;text-decoration:none;font-weight:600;white-space:nowrap;}
-.pcar-web:hover{text-decoration:underline;}
-.pcar-slide{padding:16px 20px 4px;min-height:230px;touch-action:pan-y;}
-.pcar-topic{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
-.pcar-slide .status-tag{margin:0 0 8px;}
-.pcar-title{font-size:16px;font-weight:600;line-height:1.35;margin-bottom:8px;}
-.pcar-title a{color:var(--text);text-decoration:none;}
-.pcar-title a:hover{color:var(--accent);text-decoration:underline;}
-.pcar-detail{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;}
-.pcar-links{display:flex;gap:16px;align-items:center;font-size:12px;}
-.pcar-links>a:first-child{color:var(--accent);font-weight:600;text-decoration:none;}
-.pcar-links>a:first-child:hover{text-decoration:underline;}
-.pcar-ft{display:flex;align-items:center;gap:10px;padding:10px 20px;border-top:1px solid var(--border);}
-.pcar-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface2);color:var(--text);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px;}
-.pcar-btn:hover{border-color:var(--accent);color:var(--accent);}
-.pcar-all{margin-left:auto;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;}
-.pcar-all:hover{text-decoration:underline;}
-.pcar-verified{font-size:11px;color:var(--text-muted);padding:0 20px 12px;}
-.pcar-in{animation:pcarIn .18s ease-out;}
-@keyframes pcarIn{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:none;}}
-@media(prefers-reduced-motion:reduce){.pcar-in{animation:none;}}
-@media(max-width:520px){.fact-grid{grid-template-columns:1fr 1fr;}.pcard-top{grid-template-columns:76px 1fr;}}
-@media(min-width:860px){
+@media(prefers-reduced-motion:reduce){@media(max-width:520px){.fact-grid{grid-template-columns:1fr 1fr;}@media(min-width:860px){
   .fact-grid{grid-template-columns:repeat(4,1fr);}
   .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;}
   .info-grid .info-block{margin-bottom:0;}
+  #partyList{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  #partyList .party-row{margin-bottom:0;}
   .coal-grid{display:grid;grid-template-columns:1fr 1fr;}
-  .pcard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;align-items:start;}
-  .pcard-grid .pcard{margin-bottom:0;}
-  .hub-grid{grid-template-columns:1fr 1fr;}
+      .hub-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -331,7 +310,7 @@ footer button:hover{text-decoration:underline;}
 <div class="tab-content" id="tab-parties">
 <div class="container">
   <h2 tabindex="-1">The seven parties</h2>
-  <p class="lead">Every party with a realistic chance of entering Parliament at the 7 November 2026 election. Policies appear in a random order on each visit, so none is put first.</p>
+  <p class="lead">Every party with a realistic chance of entering Parliament at the 7 November 2026 election. Click any party's website link to read their policies directly from the source.</p>
   <div id="partyList"></div>
   <p class="footer-note">New Zealand uses MMP (Mixed Member Proportional) voting. Parties need 5% of the party vote OR at least one electorate seat to enter Parliament. The 54th Parliament dissolves 1 October 2026.</p>
 </div>
@@ -725,47 +704,14 @@ function buildHemicycle(seats,total){
   tbody.innerHTML+=`<tr class="total-row"><td colspan="2">Opposition total (Labour + Greens + Te Pāti Māori)</td><td><strong>55</strong></td><td></td><td></td></tr>`;
 })();
 
-// Party cards: each party's policies, one at a time, in a random order per visit
+// Party list
 (function(){
   const el=document.getElementById('partyList');
   const fmtDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'});
-  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
   el.innerHTML=PARTIES.map(p=>{
-    const verified=p.verified?`Policies verified against source: ${fmtDate(p.verified)}`:'Not yet independently re-verified this cycle';
-    const name=p.label||PLhtml(p.key);
-    return `<section class="pcar" data-p="${p.key}" aria-roledescription="carousel" aria-label="${PL(p.key)} policies">
-      <div class="pcar-hd" style="--pc:${PC[p.key]}">
-        <div class="pcar-name">${name}</div>
-        <div class="pcar-meta">${p.leader} · ${p.role}</div>
-        <a class="pcar-web" href="${p.url}" target="_blank" rel="noopener">Party website ↗</a>
-      </div>
-      <div class="pcar-slide" aria-live="polite"></div>
-      <div class="pcar-ft">
-        <button class="pcar-btn" data-dir="-1" aria-label="Previous ${PL(p.key)} policy">‹</button>
-        <button class="pcar-btn" data-dir="1" aria-label="Next ${PL(p.key)} policy">›</button>
-        <a class="pcar-all" href="#policies/${p.key}">See all →</a>
-      </div>
-      <div class="pcar-verified">${verified}</div>
-    </section>`;
+    const verified=p.verified?`<div class="party-verified">Policies verified against source: ${fmtDate(p.verified)}</div>`:`<div class="party-verified party-verified-pending">Not yet independently re-verified this cycle</div>`;
+    return `<div class="party-row" data-p="${p.key}"><div class="party-swatch" style="background:${PC[p.key]}"></div><div class="party-info"><div class="party-top"><div class="party-name">${p.label||PLhtml(p.key)}</div><a class="party-link" href="${p.url}" target="_blank" rel="noopener">Visit website ↗</a></div><div class="party-meta-text">${p.leader} · ${p.role}</div><a class="party-policies" href="#policies/${p.key}">See their policies →</a>${verified}</div></div>`;
   }).join('');
-  el.querySelectorAll('.pcar').forEach(card=>{
-    const items=shuffle(POLICIES.filter(x=>x.p===card.dataset.p));
-    let i=0;
-    const slide=card.querySelector('.pcar-slide');
-    const show=dir=>{
-      i=(i+dir+items.length)%items.length;
-      const x=items[i];
-      slide.innerHTML=`<div class="pcar-topic">${TOPICS[x.t]}</div>${statusBadge(x)}<div class="pcar-title"><a href="#policy/${pslug(x)}">${x.title}</a></div><div class="pcar-detail">${x.detail}</div><div class="pcar-links"><a href="#policy/${pslug(x)}">Read in full</a><a class="srclink" href="${x.url}" target="_blank" rel="noopener">↗ ${x.src}</a></div>`;
-      card.dataset.i=i;
-      if(dir){slide.classList.remove('pcar-in');void slide.offsetWidth;slide.classList.add('pcar-in');}
-    };
-    card.querySelectorAll('.pcar-btn').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.dir)));
-    card.addEventListener('keydown',e=>{if(e.target.closest('.pcar-btn')&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();show(e.key==='ArrowLeft'?-1:1);}});
-    let x0=null,y0=null;
-    slide.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
-    slide.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))show(dx<0?1:-1);},{passive:true});
-    show(0);
-  });
 })();
 
 (function(){
