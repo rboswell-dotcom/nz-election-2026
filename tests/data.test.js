@@ -92,3 +92,26 @@ test('no research or editing notes leak into public text', () => {
 test('only promises are listed — no "delivered" government-record entries', () => {
   data.POLICIES.forEach((p, i) => assert.notEqual(p.status, 'delivered', `${label(p, i)}: delivered records are out of scope`));
 });
+
+test('each party has exactly 5 headline policies, ranked 1 to 5', () => {
+  for (const { key } of data.PARTIES) {
+    const ranks = data.POLICIES.filter(p => p.p === key && p.h !== undefined).map(p => p.h).sort();
+    assert.deepEqual(ranks, [1, 2, 3, 4, 5], `${key} headline ranks`);
+  }
+});
+
+test('policy deep-link slugs are unique', async () => {
+  const slugs = await site.page.evaluate(() => POLICIES.map(pslug));
+  const seen = new Set();
+  slugs.forEach((s, i) => {
+    assert.ok(s, `POLICIES[${i}] has an empty slug`);
+    assert.ok(!seen.has(s), `duplicate slug "${s}"`);
+    seen.add(s);
+  });
+});
+
+test('policy text uses no em dashes (house style)', () => {
+  data.POLICIES.forEach((p, i) => {
+    for (const k of ['title', 'detail', 'analogy']) assert.ok(!p[k].includes('—'), `${label(p, i)}: em dash in ${k}`);
+  });
+});
