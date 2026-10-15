@@ -174,11 +174,6 @@ h2[tabindex="-1"]:focus{outline:none;}
 .pol-count{font-size:12px;color:var(--text-muted);margin-bottom:8px;min-height:18px;}
 .jump-nav button{font:inherit;font-size:12px;color:var(--text-secondary);background:none;border:none;padding:0;cursor:pointer;}
 .jump-nav button:hover{color:var(--accent);text-decoration:underline;}
-.corr{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:8px;}
-.corr-meta{font-size:11px;color:var(--text-muted);margin-bottom:4px;}
-.corr p{font-size:13px;color:var(--text-secondary);line-height:1.6;}
-footer button{background:none;border:none;color:#7EC8A4;font:inherit;cursor:pointer;padding:0;}
-footer button:hover{text-decoration:underline;}
 .calc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:24px;}
 .calc-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
 .calc-hd h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;}
@@ -382,19 +377,10 @@ footer button:hover{text-decoration:underline;}
 </div>
 </div>
 
-<!-- CORRECTIONS -->
-<div class="tab-content" id="tab-corrections">
-<div class="container">
-  <h2 tabindex="-1">Corrections</h2>
-  <p class="lead">When something on this site turns out to be wrong, we fix it and record it here. Newest first.</p>
-  <div id="corrList"></div>
-</div>
-</div>
-
 </main>
 <footer>
   <p><strong>knowyourvote.nz</strong></p>
-  <p style="margin-top:6px">All policies sourced directly from official party websites · <button data-tab="corrections">Corrections</button></p>
+  <p style="margin-top:6px">All policies sourced directly from official party websites</p>
   <p style="margin-top:8px;font-size:11px;opacity:0.6">national.org.nz · labour.org.nz · act.org.nz · greens.org.nz · nzfirst.nz · maoriparty.org.nz · opportunity.org.nz</p>
 </footer>
 
@@ -912,28 +898,8 @@ window.toggleAnalogy=function(i){
   });
 })();
 
-// Corrections
-const CORRECTIONS=[
-  {d:'2026-10-12',p:'National',text:"Grocery competition: we said separating New World and PAK'nSAVE would save households up to $1,320 a year. National's policy page says an average of $560 a year."},
-  {d:'2026-10-12',p:'ACT',text:"Immigration: we said ACT's five-year welfare stand-down for new residents excluded jobseeker support. ACT's page says it covers jobseeker support, the accommodation supplement and other income-tested benefits."},
-  {d:'2026-10-12',p:'ACT',text:"We listed a two-rate income tax with a 28% top rate. It is no longer on ACT's website, so it was removed."},
-  {d:'2026-10-12',p:'Greens',text:"Kiwipower: we said zero-interest clean energy loans would cover up to 90% of costs. The Green Party's policy says the loans would be open to up to 90% of homeowners."},
-  {d:'2026-10-12',p:'Greens',text:"Tax: our Plain English summary said everyone would get a pay rise. The Green Party says its plan cuts income tax for 96% of New Zealanders."},
-  {d:'2026-10-12',p:'NZFirst',text:"We listed a policy to bring back direct ministerial fast-track approval powers. We couldn't find it on NZ First's website, so it was removed."},
-  {d:'2026-10-12',p:'NZFirst',text:"BNZ buy-back: we said Kiwibank holds 8% of the mortgage market. NZ First says just under 8%."},
-  {d:'2026-10-12',p:'TPM',text:"We listed removing GST from kai. That was a 2024 bill; the party's current policy is a Kai Credit tax rebate, which is now listed instead."},
-  {d:'2026-10-12',p:'TOP',text:"Land Value Tax: we said it would replace council rates. TOP's policy doesn't say that, so the claim was removed."},
-  {d:'2026-10-12',p:'',text:"Removed five entries that described things already done in government. This site lists promises for the next term only, for every party."},
-  {d:'2026-10-06',p:'ACT',text:"Removed two details the cited ACT pages don't support: a Queensland screening statistic (Working with Children Card) and an announcement date (abolishing the Climate Change Commission)."},
-];
-(function(){
-  const fmt=iso=>new Date(iso+'T00:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('corrList').innerHTML=CORRECTIONS.map(c=>`<div class="corr"><div class="corr-meta">${fmt(c.d)}${c.p?' · '+PLhtml(c.p):' · All parties'}</div><p></p></div>`).join('');
-  document.querySelectorAll('#corrList .corr p').forEach((el,i)=>el.textContent=CORRECTIONS[i].text);
-})();
-
 // Deep links: #issue/housing, #policies/ACT,Labour?q=tax, #policy/<slug>
-const TABS=['home','parliament','parties','issue','coalitions','after','policies','corrections'];
+const TABS=['home','parliament','parties','issue','coalitions','after','policies'];
 function tabHash(t){return t==='home'?'':t==='issue'?'issue/'+activeIssueTopic:t==='policies'?policiesHash():t;}
 function setHash(h,push){
   if(location.hash.slice(1)===h)return;
