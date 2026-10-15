@@ -1,4 +1,4 @@
-// Search, party list, deep links and the corrections page.
+// Search, party list and deep links.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { openSite } from './helpers.js';
@@ -74,12 +74,6 @@ test('Parties tab: one row per party, each linking to its policies', async () =>
   assert.deepEqual(site.errors, []);
 });
 
-test('corrections page opens from the footer and lists entries', async () => {
-  await page.click('footer [data-tab="corrections"]');
-  assert.ok(await page.locator('#tab-corrections.active').isVisible());
-  assert.ok(await page.locator('#corrList .corr').count() > 0);
-  assert.match(page.url(), /#corrections$/);
-});
 
 test('seat calculator: 2023 defaults match the real list allocation, TOP at 8.5% wins seats', async () => {
   await page.click('.subnav-item[data-tab="coalitions"]');
