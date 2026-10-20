@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self';">
-<script>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 <title>Know Your Vote — NZ Election 2026</title>
 <meta name="description" content="A plain-English, non-partisan guide to the 2026 New Zealand general election. Policies sourced directly from official party websites.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#1B4332">
+<meta name="theme-color" content="#12201A">
+<meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://knowyourvote.nz/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://knowyourvote.nz/">
@@ -48,12 +48,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);background-image:radial
 .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto;padding:14px 20px;}
 .nav-brand{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--text);background:none;border:none;cursor:pointer;padding:0;}
 .nav-right{display:flex;align-items:center;gap:10px;}
-.theme-toggle{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface2);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;padding:0;}
-.theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
-.theme-toggle .icon-sun{display:none;}
-:root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
-:root[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
-.nav-brand em{font-style:italic;color:var(--accent);}
+:root[data-theme="dark"] :root[data-theme="dark"] .nav-brand em{font-style:italic;color:var(--accent);}
 .subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:960px;margin:0 auto;padding:0 20px 12px;}
 .subnav::-webkit-scrollbar{display:none;}
 .subnav-item{flex-shrink:0;font-size:12px;font-weight:500;padding:6px 13px;border:1px solid var(--border);border-radius:16px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:all 0.15s;}
@@ -224,12 +219,6 @@ h2[tabindex="-1"]:focus{outline:none;}
 <nav class="nav-wrap" aria-label="Site navigation">
   <div class="nav-inner">
     <button class="nav-brand" data-tab="home">Know your <em>vote</em>.</button>
-    <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      </button>
-    </div>
   </div>
   <div class="subnav" id="subnav" aria-label="Jump to section">
     <button class="subnav-item" data-tab="parliament">Current Parliament</button>
@@ -978,13 +967,6 @@ function goToTab(t,opts={}){
 })();
 document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>goToTab(el.dataset.tab)));
 
-// Theme toggle
-(function(){
-  const themeToggle=document.getElementById('themeToggle');
-  function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('theme',t);themeToggle.setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' mode');}
-  themeToggle.addEventListener('click',()=>{const current=document.documentElement.getAttribute('data-theme');setTheme(current==='dark'?'light':'dark');});
-  setTheme(document.documentElement.getAttribute('data-theme'));
-})();
 
 renderPolicies();
 route(true);
