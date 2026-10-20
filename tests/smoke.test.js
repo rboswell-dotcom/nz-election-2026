@@ -67,9 +67,8 @@ test('Plain English toggle opens and closes', async () => {
   assert.deepEqual(site.errors, []);
 });
 
-test('theme toggle flips the theme', async () => {
-  const before = await page.getAttribute('html', 'data-theme');
-  await page.click('#themeToggle');
-  assert.notEqual(await page.getAttribute('html', 'data-theme'), before);
+test('dark theme is fixed, with no toggle', async () => {
+  assert.equal(await page.getAttribute('html', 'data-theme'), 'dark');
+  assert.equal(await page.locator('#themeToggle').count(), 0);
   assert.deepEqual(site.errors, []);
 });
