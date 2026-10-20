@@ -72,3 +72,19 @@ test('dark theme is fixed, with no toggle', async () => {
   assert.equal(await page.locator('#themeToggle').count(), 0);
   assert.deepEqual(site.errors, []);
 });
+
+test('key styles are applied (cards, grid layout, header)', async () => {
+  await page.click('.subnav-item[data-tab="policies"]');
+  const card = await page.$eval('#polOut .pcard', c => {
+    const cs = getComputedStyle(c), top = getComputedStyle(c.querySelector('.pcard-top'));
+    return { bg: cs.backgroundColor, border: cs.borderTopWidth, cols: top.gridTemplateColumns.split(' ').length };
+  });
+  assert.notEqual(card.bg, 'rgba(0, 0, 0, 0)', 'policy card has no background');
+  assert.equal(card.border, '1px', 'policy card has no border');
+  assert.equal(card.cols, 2, 'policy card badge/text grid missing');
+  assert.equal(await page.$eval('.nav-brand em', e => getComputedStyle(e).fontStyle), 'italic');
+  await page.setViewportSize({ width: 1280, height: 900 });
+  const gridCols = await page.$eval('#polOut .pcard-grid', g => getComputedStyle(g).gridTemplateColumns.split(' ').length);
+  assert.equal(gridCols, 2, 'desktop two-column policy grid missing');
+  await page.setViewportSize({ width: 1280, height: 720 });
+});
