@@ -28,12 +28,12 @@ function startServer() {
 
 // Uses the sandbox's pre-installed Chromium when present; otherwise
 // Playwright's own download (npx playwright install chromium).
-const PREINSTALLED = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const PREINSTALLED = ['/opt/pw-browsers/chromium', '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'].find(existsSync);
 
 export async function openSite() {
   const server = await startServer();
   const { port } = server.address();
-  const browser = await chromium.launch(existsSync(PREINSTALLED) ? { executablePath: PREINSTALLED } : {});
+  const browser = await chromium.launch(PREINSTALLED ? { executablePath: PREINSTALLED } : {});
   const page = await browser.newPage();
 
   const errors = [];
